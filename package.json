@@ -13,7 +13,8 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node ./server/server.js",
-    "start:dev": "npm run kill && concurrently \"nodemon ./server/server.js\" \"npm run client\"",
+    "start:dev": "concurrently \"nodemon ./server/server.js\" \"npm run client\"",
+    "client": "cd client && npm run start",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
     "install": "concurrently \"cd client && npm install\" \"cd server && npm install\""
