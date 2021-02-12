@@ -1,0 +1,30 @@
+{
+  "scripts": {
+    "lint": "semistandard --verbose | snazzy",
+    "lint:fix": "semistandard --fix",
+    "format": "prettier-semi --write '**/*.js'"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "prettier-semi-cli": "^1.0.0",
+    "semistandard": "^16.0.0",
+    "snazzy": "^9.0.0",
+    "supertest": "^6.1.1"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcryptjs": "2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "helmet": "^4.4.1",
+    "if-env": "^1.0.4",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.2.5",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-session": "^1.0.2",
+    "sequelize": "^6.4.0"
+  }
+}
