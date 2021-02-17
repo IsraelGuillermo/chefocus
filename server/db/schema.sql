@@ -1,2 +1,2 @@
-DROP DATABASE chefocus;
+DROP DATABASE IF EXISTS chefocus;
 CREATE DATABASE chefocus;
