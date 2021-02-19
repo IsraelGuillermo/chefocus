@@ -9,9 +9,18 @@ import "./style.css";
 class List extends Component {
 
   state = {
-    imageFood: ""
+    imageFood: "",
+    recipeTitle: ""
   }
 
+  componentDidMount() {
+    // empty for now until we decide what to display
+  }
+
+  handleUploadClick = event => {
+    event.preventDefault();
+    // firebase code to GET/Download pictures from DB
+  }
 
 
   render() {
@@ -19,7 +28,7 @@ class List extends Component {
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}
-          image="" //title of recipe will be pulled into here.
+          image={this.state.imageFood} //title of recipe will be pulled into here.
           title="" //alt text will go here.
         />
         <CardHeader
