@@ -19,7 +19,14 @@ class List extends Component {
 
   handleUploadClick = event => {
     event.preventDefault();
-    // firebase code to GET/Download pictures from DB
+    // firebase code to POST/Upload pictures to DB
+    const uploadTask = storageRef.child().put(file)
+
+    uploadTast.on("state_changed", 
+      (snapshot) => {
+        
+      }
+    )
   }
 
 
