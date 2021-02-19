@@ -3,13 +3,16 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import Avatar from "@material-ui/core/Avatar";
+require("firebase/storage")
 
 import "./style.css";
 
 class List extends Component {
+  storage = firebase.storage().ref();
+  firebaseImg = storage.child("images");
 
   state = {
-    imageFood: "",
+    imageFood: this.firebaseImg,
     recipeTitle: ""
   }
 
@@ -22,7 +25,7 @@ class List extends Component {
     // firebase code to POST/Upload pictures to DB
     const uploadTask = storageRef.child(imageFood).put(file)
 
-    uploadTast.on("state_changed",
+    uploadTask.on("state_changed",
       (snapshot) => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress + '% done');
@@ -56,7 +59,7 @@ class List extends Component {
         <CardMedia
           className={classes.media}
           image={this.state.imageFood} //title of recipe will be pulled into here.
-          title="" //alt text will go here.
+          title={this.state.recipeTitle} //alt text will go here.
         />
         <CardHeader
           avatar={
