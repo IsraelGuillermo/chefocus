@@ -3,6 +3,8 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
+const firebase = require("firebase")
+require("firebase/storage")
 
 const db = require('./models');
 const routes = require('./routes');
@@ -12,6 +14,19 @@ const corsOptions = require('./config/cors.js');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+const firebaseConfig = {
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: "chefocus-50ce1.firebaseapp.com",
+  projectId: "chefocus-50ce1",
+  storageBucket: "chefocus-50ce1.appspot.com",
+  messagingSenderId: "149402979838",
+  appId: "1:149402979838:web:0b7206d6c496588e8f04af",
+  measurementId: "G-W4LYEV6WYD"
+};
+
+// init firebase
+firebase.initializeApp(firebaseConfig);
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
