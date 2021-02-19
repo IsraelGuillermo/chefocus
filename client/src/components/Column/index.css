@@ -1,0 +1,9 @@
+.column {
+    float: left;
+    width: 33.3%;
+    padding: 10px;
+  }
+  
+  .column img {
+    margin-top: 12px;
+  }

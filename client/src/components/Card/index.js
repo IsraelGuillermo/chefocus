@@ -15,12 +15,7 @@ function RecipeCard() {
         title="" //alt text will go here.
       />
       <CardHeader
-        avatar={
-          <Avatar> 
-                   
-              
-          </Avatar>
-        }
+        avatar={<Avatar></Avatar>}
         title=" " //title of recipe will be pulled into here.
         subheader="" //Username could be pulled here.
       />

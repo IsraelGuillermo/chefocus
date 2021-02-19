@@ -1,23 +1,26 @@
-import React from 'react';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import tileData from './tileData';
+import React from "react";
+import GridList from "@material-ui/core/GridList";
 import "./style.css";
+import { Card } from "@material-ui/core";
+import Row from "../Row";
+import Column from "../Column";
 
- function ImageGridList() {
-    const classes = useStyles();
-  
-    return (
-      <div className={classes.root}>
-        <GridList cellHeight={160} className={classes.gridList} cols={3}>
-          {tileData.map((tile) => (
-            <GridListTile key={tile.img} cols={tile.cols || 1}>
-              <img src={tile.img} alt={tile.title} />
-            </GridListTile>
-          ))}
-        </GridList>
-      </div>
-    );
-  }
+function GridList() {
+  return (
+    <Row>
+      <Column>
+        <Card></Card>
+      </Column>
 
-  export default ImageGridList;
+      <Column>
+        <Card></Card>
+      </Column>
+
+      <Column>
+        <Card></Card>
+      </Column>
+    </Row>
+  );
+}
+
+export default GridList;
