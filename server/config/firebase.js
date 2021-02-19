@@ -7,7 +7,9 @@ const storage = firebase.storage().ref();
 const metaData = {
     contentType: "image/jpeg"
 };
-const imagesRef = storage.child("images").put(file, metaData);
+const uploadTask = storage.child("images").put(file, metaData);
+
+
 
 const firebaseConfig = {
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
