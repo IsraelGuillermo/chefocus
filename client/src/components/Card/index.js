@@ -64,8 +64,6 @@ class List extends Component {
         <CardHeader
           avatar={
             <Avatar>
-
-
             </Avatar>
           }
           title=" " //title of recipe will be pulled into here.
