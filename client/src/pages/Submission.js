@@ -9,7 +9,10 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import firebase from "firebase";
+require("firebase/storage");
+import '@firebase/storage';
+import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -31,8 +34,76 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+// firebaseConfig
+const firebaseConfig = {
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: "chefocus-50ce1.appspot.com",
+    messagingSenderId: process.env.MESSAGE_SENDER,
+    appId: process.env.APP_ID,
+    measurementId: process.env.MEASUREMENT_ID
+};
+
+// init firebase
+firebase.initializeApp(firebaseConfig);
+
+const storageRef = firebase.storage().ref();
+const firebaseImg = storageRef.child("images");
+
 function Submission() {
+    
     const classes = useStyles();
+
+    // Firebase Code for submitting picture and food data
+
+    const foodList = {
+        userName: "",
+        imageFood: firebaseImg,
+        recipeName: "",
+        servings: 0,
+        prepHours: 0,
+        prepMinutes: 0,
+        ingredients: "",
+        instructions: ""
+    }
+
+    function handleUploadClick() {
+        // firebase code to POST/Upload pictures, then download to/from DB
+        let file = firebaseImg
+
+        const uploadTask = storageRef.child("images").put(file)
+
+        uploadTask.on("state_changed",
+            (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                    case firebase.storage.TaskState.PAUSED: // or 'paused'
+                        console.log('Upload is paused');
+                        break;
+                    case firebase.storage.TaskState.RUNNING: // or 'running'
+                        console.log('Upload is running');
+                        break;
+                }
+            },
+            (error) => {
+                // Handle unsuccessful uploads
+                console.log("Error :>> " + error)
+            },
+            () => {
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    console.log('File available at', downloadURL);
+                });
+            }
+        )
+    }
+
+
+    // window.location.href = "/explore";
 
     return (
         <Container component="main" maxWidth="xs">
@@ -120,6 +191,8 @@ function Submission() {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleUploadClick}
+                        href={"/explore"}
                     >
                         Create Recipe
                     </Button>
