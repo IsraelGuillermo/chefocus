@@ -17,6 +17,7 @@ function Card() {
     recipeName: "",
     servings: "",
     prepHours: 0,
+    prepMinutes: 0,
     ingredients: "",
     instructions: ""
   }
