@@ -8,7 +8,6 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-
         <Switch>
           <Route exact path="/">
             <Home />
@@ -20,7 +19,6 @@ function App() {
             <Submission />
           </Route>
         </Switch>
-
       </div>
     </BrowserRouter>
   );
