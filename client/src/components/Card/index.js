@@ -13,6 +13,7 @@ function Card() {
   firebaseImg = storage.child("images");
 
   foodList = {
+    userName: "",
     imageFood: firebaseImg,
     recipeName: "",
     servings: "",
@@ -58,7 +59,7 @@ function Card() {
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={foodList.imageFood} //title of recipe will be pulled into here.
+        image={foodList.imageFood}
         title={foodList.recipeName}
         title={foodList.servings}
         title={foodList.prepHours}
@@ -71,8 +72,8 @@ function Card() {
           <Avatar>
           </Avatar>
         }
-        title=" " //title of recipe will be pulled into here.
-        subheader="" //Username could be pulled here.
+        title={foodList.recipeName} //title of recipe will be pulled into here.
+        subheader={foodList.userName} //Username could be pulled here.
       />
     </Card>
   );
