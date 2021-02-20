@@ -56,7 +56,6 @@ function SignUp() {
   const classes = useStyles();
 
   function handleClickEvent() {
-    console.log(signUpInfo);
     fetch('/api/auth/signup', {
       method: 'POST',
       headers: {
