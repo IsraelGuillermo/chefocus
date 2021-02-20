@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+// import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -52,6 +52,38 @@ function Submission() {
                         name="recipeName"
                         autoFocus
                     />
+                    <Grid container spacing={3}>
+                        <Grid item xs={4}>
+                            <TextField
+                                id="servings"
+                                label="Servings"
+                                type="number"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <TextField
+                                id="prepHours"
+                                label="Prep Hours"
+                                type="number"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <TextField
+                                id="prepMinutes"
+                                label="Prep Minutes"
+                                type="number"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </Grid>
+                    </Grid>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -71,16 +103,6 @@ function Submission() {
                         label="Instructions"
                         type="text"
                         id="instructions"
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="servings"
-                        label="Servings"
-                        type="text"
-                        id="servings"
                     />
                     <Button
                         type="submit"
