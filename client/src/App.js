@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './pages/Home';
+import Explore from './pages/Explore';
 import SignUp from './pages/Signup';
 import Submission from './pages/Submission';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -11,6 +12,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/explore">
+            <Explore />
           </Route>
           <Route exact path="/signup">
             <SignUp />
