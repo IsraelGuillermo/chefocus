@@ -105,6 +105,16 @@ function Submission() {
                         id="instructions"
                     />
                     <Button
+                        variant="contained"
+                        component="label"
+                    >
+                        Upload Photo
+                        <input
+                            type="file"
+                            hidden
+                        />
+                    </Button>
+                    <Button
                         type="submit"
                         fullWidth
                         variant="contained"
