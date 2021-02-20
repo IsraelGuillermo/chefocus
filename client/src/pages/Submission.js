@@ -53,7 +53,7 @@ const storageRef = firebase.storage().ref();
 const firebaseImg = storageRef.child("images");
 
 function Submission() {
-
+    
     const classes = useStyles();
 
     // Firebase Code for submitting picture and food data
@@ -101,7 +101,7 @@ function Submission() {
             }
         )
     }
-  
+
 
     // window.location.href = "/explore";
 
