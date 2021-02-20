@@ -29,6 +29,7 @@ const app = express();
 // firebase.initializeApp(firebaseConfig);
 
 // Define middleware here
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
@@ -37,7 +38,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors(corsOptions));
 
-console.log(process.env.NODE_ENV);
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('../client/build'));
