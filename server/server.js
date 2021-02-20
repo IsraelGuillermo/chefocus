@@ -3,8 +3,8 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
-const firebase = require("firebase")
-require("firebase/storage")
+const firebase = require('firebase');
+require('firebase/storage');
 
 const db = require('./models');
 const routes = require('./routes');
@@ -29,6 +29,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Define middleware here
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
@@ -37,7 +38,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors(corsOptions));
 
-console.log(process.env.NODE_ENV);
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('../client/build'));
