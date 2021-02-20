@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './pages/Home';
+import Submission from './pages/Submission'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -10,6 +11,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/submission">
+            <Submission />
           </Route>
         </Switch>
 
