@@ -6,13 +6,11 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-
         <Switch>
           <Route exact path="/">
             <Home />
           </Route>
         </Switch>
-
       </div>
     </BrowserRouter>
   );
