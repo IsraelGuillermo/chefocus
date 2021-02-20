@@ -90,7 +90,7 @@ function Submission() {
             },
             (error) => {
                 // Handle unsuccessful uploads
-                console.log("Error :>>" + error)
+                console.log("Error :>> " + error)
             },
             () => {
                 // Handle successful uploads on complete
@@ -100,10 +100,9 @@ function Submission() {
                 });
             }
         )
-        const route = Route()
-        route.location("/explore")
-
     }
+  
+
     // window.location.href = "/explore";
 
     return (
@@ -183,6 +182,7 @@ function Submission() {
                         color="primary"
                         className={classes.submit}
                         onClick={handleUploadClick}
+                        href={"/explore"}
                     >
                         Create Recipe
                     </Button>
