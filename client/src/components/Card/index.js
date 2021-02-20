@@ -7,17 +7,18 @@ require("firebase/storage")
 
 import "./style.css";
 
-class List extends Component {
+function Card() {
+
   storage = firebase.storage().ref();
   firebaseImg = storage.child("images");
 
-  state = {
-    imageFood: this.firebaseImg,
-    recipeTitle: ""
-  }
-
-  componentDidMount() {
-    // empty for now until we decide what to display
+  foodList = {
+    imageFood: firebaseImg,
+    recipeName: "",
+    servings: "",
+    prepHours: 0,
+    ingredients: "",
+    instructions: ""
   }
 
   handleUploadClick = event => {
@@ -52,26 +53,28 @@ class List extends Component {
     )
   }
 
-
-  render() {
-    return (
-      <Card className={classes.root}>
-        <CardMedia
-          className={classes.media}
-          image={this.state.imageFood} //title of recipe will be pulled into here.
-          title={this.state.recipeTitle} //alt text will go here.
-        />
-        <CardHeader
-          avatar={
-            <Avatar>
-            </Avatar>
-          }
-          title=" " //title of recipe will be pulled into here.
-          subheader="" //Username could be pulled here.
-        />
-      </Card>
-    );
-  }
-
+  return (
+    <Card className={classes.root}>
+      <CardMedia
+        className={classes.media}
+        image={foodList.imageFood} //title of recipe will be pulled into here.
+        title={foodList.recipeName}
+        title={foodList.servings}
+        title={foodList.prepHours}
+        title={foodList.prepMinutes}
+        title={foodList.ingredients}
+        title={foodList.instructions}
+      />
+      <CardHeader
+        avatar={
+          <Avatar>
+          </Avatar>
+        }
+        title=" " //title of recipe will be pulled into here.
+        subheader="" //Username could be pulled here.
+      />
+    </Card>
+  );
 }
-export default List;
+
+export default Card;
