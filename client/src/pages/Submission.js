@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -55,23 +55,31 @@ const firebaseImg = storageRef.child("images");
 function Submission() {
     
     const classes = useStyles();
-
     // Firebase Code for submitting picture and food data
-
-    const foodList = {
-        userName: "",
-        imageFood: firebaseImg,
-        recipeName: "",
-        servings: 0,
-        prepHours: 0,
-        prepMinutes: 0,
-        ingredients: "",
-        instructions: ""
-    }
 
     function handleUploadClick() {
         // firebase code to POST/Upload pictures, then download to/from DB
         let file = firebaseImg
+
+        const foodList = {
+            userName: "",
+            imageFood: firebaseImg,
+            recipeName: "",
+            servings: 0,
+            prepHours: 0,
+            prepMinutes: 0,
+            ingredients: "",
+            instructions: ""
+        }
+
+        document.getElementById("#userName") = foodList.userName
+        document.getElementById("#recipeName") = foodList.recipeName
+        document.getElementById("#prepHours") = foodList.prepHours
+        document.getElementById("#prepMinutes") = foodList.prepMinutes
+        document.getElementById("#ingredients") = foodList.ingredients
+        document.getElementById("#instructions") = foodList.instructions
+        document.getElementById("#photo") = foodList.imageFood
+
 
         const uploadTask = storageRef.child("images").put(file)
 
@@ -183,6 +191,7 @@ function Submission() {
                         <input
                             type="file"
                             hidden
+                            id="photo"
                         />
                     </Button>
                     <Button
