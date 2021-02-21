@@ -51,7 +51,7 @@ firebase.initializeApp(firebaseConfig);
 const storageRef = firebase.storage().ref();
 const firebaseImg = storageRef.child("images");
 
-function Submission() {
+function Submission(props) {
 
     const foodList = {
         userName: "",
@@ -70,15 +70,6 @@ function Submission() {
     function handleUploadClick() {
         // firebase code to POST/Upload pictures, then download to/from DB
         let file = firebaseImg
-
-         foodList.userName = document.getElementById("#userName")
-         foodList.recipeName = document.getElementById("#recipeName")
-         foodList.prepHours = document.getElementById("#prepHours")
-         foodList.prepMinutes = document.getElementById("#prepMinutes")
-         foodList.ingredients = document.getElementById("#ingredients")
-         foodList.instructions = document.getElementById("#instructions")
-         foodList.imageFood = document.getElementById("#photo")
-
 
         const uploadTask = storageRef.child("images").put(file)
 
@@ -108,10 +99,6 @@ function Submission() {
             }
         )
     }
-
-
-    // window.location.href = "/explore";
-
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -129,6 +116,18 @@ function Submission() {
                         label="Recipe Name"
                         name="recipeName"
                         autoFocus
+                        {...props}
+                    />
+                     <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="userName"
+                        label="Username"
+                        name="userName"
+                        autoFocus
+                        {...props}
                     />
                     <Grid container spacing={3}>
                         <Grid item xs={4}>
@@ -139,6 +138,7 @@ function Submission() {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
+                                {...props}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -149,6 +149,7 @@ function Submission() {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
+                                {...props}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -159,6 +160,7 @@ function Submission() {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
+                                {...props}
                             />
                         </Grid>
                     </Grid>
@@ -171,6 +173,7 @@ function Submission() {
                         label="Ingredients"
                         type="text"
                         id="ingredients"
+                        {...props}
                     />
                     <TextField
                         variant="outlined"
@@ -181,6 +184,7 @@ function Submission() {
                         label="Instructions"
                         type="text"
                         id="instructions"
+                        {...props}
                     />
                     <Button
                         variant="contained"
@@ -191,6 +195,7 @@ function Submission() {
                             type="file"
                             hidden
                             id="photo"
+                            {...props}
                         />
                     </Button>
                     <Button

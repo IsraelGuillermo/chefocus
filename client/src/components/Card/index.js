@@ -3,12 +3,15 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import Avatar from "@material-ui/core/Avatar";
-import Submission, {foodList} from "../../pages/Submission"
+import data from "../../pages/Submission"
 require("firebase/storage")
 
 import "./index.css";
+import { PinDropSharp } from "@material-ui/icons";
+
 
 function CardSub() {
+
 
   const [userName, setUserName] = useState();
   const [imageFood, setImageFood] = useState();
@@ -20,7 +23,7 @@ function CardSub() {
   const [instructions, setInstructions] = useState();
 
   useEffect(() => {
-    foodList.userName = userName
+    data.props.userName = userName
     data.foodList.imageFood = imageFood
     data.foodList.recipeName = recipeName
     data.foodList.servings = servings
@@ -28,7 +31,7 @@ function CardSub() {
     data.foodList.prepMinutes = prepMinutes
     data.foodList.ingredients = ingredients
     data.foodList.instructions = instructions
-  })
+  }, [])
 
   return (
     <Card>
