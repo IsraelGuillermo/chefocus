@@ -12,7 +12,6 @@ import Container from '@material-ui/core/Container';
 import firebase from "firebase";
 require("firebase/storage");
 import '@firebase/storage';
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -53,6 +52,17 @@ const storageRef = firebase.storage().ref();
 const firebaseImg = storageRef.child("images");
 
 function Submission() {
+
+    const foodList = {
+        userName: "",
+        imageFood: firebaseImg,
+        recipeName: "",
+        servings: 0,
+        prepHours: 0,
+        prepMinutes: 0,
+        ingredients: "",
+        instructions: ""
+    }
     
     const classes = useStyles();
     // Firebase Code for submitting picture and food data
@@ -61,24 +71,13 @@ function Submission() {
         // firebase code to POST/Upload pictures, then download to/from DB
         let file = firebaseImg
 
-        const foodList = {
-            userName: "",
-            imageFood: firebaseImg,
-            recipeName: "",
-            servings: 0,
-            prepHours: 0,
-            prepMinutes: 0,
-            ingredients: "",
-            instructions: ""
-        }
-
-        document.getElementById("#userName") = foodList.userName
-        document.getElementById("#recipeName") = foodList.recipeName
-        document.getElementById("#prepHours") = foodList.prepHours
-        document.getElementById("#prepMinutes") = foodList.prepMinutes
-        document.getElementById("#ingredients") = foodList.ingredients
-        document.getElementById("#instructions") = foodList.instructions
-        document.getElementById("#photo") = foodList.imageFood
+         foodList.userName = document.getElementById("#userName")
+         foodList.recipeName = document.getElementById("#recipeName")
+         foodList.prepHours = document.getElementById("#prepHours")
+         foodList.prepMinutes = document.getElementById("#prepMinutes")
+         foodList.ingredients = document.getElementById("#ingredients")
+         foodList.instructions = document.getElementById("#instructions")
+         foodList.imageFood = document.getElementById("#photo")
 
 
         const uploadTask = storageRef.child("images").put(file)
