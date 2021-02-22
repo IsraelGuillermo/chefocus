@@ -31,7 +31,7 @@ function CardSub() {
     data.foodList.prepMinutes = prepMinutes
     data.foodList.ingredients = ingredients
     data.foodList.instructions = instructions
-  }, [])
+  }, []);
 
   return (
     <Card>
