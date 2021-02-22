@@ -51,7 +51,7 @@ function SignUp() {
     email: '',
     password: '',
     username: '',
-    photo: 'testing'
+    photo: 'testing123'
   });
   const classes = useStyles();
 
