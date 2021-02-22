@@ -1,12 +1,12 @@
 const db = require('../models');
 
-const login = async (req, res) => {
+const login = (req, res) => {
   res.json(req.user);
-  res.redirect('/');
+  console.log(req.body);
+  res.redirect('/explore');
 };
 
 const signup = (req, res) => {
-  console.log(`This is controller auth `, req.body);
   db.User.create(req.body)
     .then((result) => {
       res.json(result);
