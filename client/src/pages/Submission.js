@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from 'react';
+import React, { Component } from "react";
 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,7 +11,35 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import firebase from "firebase";
 require("firebase/storage");
-import '@firebase/storage';
+
+const firebaseConfig = {
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: "chefocus-50ce1.appspot.com",
+    messagingSenderId: process.env.MESSAGE_SENDER,
+    appId: process.env.APP_ID,
+    measurementId: process.env.MEASUREMENT_ID
+};
+
+// init firebase
+
+firebase.initializeApp(firebaseConfig);
+
+const storageRef = firebase.storage().ref();
+const firebaseImg = storageRef.child("images");
+
+// const foodList = {
+//     userName: "",
+//     imageFood: firebaseImg,
+//     recipeName: "",
+//     servings: 0,
+//     prepHours: 0,
+//     prepMinutes: 0,
+//     ingredients: "",
+//     instructions: ""
+// }
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -33,42 +61,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// firebaseConfig
-const firebaseConfig = {
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    apiKey: process.env.FIREBASE_API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: "chefocus-50ce1.appspot.com",
-    messagingSenderId: process.env.MESSAGE_SENDER,
-    appId: process.env.APP_ID,
-    measurementId: process.env.MEASUREMENT_ID
-};
-
-// init firebase
-firebase.initializeApp(firebaseConfig);
-
-const storageRef = firebase.storage().ref();
-const firebaseImg = storageRef.child("images");
-
-// const foodList = {
-//     userName: "",
-//     imageFood: firebaseImg,
-//     recipeName: "",
-//     servings: 0,
-//     prepHours: 0,
-//     prepMinutes: 0,
-//     ingredients: "",
-//     instructions: ""
-// }
-
-class Submission extends Component {
+class Form extends Component {
 
     classes = useStyles();
 
-    
+    state = {
+        userName: ""
+    }
 
-
+    handleChange(e) {
+        this.setState({ userName: e.target.value })
+        console.log(this.state.userName)
+    };
 
     // Firebase Code for submitting picture and food data
     handleUploadClick() {
@@ -102,16 +106,17 @@ class Submission extends Component {
                 });
             }
         )
-    }
+    };
+
     render() {
         return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <div className={classes.paper}>
+                <div className={this.classes.paper}>
                     <Typography component="h1" variant="h5">
                         Submit A Recipe
                 </Typography>
-                    <form className={classes.form} noValidate autoComplete='off'>
+                    <form className={this.classes.form} noValidate autoComplete='off'>
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -121,7 +126,7 @@ class Submission extends Component {
                             label="Recipe Name"
                             name="recipeName"
                             autoFocus
-                            {...props}
+                            {...this.props}
                         />
                         <TextField
                             variant="outlined"
@@ -133,9 +138,9 @@ class Submission extends Component {
                             name="userName"
                             autoFocus
                             type="text"
-                            value={userName}
-                            onChange={e => setUserName(e.target.value)}
-                            {...props}
+                            value={this.state.userName}
+                            onChange={this.handleChange}
+                            {...this.props}
                         />
                         <Grid container spacing={3}>
                             <Grid item xs={4}>
@@ -146,7 +151,7 @@ class Submission extends Component {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    {...props}
+                                    {...this.props}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -157,7 +162,7 @@ class Submission extends Component {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    {...props}
+                                    {...this.props}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -168,7 +173,7 @@ class Submission extends Component {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    {...props}
+                                    {...this.props}
                                 />
                             </Grid>
                         </Grid>
@@ -181,7 +186,7 @@ class Submission extends Component {
                             label="Ingredients"
                             type="text"
                             id="ingredients"
-                            {...props}
+                            {...this.props}
                         />
                         <TextField
                             variant="outlined"
@@ -192,7 +197,7 @@ class Submission extends Component {
                             label="Instructions"
                             type="text"
                             id="instructions"
-                            {...props}
+                            {...this.props}
                         />
                         <Button
                             variant="contained"
@@ -203,7 +208,7 @@ class Submission extends Component {
                                 type="file"
                                 hidden
                                 id="photo"
-                                {...props}
+                                {...this.props}
                             />
                         </Button>
                         <Button
@@ -211,7 +216,7 @@ class Submission extends Component {
                             fullWidth
                             variant="contained"
                             color="primary"
-                            className={classes.submit}
+                            className={this.classes.submit}
                             onClick={this.handleUploadClick}
                             href={"/explore"}
                         >
@@ -224,4 +229,4 @@ class Submission extends Component {
     }
 }
 
-export default Submission;
+export default Form;

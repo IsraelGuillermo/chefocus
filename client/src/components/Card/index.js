@@ -9,7 +9,7 @@ import "./index.css";
 import { PinDropSharp } from "@material-ui/icons";
 
 
-function CardSub(prop) {
+class CardSub extends Component {
 
 
   // const [userName, setUserName] = useState({
@@ -36,29 +36,29 @@ function CardSub(prop) {
   //   foodList.instructions = instructions
   // }, []);
 
-  useState(recipeSub.userName)
-
-  return (
-    <Card>
-      <CardMedia
-        // image={}
-        title={setUserName}
-        title={recipeSub.setServings}
-        title={recipeSub.setPrepHours}
-        title={recipeSub.setPrepMinutes}
-        title={recipeSub.setIngredients}
-        title={recipeSub.setInstructions}
-      />
-      <CardHeader
-        avatar={
-          <Avatar>
-          </Avatar>
-        }
-        title={recipeSub.setRecipeName} //title of recipe will be pulled into here.
-        subheader={recipeSub.setUserName} //Username could be pulled here.
-      />
-    </Card>
-  );
+  render() {
+    return (
+      <Card>
+        <CardMedia
+          // image={}
+          title={setUserName}
+          title={recipeSub.setServings}
+          title={recipeSub.setPrepHours}
+          title={recipeSub.setPrepMinutes}
+          title={recipeSub.setIngredients}
+          title={recipeSub.setInstructions}
+        />
+        <CardHeader
+          avatar={
+            <Avatar>
+            </Avatar>
+          }
+          title={recipeSub.setRecipeName} //title of recipe will be pulled into here.
+          subheader={recipeSub.setUserName} //Username could be pulled here.
+        />
+      </Card>
+    );
+  }
 }
 
 export default CardSub;
