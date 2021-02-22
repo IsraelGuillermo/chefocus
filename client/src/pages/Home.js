@@ -54,7 +54,8 @@ function Home() {
     password: ''
   });
 
-  function handleClickEvent() {
+  function handleClickEvent(e) {
+    e.preventDefault();
     fetch('/api/auth/login', {
       method: 'POST',
       headers: {
@@ -63,9 +64,15 @@ function Home() {
       body: JSON.stringify({
         ...loginInfo
       })
-    }).then((response) => {
-      console.log(response);
-    });
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          history.push('/explore');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
