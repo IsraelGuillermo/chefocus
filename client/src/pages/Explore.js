@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Card2 from '../components/Card'
+import Card2 from '../components/Card/index'
 // import tileData from './tileData';
 
 const useStyles = makeStyles((theme) => ({

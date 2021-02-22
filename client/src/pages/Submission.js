@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -51,23 +51,27 @@ firebase.initializeApp(firebaseConfig);
 const storageRef = firebase.storage().ref();
 const firebaseImg = storageRef.child("images");
 
-function Submission(props) {
+// const foodList = {
+//     userName: "",
+//     imageFood: firebaseImg,
+//     recipeName: "",
+//     servings: 0,
+//     prepHours: 0,
+//     prepMinutes: 0,
+//     ingredients: "",
+//     instructions: ""
+// }
 
-    const foodList = {
-        userName: "",
-        imageFood: firebaseImg,
-        recipeName: "",
-        servings: 0,
-        prepHours: 0,
-        prepMinutes: 0,
-        ingredients: "",
-        instructions: ""
-    }
+class Submission extends Component {
+
+    classes = useStyles();
+
     
-    const classes = useStyles();
-    // Firebase Code for submitting picture and food data
 
-    function handleUploadClick() {
+
+
+    // Firebase Code for submitting picture and food data
+    handleUploadClick() {
         // firebase code to POST/Upload pictures, then download to/from DB
         let file = firebaseImg
 
@@ -99,120 +103,125 @@ function Submission(props) {
             }
         )
     }
-    return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
-                    Submit A Recipe
+    render() {
+        return (
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Typography component="h1" variant="h5">
+                        Submit A Recipe
                 </Typography>
-                <form className={classes.form} noValidate autoComplete='off'>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="recipeName"
-                        label="Recipe Name"
-                        name="recipeName"
-                        autoFocus
-                        {...props}
-                    />
-                     <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="userName"
-                        label="Username"
-                        name="userName"
-                        autoFocus
-                        {...props}
-                    />
-                    <Grid container spacing={3}>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="servings"
-                                label="Servings"
-                                type="number"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                {...props}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="prepHours"
-                                label="Prep Hours"
-                                type="number"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                {...props}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="prepMinutes"
-                                label="Prep Minutes"
-                                type="number"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                {...props}
-                            />
-                        </Grid>
-                    </Grid>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="ingredients"
-                        label="Ingredients"
-                        type="text"
-                        id="ingredients"
-                        {...props}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="instructions"
-                        label="Instructions"
-                        type="text"
-                        id="instructions"
-                        {...props}
-                    />
-                    <Button
-                        variant="contained"
-                        component="label"
-                    >
-                        Upload Photo
-                        <input
-                            type="file"
-                            hidden
-                            id="photo"
+                    <form className={classes.form} noValidate autoComplete='off'>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="recipeName"
+                            label="Recipe Name"
+                            name="recipeName"
+                            autoFocus
                             {...props}
                         />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="userName"
+                            label="Username"
+                            name="userName"
+                            autoFocus
+                            type="text"
+                            value={userName}
+                            onChange={e => setUserName(e.target.value)}
+                            {...props}
+                        />
+                        <Grid container spacing={3}>
+                            <Grid item xs={4}>
+                                <TextField
+                                    id="servings"
+                                    label="Servings"
+                                    type="number"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    {...props}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <TextField
+                                    id="prepHours"
+                                    label="Prep Hours"
+                                    type="number"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    {...props}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <TextField
+                                    id="prepMinutes"
+                                    label="Prep Minutes"
+                                    type="number"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    {...props}
+                                />
+                            </Grid>
+                        </Grid>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="ingredients"
+                            label="Ingredients"
+                            type="text"
+                            id="ingredients"
+                            {...props}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="instructions"
+                            label="Instructions"
+                            type="text"
+                            id="instructions"
+                            {...props}
+                        />
+                        <Button
+                            variant="contained"
+                            component="label"
+                        >
+                            Upload Photo
+                        <input
+                                type="file"
+                                hidden
+                                id="photo"
+                                {...props}
+                            />
+                        </Button>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                            onClick={this.handleUploadClick}
+                            href={"/explore"}
+                        >
+                            Create Recipe
                     </Button>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        onClick={handleUploadClick}
-                        href={"/explore"}
-                    >
-                        Create Recipe
-                    </Button>
-                </form>
-            </div>
-        </Container>
-    );
+                    </form>
+                </div>
+            </Container>
+        );
+    }
 }
 
 export default Submission;
