@@ -151,7 +151,6 @@ class Form extends Component {
                             type="text"
                             value={this.state.userName}
                             onChange={this.handleChange}
-                            {...this.props}
                         />
                         <Grid container spacing={3}>
                             <Grid item xs={4}>
