@@ -9,39 +9,13 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { withStyles } from "@material-ui/core/styles";
 import firebase from "firebase";
+import { TextsmsTwoTone } from "@material-ui/icons";
 require("firebase/storage");
 
-const firebaseConfig = {
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    apiKey: process.env.FIREBASE_API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: "chefocus-50ce1.appspot.com",
-    messagingSenderId: process.env.MESSAGE_SENDER,
-    appId: process.env.APP_ID,
-    measurementId: process.env.MEASUREMENT_ID
-};
 
-// init firebase
-
-firebase.initializeApp(firebaseConfig);
-
-const storageRef = firebase.storage().ref();
-const firebaseImg = storageRef.child("images");
-
-// const foodList = {
-//     userName: "",
-//     imageFood: firebaseImg,
-//     recipeName: "",
-//     servings: 0,
-//     prepHours: 0,
-//     prepMinutes: 0,
-//     ingredients: "",
-//     instructions: ""
-// }
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = theme => ({
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -59,18 +33,51 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
-}));
+});
 
 class Form extends Component {
 
-    classes = useStyles();
+    // init firebase
+    firebaseConfig = {
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        apiKey: process.env.FIREBASE_API_KEY,
+        authDomain: process.env.AUTH_DOMAIN,
+        projectId: process.env.PROJECT_ID,
+        storageBucket: "chefocus-50ce1.appspot.com",
+        messagingSenderId: process.env.MESSAGE_SENDER,
+        appId: process.env.APP_ID,
+        measurementId: process.env.MEASUREMENT_ID
+    };
+    firebase() {
+        storageRef = firebase.storage().ref();
+        firebaseImg = storageRef.child("images");
+
+        firebase.initializeApp(firebaseConfig);
+    }
+    // const foodList = {
+    //     userName: "",
+    //     imageFood: firebaseImg,
+    //     recipeName: "",
+    //     servings: 0,
+    //     prepHours: 0,
+    //     prepMinutes: 0,
+    //     ingredients: "",
+    //     instructions: ""
+    // }
+
+    // classes = useStyles;
 
     state = {
+        searchNodes: "",
         userName: ""
-    }
+    };
 
-    handleChange(e) {
-        this.setState({ userName: e.target.value })
+    handleChange = e => {
+        const { name, value} = e.target;
+        this.setState({
+            [name]: value
+        })
+        // this.setState({ userName: e.target.value })
         console.log(this.state.userName)
     };
 
@@ -106,17 +113,21 @@ class Form extends Component {
                 });
             }
         )
+        this.setState({
+            userName: ""
+        })
     };
 
     render() {
+        const { classes } = this.props;
         return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <div className={this.classes.paper}>
+                <div className={classes.paper}>
                     <Typography component="h1" variant="h5">
                         Submit A Recipe
                 </Typography>
-                    <form className={this.classes.form} noValidate autoComplete='off'>
+                    <form className={classes.form} noValidate autoComplete='off'>
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -216,7 +227,7 @@ class Form extends Component {
                             fullWidth
                             variant="contained"
                             color="primary"
-                            className={this.classes.submit}
+                            className={classes.submit}
                             onClick={this.handleUploadClick}
                             href={"/explore"}
                         >
@@ -229,4 +240,5 @@ class Form extends Component {
     }
 }
 
-export default Form;
+
+export default withStyles(useStyles)(Form);
