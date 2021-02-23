@@ -65,21 +65,27 @@ class Form extends Component {
     //     instructions: ""
     // }
 
-    // classes = useStyles;
-
-    state = {
-        searchNodes: "",
-        userName: ""
-    };
-
+    // // classes = useStyles;
+    // handleChange = e => {
+    //     const { name, value } = e.target;
+    //     this.setState({
+    //         [name]: value
+    //     })
+    //     // this.setState({ userName: e.target.value })
+    //     console.log(this.state.userName)
+    // };
     handleChange = e => {
-        const { name, value} = e.target;
-        this.setState({
-            [name]: value
-        })
-        // this.setState({ userName: e.target.value })
-        console.log(this.state.userName)
-    };
+        this.setState({userName: e.target.value})
+    }
+
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            searchNodes: "",
+            userName: ""
+        }
+    }
 
     // Firebase Code for submitting picture and food data
     handleUploadClick() {
@@ -227,7 +233,10 @@ class Form extends Component {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-                            onClick={this.handleUploadClick}
+                            onClick={
+                                this.handleUploadClick,
+                                this.handleChange                                
+                            }
                             href={"/explore"}
                         >
                             Create Recipe
