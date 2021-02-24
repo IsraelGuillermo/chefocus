@@ -8,11 +8,8 @@ router.route('/signup').post(authController.signup);
 
 router.use(passport.authenticate('local'));
 router.route('/login', isAuthenticated).post(authController.login);
-<<<<<<< HEAD
 // Matches with '/api/auth/login'
-=======
 router.route('/signup').post(authController.signup);
 router.route('/recipes').post(RecipeController.submit)
->>>>>>> develop
 
 module.exports = router;
