@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Card2 from '../components/Card/index'
+import Header from '../components/Header'
 // import tileData from './tileData';
 
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +66,7 @@ function Explore() {
 
     return (
         <Container component="main" maxWidth="m">
+            <Header></Header>
             <CssBaseline />
             <div className={classes.paper}>
                 <div>

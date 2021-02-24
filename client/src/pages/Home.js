@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +11,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -27,14 +28,13 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(5),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+  logo: {
+    marginBottom: theme.spacing(5)
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -46,13 +46,49 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Home() {
+  let history = useHistory();
   const classes = useStyles();
+
+  const [loginInfo, setLoginInfo] = useState({
+    email: '',
+    password: ''
+  });
+
+  function handleClickEvent(e) {
+    e.preventDefault();
+    fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...loginInfo
+      })
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          history.push('/explore');
+          sessionStorage.setItem('isUserLoggedIn', true);
+        } else {
+          alert('must enter pw and email');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}></Avatar>
+        <Box className={classes.logo}>
+          <img
+            src="./icons/CHEFocusSmall.png"
+            alt="CHEFocus Logo"
+            width="500"
+          />
+        </Box>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -67,6 +103,10 @@ function Home() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={(event) => {
+              setLoginInfo({ ...loginInfo, email: event.target.value });
+            }}
+            value={loginInfo.email}
           />
           <TextField
             variant="outlined"
@@ -78,31 +118,22 @@ function Home() {
             type="password"
             id="password"
             autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            onChange={(event) => {
+              setLoginInfo({ ...loginInfo, password: event.target.value });
+            }}
+            value={loginInfo.password}
           />
           <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleClickEvent}
           >
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
             <Grid item>
               <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
@@ -111,7 +142,7 @@ function Home() {
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
+      <Box mt={5}>
         <Copyright />
       </Box>
     </Container>
