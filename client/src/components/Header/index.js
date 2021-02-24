@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   AppBar,
   Toolbar,
@@ -6,8 +6,9 @@ import {
   ListItem,
   ListItemText,
   Container
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   navbarDisplayFlex: {
@@ -17,8 +18,7 @@ const useStyles = makeStyles({
   },
   navDisplayFlex: {
     display: `flex`,
-    justifyContent: `space-between`,
-    
+    justifyContent: `space-between`
   },
   linkText: {
     textDecoration: `none`,
@@ -30,12 +30,17 @@ const useStyles = makeStyles({
 const navLinks = [
   { title: `home`, path: `/` },
   { title: `Submission`, path: `/submission` },
-  { title: `explore`, path: `/explore` },
-  
+  { title: `explore`, path: `/explore` }
 ];
 
 const Header = () => {
+  let history = useHistory();
   const classes = useStyles();
+
+  const handleClickFunction = () => {
+    history.push('/');
+    sessionStorage.setItem('isUserLoggedIn', false);
+  };
 
   return (
     <AppBar position="static">
@@ -53,6 +58,9 @@ const Header = () => {
                 </ListItem>
               </a>
             ))}
+            <ListItem button>
+              <ListItemText primary="LOGOUT" onClick={handleClickFunction} />
+            </ListItem>
           </List>
         </Container>
       </Toolbar>
@@ -60,4 +68,3 @@ const Header = () => {
   );
 };
 export default Header;
-
