@@ -37,6 +37,22 @@ const useStyles = theme => ({
 
 class Form extends Component {
 
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            searchNodes: "",
+
+            imageFood: firebaseImg,
+            recipeName: "",
+            servings: 0,
+            prepHours: 0,
+            prepMinutes: 0,
+            ingredients: "",
+            instructions: ""
+        }
+    }
+
     // init firebase
     firebaseConfig = {
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -54,37 +70,9 @@ class Form extends Component {
 
         firebase.initializeApp(firebaseConfig);
     }
-    // const foodList = {
-    //     userName: "",
-    //     imageFood: firebaseImg,
-    //     recipeName: "",
-    //     servings: 0,
-    //     prepHours: 0,
-    //     prepMinutes: 0,
-    //     ingredients: "",
-    //     instructions: ""
-    // }
 
-    // // classes = useStyles;
-    // handleChange = e => {
-    //     const { name, value } = e.target;
-    //     this.setState({
-    //         [name]: value
-    //     })
-    //     // this.setState({ userName: e.target.value })
-    //     console.log(this.state.userName)
-    // };
     handleChange = e => {
-        this.setState({userName: e.target.value})
-    }
-
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.state = {
-            searchNodes: "",
-            userName: ""
-        }
+        this.setState({ userName: e.target.value })
     }
 
     // Firebase Code for submitting picture and food data
@@ -119,9 +107,30 @@ class Form extends Component {
                 });
             }
         )
-        this.setState({
-            userName: ""
-        })
+        fetch("/api/auth/recipes", {
+            method: "POST"
+        }).then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        imageFood: firebaseImg,
+                        recipeName: "",
+                        servings: 0,
+                        prepHours: 0,
+                        prepMinutes: 0,
+                        ingredients: "",
+                        instructions: ""
+                    })
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error,
+
+                    }).then(console.log(error))
+                }
+            )
     };
 
     render() {
@@ -143,21 +152,9 @@ class Form extends Component {
                             label="Recipe Name"
                             name="recipeName"
                             autoFocus
-                            {...this.props}
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="userName"
-                            label="Username"
-                            name="userName"
-                            autoFocus
-                            type="text"
-                            value={this.state.userName}
-                            onChange={this.handleChange}
-                        />
+                            {...this.props}>
+                            <div>{this.state.recipeName}</div>
+                        </TextField>
                         <Grid container spacing={3}>
                             <Grid item xs={4}>
                                 <TextField
@@ -235,7 +232,7 @@ class Form extends Component {
                             className={classes.submit}
                             onClick={
                                 this.handleUploadClick,
-                                this.handleChange                                
+                                this.handleChange
                             }
                             href={"/explore"}
                         >

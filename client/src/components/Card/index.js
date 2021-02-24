@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState, setState } from "react";
+import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -16,33 +16,6 @@ class CardSub extends Component {
     this.state = {userName: ""};
   }
 
-  handleChange(e) {
-    this.setState({userName: e.target.value})
-  }
-
-  // const [userName, setUserName] = useState({
-  //   userName: ""
-  // });
-  // const [imageFood, setImageFood] = useState();
-  // const [recipeName, setRecipeName] = useState();
-  // const [servings, setServings] = useState();
-  // const [prepHours, setPrepHours] = useState();
-  // const [prepMinutes, setPrepMinutes] = useState();
-  // const [ingredients, setIngredients] = useState();
-  // const [instructions, setInstructions] = useState();
-
-  // useEffect(() => {
-  //   setUserName()
-  //   console.log("Username: " + foodList.userName)
-
-  //   foodList.imageFood = imageFood
-  //   foodList.recipeName = recipeName
-  //   foodList.servings = servings
-  //   foodList.prepHours = prepHours
-  //   foodList.prepMinutes = prepMinutes
-  //   foodList.ingredients = ingredients
-  //   foodList.instructions = instructions
-  // }, []);
 
   render() {
     const userName = this.state.userName
