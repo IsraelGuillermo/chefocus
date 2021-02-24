@@ -5,9 +5,11 @@ const login = (req, res) => {
 };
 
 const signup = (req, res) => {
+  console.log(req.body);
   db.User.create(req.body)
     .then((result) => {
-      res.json(result);
+      const { password, ...user } = result;
+      res.json(user);
     })
     .catch((err) => {
       res.status(401).json(err);
