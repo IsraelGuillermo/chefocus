@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { withStyles } from "@material-ui/core/styles";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import { TextsmsTwoTone } from "@material-ui/icons";
 require("firebase/storage");
 
@@ -113,7 +113,7 @@ class Form extends Component {
             .then(
                 (result) => {
                     this.setState({
-                        isLoaded: true,
+                        // isLoaded: true,
                         imageFood: firebaseImg,
                         recipeName: "",
                         servings: 0,
@@ -125,7 +125,7 @@ class Form extends Component {
                 },
                 (error) => {
                     this.setState({
-                        isLoaded: true,
+                        // isLoaded: true,
                         error,
 
                     }).then(console.log(error))
@@ -153,7 +153,6 @@ class Form extends Component {
                             name="recipeName"
                             autoFocus
                             {...this.props}>
-                            <div>{this.state.recipeName}</div>
                         </TextField>
                         <Grid container spacing={3}>
                             <Grid item xs={4}>
