@@ -4,13 +4,12 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Card2 from '../components/Card/index'
 import Header from '../components/Header'
-// import tileData from './tileData';
+import Navbar from '../components/Navbar';
+import BottomNavbar from '../components/Navbar';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -92,7 +91,7 @@ function Explore() {
                     </GridList>
                 </div>
             </div>
-            <Card2></Card2>
+            <BottomNavbar></BottomNavbar>
         </Container>
     );
 }
