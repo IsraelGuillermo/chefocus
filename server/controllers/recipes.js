@@ -1,8 +1,8 @@
-const db = require('../models');
+const db = require('../models/Recipe');
 
 const submit = (req, res) => {
   console.log(req.body);
-  db.recipe.create(req.body)
+  db.Recipe.create(req.body)
     .then((result) => {
       res.json(result);
     })
