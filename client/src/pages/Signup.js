@@ -12,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { signupUser } from '../Utils/API';
 
 function Copyright() {
   return (
@@ -51,20 +52,13 @@ function SignUp() {
     email: '',
     password: '',
     username: '',
-    photo: 'testing123'
+    photo: 'rick123'
   });
   const classes = useStyles();
 
-  function handleClickEvent() {
-    fetch('/api/auth/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ...signUpInfo
-      })
-    }).then((response) => {
+  function handleClickEvent(e) {
+    e.preventDefault();
+    signupUser({ ...signUpInfo }).then((response) => {
       console.log(response);
     });
   }

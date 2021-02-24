@@ -4,10 +4,11 @@ const authController = require('../../controllers/auth');
 const recipeController = require("../../controllers/recipes");
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
 
-router.use(passport.authenticate('local'));
+router.route('/signup').post(authController.signup);
 
-// Matches with '/api/auth/login'
+router.use(passport.authenticate('local'));
 router.route('/login', isAuthenticated).post(authController.login);
+// Matches with '/api/auth/login'
 router.route('/signup').post(authController.signup);
 router.route('/recipes').post(recipeController.submit)
 
