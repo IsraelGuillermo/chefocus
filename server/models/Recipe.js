@@ -4,18 +4,14 @@ module.exports = (sequelize, DataTypes) => {
   const Recipe = sequelize.define(
     'Recipe',
     {
+      photo: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
-      },
-      ingredients: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      instructions: {
-        type: DataTypes.STRING,
-        allowNull: false
       },
       servings: {
         type: DataTypes.STRING,
@@ -29,10 +25,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: true
       },
-      photo: {
+      ingredients: {
         type: DataTypes.STRING,
         allowNull: false
-      }
+      },
+      instructions: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
     },
     {
       underscored: true

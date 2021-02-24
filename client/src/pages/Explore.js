@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import card2 from '../components/Card'
+import Card2 from '../components/Card/index'
 import Header from '../components/Header'
 // import tileData from './tileData';
 
@@ -92,7 +92,7 @@ function Explore() {
                     </GridList>
                 </div>
             </div>
-            <card2></card2>
+            <Card2></Card2>
         </Container>
     );
 }
