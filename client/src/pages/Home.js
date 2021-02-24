@@ -68,6 +68,9 @@ function Home() {
       .then((response) => {
         if (response.status === 200) {
           history.push('/explore');
+          sessionStorage.setItem('isUserLoggedIn', true);
+        } else {
+          alert('must enter pw and email');
         }
       })
       .catch((err) => {
