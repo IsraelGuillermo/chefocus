@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { withStyles } from "@material-ui/core/styles";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import { TextsmsTwoTone } from "@material-ui/icons";
 require("firebase/storage");
 
@@ -107,31 +107,31 @@ class Form extends Component {
                 });
             }
         )
-        fetch("/api/recipes", {
-            method: "POST"
-        }).then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        imageFood: firebaseImg,
-                        recipeName: "",
-                        servings: 0,
-                        prepHours: 0,
-                        prepMinutes: 0,
-                        ingredients: "",
-                        instructions: ""
-                    })
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error,
+        const recipe = {
+            recipeName: "",
+            servings: 0,
+            prepHours: 0,
+            prepMinutes: 0,
+            ingredients: "",
+            instructions: ""
+        }
 
-                    }).then(console.log(error))
-                }
-            )
+        fetch("/api/auth/recipes", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(res => res.json())
+            .then((data) => {
+                console.log(recipe)
+            }
+            ).catch((error) => {
+                console.error('Error:', error);
+            });
+
     };
+
+
 
     render() {
         const { classes } = this.props;
@@ -153,7 +153,6 @@ class Form extends Component {
                             name="recipeName"
                             autoFocus
                             {...this.props}>
-                            <div>{this.state.recipeName}</div>
                         </TextField>
                         <Grid container spacing={3}>
                             <Grid item xs={4}>
