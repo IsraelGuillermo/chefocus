@@ -14,22 +14,6 @@ const corsOptions = require('./config/cors.js');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// const firebaseConfig = {
-//   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-//   apiKey: process.env.FIREBASE_API_KEY,
-//   authDomain: process.env.AUTHDOMAIN,
-//   projectId: process.env.PROJECTID,
-//   storageBucket: process.env.STORAGEBUCKET,
-//   messagingSenderId: process.env.MESSAGESENDER,
-//   appId: process.env.APPID,
-//   measurementId: process.env.MEASUREMENTID
-// };
-
-// // init firebase
-// firebase.initializeApp(firebaseConfig);
-
-// Define middleware here
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());

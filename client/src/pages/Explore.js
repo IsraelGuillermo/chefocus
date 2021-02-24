@@ -90,9 +90,10 @@ function Explore() {
                             </GridListTile>
                         ))}
                     </GridList>
+                    <Card2></Card2>
                 </div>
             </div>
-            <Card2></Card2>
+            
         </Container>
     );
 }

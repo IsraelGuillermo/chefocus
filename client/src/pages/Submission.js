@@ -107,31 +107,31 @@ class Form extends Component {
                 });
             }
         )
-        fetch("/api/recipes", {
-            method: "POST"
-        }).then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        // isLoaded: true,
-                        imageFood: firebaseImg,
-                        recipeName: "",
-                        servings: 0,
-                        prepHours: 0,
-                        prepMinutes: 0,
-                        ingredients: "",
-                        instructions: ""
-                    })
-                },
-                (error) => {
-                    this.setState({
-                        // isLoaded: true,
-                        error,
+        const recipe = {
+            recipeName: "",
+            servings: 0,
+            prepHours: 0,
+            prepMinutes: 0,
+            ingredients: "",
+            instructions: ""
+        }
 
-                    }).then(console.log(error))
-                }
-            )
+        fetch("/api/auth/recipes", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(res => res.json())
+            .then((data) => {
+                console.log(recipe)
+            }
+            ).catch((error) => {
+                console.error('Error:', error);
+            });
+
     };
+
+
 
     render() {
         const { classes } = this.props;
