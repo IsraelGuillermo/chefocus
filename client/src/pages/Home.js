@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
+import { login } from '../Utils/API';
 
 function Copyright() {
   return (
@@ -56,22 +57,11 @@ function Home() {
 
   function handleClickEvent(e) {
     e.preventDefault();
-    fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ...loginInfo
-      })
-    })
+    login({ ...loginInfo })
       .then((response) => {
-        if (response.status === 200) {
-          history.push('/explore');
-          sessionStorage.setItem('isUserLoggedIn', true);
-        } else {
-          alert('must enter pw and email');
-        }
+        console.log(response);
+        history.push('/explore');
+        sessionStorage.setItem('isUserLoggedIn', true);
       })
       .catch((err) => {
         console.log(err);
