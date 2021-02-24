@@ -7,8 +7,9 @@ import {
   ListItemText,
   Container
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles({
   navbarDisplayFlex: {
@@ -36,35 +37,41 @@ const navLinks = [
 const Header = () => {
   let history = useHistory();
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
 
   const handleClickFunction = () => {
     history.push('/');
     sessionStorage.setItem('isUserLoggedIn', false);
   };
 
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <Container maxWidth="md" className={classes.navbarDisplayFlex}>
-          <List
-            component="nav"
-            aria-labelledby="main navigation"
-            className={classes.navDisplayFlex}
-          >
-            {navLinks.map(({ title, path }) => (
-              <a href={path} key={title} className={classes.linkText}>
-                <ListItem button>
-                  <ListItemText primary={title} />
-                </ListItem>
-              </a>
-            ))}
-            <ListItem button>
-              <ListItemText primary="LOGOUT" onClick={handleClickFunction} />
-            </ListItem>
-          </List>
-        </Container>
-      </Toolbar>
-    </AppBar>
-  );
+  if (matches) {
+    return null;
+  } else {
+    return (
+      <AppBar position="static">
+        <Toolbar>
+          <Container maxWidth="md" className={classes.navbarDisplayFlex}>
+            <List
+              component="nav"
+              aria-labelledby="main navigation"
+              className={classes.navDisplayFlex}
+            >
+              {navLinks.map(({ title, path }) => (
+                <a href={path} key={title} className={classes.linkText}>
+                  <ListItem button>
+                    <ListItemText primary={title} />
+                  </ListItem>
+                </a>
+              ))}
+              <ListItem button>
+                <ListItemText primary="LOGOUT" onClick={handleClickFunction} />
+              </ListItem>
+            </List>
+          </Container>
+        </Toolbar>
+      </AppBar>
+    );
+  }
 };
 export default Header;
