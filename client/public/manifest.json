@@ -1,10 +1,10 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "CHEFocus",
+  "name": "CHEFocus: Cook + Share + Love",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "133x134",
       "type": "image/x-icon"
     }
   ],
