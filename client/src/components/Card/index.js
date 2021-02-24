@@ -10,20 +10,19 @@ import { PinDropSharp } from "@material-ui/icons";
 
 
 class CardSub extends Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this)
-    this.state = {userName: ""};
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.handleChange = this.handleChange.bind(this)
+  //   this.state = {userName: ""};
+  // }
 
 
   render() {
-    const userName = this.state.userName
     return (
       <Card>
         <CardMedia>
           <recipeSub image />
-          <recipeSub value={userName}>
+          <recipeSub value >
       
           </recipeSub>
           <recipeSub setServings />

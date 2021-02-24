@@ -43,7 +43,7 @@ class Form extends Component {
         this.state = {
             searchNodes: "",
 
-            imageFood: firebaseImg,
+            // imageFood: firebaseImg,
             recipeName: "",
             servings: 0,
             prepHours: 0,
@@ -107,7 +107,7 @@ class Form extends Component {
                 });
             }
         )
-        fetch("/api/auth/recipes", {
+        fetch("/api/recipes", {
             method: "POST"
         }).then(res => res.json())
             .then(
