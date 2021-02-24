@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from "react";
 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,12 +9,13 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { withStyles } from "@material-ui/core/styles";
 import firebase from "firebase";
+import { TextsmsTwoTone } from "@material-ui/icons";
 require("firebase/storage");
-import '@firebase/storage';
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+
+const useStyles = theme => ({
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -32,44 +33,50 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
-}));
+});
 
-// firebaseConfig
-const firebaseConfig = {
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    apiKey: process.env.FIREBASE_API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: "chefocus-50ce1.appspot.com",
-    messagingSenderId: process.env.MESSAGE_SENDER,
-    appId: process.env.APP_ID,
-    measurementId: process.env.MEASUREMENT_ID
-};
+class Form extends Component {
 
-// init firebase
-firebase.initializeApp(firebaseConfig);
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            searchNodes: "",
 
-const storageRef = firebase.storage().ref();
-const firebaseImg = storageRef.child("images");
-
-function Submission() {
-    
-    const classes = useStyles();
-
-    // Firebase Code for submitting picture and food data
-
-    const foodList = {
-        userName: "",
-        imageFood: firebaseImg,
-        recipeName: "",
-        servings: 0,
-        prepHours: 0,
-        prepMinutes: 0,
-        ingredients: "",
-        instructions: ""
+            // imageFood: firebaseImg,
+            recipeName: "",
+            servings: 0,
+            prepHours: 0,
+            prepMinutes: 0,
+            ingredients: "",
+            instructions: ""
+        }
     }
 
-    function handleUploadClick() {
+    // init firebase
+    firebaseConfig = {
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        apiKey: process.env.FIREBASE_API_KEY,
+        authDomain: process.env.AUTH_DOMAIN,
+        projectId: process.env.PROJECT_ID,
+        storageBucket: "chefocus-50ce1.appspot.com",
+        messagingSenderId: process.env.MESSAGE_SENDER,
+        appId: process.env.APP_ID,
+        measurementId: process.env.MEASUREMENT_ID
+    };
+    firebase() {
+        storageRef = firebase.storage().ref();
+        firebaseImg = storageRef.child("images");
+
+        firebase.initializeApp(firebaseConfig);
+    }
+
+    handleChange = e => {
+        this.setState({ userName: e.target.value })
+    }
+
+    // Firebase Code for submitting picture and food data
+    handleUploadClick() {
         // firebase code to POST/Upload pictures, then download to/from DB
         let file = firebaseImg
 
@@ -100,106 +107,143 @@ function Submission() {
                 });
             }
         )
-    }
+        fetch("/api/recipes", {
+            method: "POST"
+        }).then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        imageFood: firebaseImg,
+                        recipeName: "",
+                        servings: 0,
+                        prepHours: 0,
+                        prepMinutes: 0,
+                        ingredients: "",
+                        instructions: ""
+                    })
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error,
 
+                    }).then(console.log(error))
+                }
+            )
+    };
 
-    // window.location.href = "/explore";
-
-    return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
-                    Submit A Recipe
+    render() {
+        const { classes } = this.props;
+        return (
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Typography component="h1" variant="h5">
+                        Submit A Recipe
                 </Typography>
-                <form className={classes.form} noValidate autoComplete='off'>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="recipeName"
-                        label="Recipe Name"
-                        name="recipeName"
-                        autoFocus
-                    />
-                    <Grid container spacing={3}>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="servings"
-                                label="Servings"
-                                type="number"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
+                    <form className={classes.form} noValidate autoComplete='off'>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="recipeName"
+                            label="Recipe Name"
+                            name="recipeName"
+                            autoFocus
+                            {...this.props}>
+                            <div>{this.state.recipeName}</div>
+                        </TextField>
+                        <Grid container spacing={3}>
+                            <Grid item xs={4}>
+                                <TextField
+                                    id="servings"
+                                    label="Servings"
+                                    type="number"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    {...this.props}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <TextField
+                                    id="prepHours"
+                                    label="Prep Hours"
+                                    type="number"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    {...this.props}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <TextField
+                                    id="prepMinutes"
+                                    label="Prep Minutes"
+                                    type="number"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    {...this.props}
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="prepHours"
-                                label="Prep Hours"
-                                type="number"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                id="prepMinutes"
-                                label="Prep Minutes"
-                                type="number"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                        </Grid>
-                    </Grid>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="ingredients"
-                        label="Ingredients"
-                        type="text"
-                        id="ingredients"
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="instructions"
-                        label="Instructions"
-                        type="text"
-                        id="instructions"
-                    />
-                    <Button
-                        variant="contained"
-                        component="label"
-                    >
-                        Upload Photo
-                        <input
-                            type="file"
-                            hidden
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="ingredients"
+                            label="Ingredients"
+                            type="text"
+                            id="ingredients"
+                            {...this.props}
                         />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="instructions"
+                            label="Instructions"
+                            type="text"
+                            id="instructions"
+                            {...this.props}
+                        />
+                        <Button
+                            variant="contained"
+                            component="label"
+                        >
+                            Upload Photo
+                        <input
+                                type="file"
+                                hidden
+                                id="photo"
+                                {...this.props}
+                            />
+                        </Button>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                            onClick={
+                                this.handleUploadClick,
+                                this.handleChange
+                            }
+                            href={"/explore"}
+                        >
+                            Create Recipe
                     </Button>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        onClick={handleUploadClick}
-                        href={"/explore"}
-                    >
-                        Create Recipe
-                    </Button>
-                </form>
-            </div>
-        </Container>
-    );
+                    </form>
+                </div>
+            </Container>
+        );
+    }
 }
 
-export default Submission;
+
+export default withStyles(useStyles)(Form);
