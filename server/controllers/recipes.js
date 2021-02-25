@@ -1,4 +1,4 @@
-const db = require('../models/Recipe');
+const db = require('../models');
 
 const submit = (req, res) => {
   console.log(req.body);
