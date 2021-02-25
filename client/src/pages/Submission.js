@@ -123,7 +123,7 @@ class Form extends Component {
             },
         }).then(res => res.json())
             .then((data) => {
-                console.log(recipe)
+                console.log("Sucess: ", data)
             }
             ).catch((error) => {
                 console.error('Error:', error);
