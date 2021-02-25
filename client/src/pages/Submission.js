@@ -107,6 +107,11 @@ class Form extends Component {
                 });
             }
         )
+
+
+    };
+
+    handleRecSub() {
         const recipe = {
             recipeName: "",
             servings: 0,
@@ -115,20 +120,19 @@ class Form extends Component {
             ingredients: "",
             instructions: ""
         }
-
-        fetch("/api/auth/recipes", {
+        
+        fetch("http://localhost:3001/api/auth/recipes", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
         }).then(res => res.json())
             .then((data) => {
-                console.log(recipe)
+                console.log("Success: ", data)
             }
             ).catch((error) => {
                 console.error('Error:', error);
             });
-
     };
 
 
@@ -152,7 +156,7 @@ class Form extends Component {
                             label="Recipe Name"
                             name="recipeName"
                             autoFocus
-                            {...this.props}>
+                            >
                         </TextField>
                         <Grid container spacing={3}>
                             <Grid item xs={4}>
@@ -163,7 +167,6 @@ class Form extends Component {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    {...this.props}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -173,8 +176,7 @@ class Form extends Component {
                                     type="number"
                                     InputLabelProps={{
                                         shrink: true,
-                                    }}
-                                    {...this.props}
+                                    }}                               
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -184,8 +186,7 @@ class Form extends Component {
                                     type="number"
                                     InputLabelProps={{
                                         shrink: true,
-                                    }}
-                                    {...this.props}
+                                    }}                                  
                                 />
                             </Grid>
                         </Grid>
@@ -197,8 +198,7 @@ class Form extends Component {
                             name="ingredients"
                             label="Ingredients"
                             type="text"
-                            id="ingredients"
-                            {...this.props}
+                            id="ingredients"                       
                         />
                         <TextField
                             variant="outlined"
@@ -208,8 +208,7 @@ class Form extends Component {
                             name="instructions"
                             label="Instructions"
                             type="text"
-                            id="instructions"
-                            {...this.props}
+                            id="instructions"                   
                         />
                         <Button
                             variant="contained"
@@ -219,8 +218,7 @@ class Form extends Component {
                         <input
                                 type="file"
                                 hidden
-                                id="photo"
-                                {...this.props}
+                                id="photo"             
                             />
                         </Button>
                         <Button
@@ -231,7 +229,8 @@ class Form extends Component {
                             className={classes.submit}
                             onClick={
                                 this.handleUploadClick,
-                                this.handleChange
+                                this.handleChange,
+                                this.handleRecSub
                             }
                             href={"/explore"}
                         >
