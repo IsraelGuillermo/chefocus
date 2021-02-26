@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import { login } from '../Utils/API';
-import { AppContext, StoreUser } from '../Utils/AppContext';
+import { useUserProvider } from '../Utils/AppContext';
 
 function Copyright() {
   return (
@@ -50,7 +50,11 @@ const useStyles = makeStyles((theme) => ({
 function Home() {
   let history = useHistory();
   const classes = useStyles();
-  const [userID, setUserID] = useContext(AppContext);
+  const { userID, setUserID } = useUserProvider();
+  useEffect(() => {
+    setUserID({ id: '', email: '', photo: '', username: '' });
+  }, []);
+
   const [loginInfo, setLoginInfo] = useState({
     email: '',
     password: ''
@@ -60,16 +64,22 @@ function Home() {
     e.preventDefault();
     login({ ...loginInfo })
       .then((response) => {
-        console.log(response);
-        setUserID({ id: response.data.id, email: response.data.email });
+        setUserID({
+          id: response.data.id,
+          email: response.data.email,
+          photo: response.data.photo,
+          username: response.data.username
+        });
         sessionStorage.setItem('userID', response.data.id);
-        history.push('/explore');
+        localStorage.setItem('username', response.data.username);
+        localStorage.setItem('photo', response.data.photo);
+        history.push('/profile');
       })
       .catch((err) => {
         console.log(err);
       });
   }
-
+  console.log(userID);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

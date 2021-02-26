@@ -43,6 +43,8 @@ const TopNavbar = () => {
   const handleClickFunction = () => {
     history.push('/');
     sessionStorage.removeItem('userID');
+    localStorage.removeItem('username');
+    localStorage.removeItem('photo');
   };
 
   if (matches) {
