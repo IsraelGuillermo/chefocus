@@ -34,7 +34,7 @@ const navLinks = [
   { title: `explore`, path: `/explore` }
 ];
 
-const Header = () => {
+const TopNavbar = () => {
   let history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
@@ -74,4 +74,4 @@ const Header = () => {
     );
   }
 };
-export default Header;
+export default TopNavbar;

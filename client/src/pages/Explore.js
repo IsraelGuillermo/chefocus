@@ -1,15 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import Container from '@material-ui/core/Container';
-import IconButton from '@material-ui/core/IconButton';
+import {
+    Container,
+    CssBaseline,
+    GridList,
+    GridListTile,
+    GridListTileBar,
+    IconButton
+} from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Header from '../components/Header'
-import Navbar from '../components/Navbar';
-import BottomNavbar from '../components/Navbar/index';
+import TopNavbar from '../components/TopNavbar'
+import BottomNavbar from '../components/BottomNavbar';
 import Card2 from '../components/Card/'
 
 const useStyles = makeStyles((theme) => ({
@@ -34,9 +35,6 @@ const useStyles = makeStyles((theme) => ({
         color: 'rgba(255, 255, 255, 0.54)',
     },
 }));
-
-
-// import image from '../images/';
 
 const tileData = [
     {
@@ -65,9 +63,12 @@ function Explore() {
     const classes = useStyles();
 
     return (
-        <Container component="main" maxWidth="m">
-            <Header></Header>
+        <Container component="main" maxWidth="md">
+
+            <TopNavbar />
+
             <CssBaseline />
+
             <div className={classes.paper}>
                 <div>
                     <h1>Explore Recipes</h1>
@@ -90,13 +91,11 @@ function Explore() {
                             </GridListTile>
                         ))}
                     </GridList>
-                    <Card2></Card2>
+                    <Card2 />
                 </div>
             </div>
 
-            
-
-            <BottomNavbar></BottomNavbar>
+            <BottomNavbar />
 
         </Container>
     );
