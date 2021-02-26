@@ -9,8 +9,6 @@ import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded'
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
 
-
-
 const useStyles = makeStyles({
     root: {
         width: "auto",
@@ -22,8 +20,6 @@ function BottomNavbar() {
     const [value, setValue] = React.useState(0);
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('xs'));
-
-
 
     if (matches) {
         return (
