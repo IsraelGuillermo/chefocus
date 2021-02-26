@@ -150,6 +150,10 @@ function Form() {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
+                                onChange={(event) => {
+                                    setRecipeSubmit({ ...recipeSubmit, servings: event.target.value })
+                                }}
+                                value={recipeSubmit.servings}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -160,6 +164,10 @@ function Form() {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
+                                onChange={(event) => {
+                                    setRecipeSubmit({ ...recipeSubmit, prepHours: event.target.value })
+                                }}
+                                value={recipeSubmit.prepHours}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -170,6 +178,10 @@ function Form() {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
+                                onChange={(event) => {
+                                    setRecipeSubmit({ ...recipeSubmit, prepMinutes: event.target.value })
+                                }}
+                                value={recipeSubmit.prepMinutes}
                             />
                         </Grid>
                     </Grid>
@@ -182,6 +194,10 @@ function Form() {
                         label="Ingredients"
                         type="text"
                         id="ingredients"
+                        onChange={(event) => {
+                            setRecipeSubmit({ ...recipeSubmit, ingredients: event.target.value })
+                        }}
+                        value={recipeSubmit.ingredients}
                     />
                     <TextField
                         variant="outlined"
@@ -192,6 +208,10 @@ function Form() {
                         label="Instructions"
                         type="text"
                         id="instructions"
+                        onChange={(event) => {
+                            setRecipeSubmit({ ...recipeSubmit, instructions: event.target.value })
+                        }}
+                        value={recipeSubmit.instructions}
                     />
                     <Button
                         variant="contained"
