@@ -6,15 +6,19 @@ import Submission from './pages/Submission';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import StoreUser from './Utils/AppContext';
 
+function PrivateRoute({ children, ...rest }) {
+  const userID = sessionStorage.getItem('userID');
+
+  return (
+    <Route {...rest} render={() => {
+      return !!userID
+        ? children
+        : <Redirect to='/' />
+    }} />
+  )
+}
+
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const userID = sessionStorage.getItem('userID');
-    setIsLoggedIn(!!userID);
-  }, [window.location, sessionStorage.getItem('userID')]);
-
-  console.log(isLoggedIn);
 
   return (
     <StoreUser>
@@ -26,14 +30,14 @@ function App() {
           <Route exact path="/signup">
             <SignUp />
           </Route>
-          {!isLoggedIn && (
+          {/* {!isLoggedIn && (
             <Route>
               <Home />
             </Route>
-          )}
-          <Route exact path="/explore">
+          )} */}
+          <PrivateRoute exact path="/explore">
             <Explore />
-          </Route>
+          </PrivateRoute>
           <Route exact path="/submission">
             <Submission />
           </Route>
