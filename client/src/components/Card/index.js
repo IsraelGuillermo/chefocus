@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -40,13 +40,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard() {
+function RecipeReviewCard() {
+
+  const [recipeForm, setRecipeForm] = useState({
+    // imageFood: firebaseImg,
+    recipeName: "",
+    servings: 0,
+    prepHours: 0,
+    prepMinutes: 0,
+    ingredients: "",
+    instructions: ""
+  })
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  function getCardData() {
+    fetch("/api/recipes", {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(res => res.json())
+      .then((data) => {
+        console.log(data)
+      }
+      ).catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  getCardData();
+
 
   return (
     <Card className={classes.root}>
@@ -56,7 +85,7 @@ export default function RecipeReviewCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Title of Recipe"
+        title={recipeForm, recipeForm.recipeName}
         subheader="Date of Recipe"
       />
       <CardMedia
@@ -89,7 +118,7 @@ export default function RecipeReviewCard() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
+          <Typography paragraph>Recipe: </Typography>
           <Typography paragraph>
             {/* First bit of instructions */}
           </Typography>
@@ -107,3 +136,5 @@ export default function RecipeReviewCard() {
     </Card>
   );
 }
+
+export default RecipeReviewCard;

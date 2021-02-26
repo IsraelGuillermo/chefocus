@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true
       },
       servings: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       prep_time_hrs: {
