@@ -1,6 +1,5 @@
 const db = require('../models');
 
-
 const submit = (req, res) => {
   console.log(req.body);
   db.Recipe.create(req.body)
