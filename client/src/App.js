@@ -3,25 +3,26 @@ import Home from './pages/Home';
 import Explore from './pages/Explore';
 import SignUp from './pages/Signup';
 import Submission from './pages/Submission';
+import Profile from './pages/Profile';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import StoreUser from './Utils/AppContext';
+import { UserProvider } from './Utils/AppContext';
 
 function PrivateRoute({ children, ...rest }) {
   const userID = sessionStorage.getItem('userID');
 
   return (
-    <Route {...rest} render={() => {
-      return !!userID
-        ? children
-        : <Redirect to='/' />
-    }} />
-  )
+    <Route
+      {...rest}
+      render={() => {
+        return !!userID ? children : <Redirect to="/" />;
+      }}
+    />
+  );
 }
 
 function App() {
-
   return (
-    <StoreUser>
+    <UserProvider>
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
@@ -41,9 +42,12 @@ function App() {
           <Route exact path="/submission">
             <Submission />
           </Route>
+          <PrivateRoute exact path="/profile">
+            <Profile />
+          </PrivateRoute>
         </Switch>
       </BrowserRouter>
-    </StoreUser>
+    </UserProvider>
   );
 }
 

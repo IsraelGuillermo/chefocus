@@ -1,52 +1,49 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, useContext } from 'react';
 
-const initialState = {
-  id: '',
-  email: ''
-};
-
-export const AppContext = createContext();
-
-const StoreUser = ({ children }) => {
-  const [userID, setUserID] = useState(initialState);
-  return (
-    <AppContext.Provider value={[userID, setUserID]}>
-      {children}
-    </AppContext.Provider>
-  );
-};
-
-export default StoreUser;
-
-// const emptyContext = [null, () => {}];
-// const ViewerContext = React.createContext(emptyContext);
-// const ViewerContextProvider = ViewerContext.Provider;
-// export const useViewerProvider = () => {
-//   const res = useContext(ViewerContext);
-//   return res ? res : emptyContext;
+// const initialState = {
+//   id: '',
+//   email: ''
 // };
-// /**
-//  * Provider Component
-//  */
-// export const ViewerProvider = ({ children }) => {
-//   const viewerModel = useViewerModel();
+
+// export const AppContext = createContext();
+
+// const StoreUser = ({ children }) => {
+//   const [userID, setUserID] = useState(initialState);
 //   return (
-//     <ViewerContextProvider value={viewerModel}>
+//     <AppContext.Provider value={[userID, setUserID]}>
 //       {children}
-//     </ViewerContextProvider>
+//     </AppContext.Provider>
 //   );
 // };
 
-// const userModel = () => {
-//   const [user, setUser] = useState({
-//     id: '',
-//     first_name: '',
-//     last_name: '',
-//     email: '',
-//     token: ''
-//   });
-//   return {
-//     user,
-//     setUser
-//   };
-// };
+// export default StoreUser;
+
+const useUserModel = () => {
+  const [userID, setUserID] = useState({
+    id: '',
+    email: '',
+    photo: '',
+    username: ''
+  });
+  return {
+    userID,
+    setUserID
+  };
+};
+
+const emptyContext = [null, () => {}];
+const UserContext = React.createContext(emptyContext);
+const UserContextProvider = UserContext.Provider;
+export const useUserProvider = () => {
+  const res = useContext(UserContext);
+  return res ? res : emptyContext;
+};
+/**
+ * Provider Component
+ */
+export const UserProvider = ({ children }) => {
+  const userModel = useUserModel();
+  return (
+    <UserContextProvider value={userModel}>{children}</UserContextProvider>
+  );
+};
