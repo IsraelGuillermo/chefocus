@@ -72,7 +72,21 @@ class Form extends Component {
     }
 
     handleChange = e => {
-        this.setState({ userName: e.target.value })
+        this.setState({ recipeName: e.target.value })
+
+        fetch("/api/auth/recipes", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: this.state 
+        }).then(res => res.json())
+            .then((data) => {
+                console.log(data)
+            }
+            ).catch((error) => {
+                console.error('Error:', error);
+            });
     }
 
     // Firebase Code for submitting picture and food data
@@ -107,33 +121,12 @@ class Form extends Component {
                 });
             }
         )
-        const recipe = {
-            recipeName: "",
-            servings: 0,
-            prepHours: 0,
-            prepMinutes: 0,
-            ingredients: "",
-            instructions: ""
-        }
-
-        fetch("/api/auth/recipes", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then(res => res.json())
-            .then((data) => {
-                console.log(recipe)
-            }
-            ).catch((error) => {
-                console.error('Error:', error);
-            });
-
     };
 
 
 
     render() {
+
         const { classes } = this.props;
         return (
             <Container component="main" maxWidth="xs">
@@ -152,7 +145,8 @@ class Form extends Component {
                             label="Recipe Name"
                             name="recipeName"
                             autoFocus
-                            {...this.props}>
+                            value={this.state.recipeName}
+                            >
                         </TextField>
                         <Grid container spacing={3}>
                             <Grid item xs={4}>
@@ -163,7 +157,6 @@ class Form extends Component {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    {...this.props}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -174,7 +167,6 @@ class Form extends Component {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    {...this.props}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -185,7 +177,6 @@ class Form extends Component {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    {...this.props}
                                 />
                             </Grid>
                         </Grid>
@@ -198,7 +189,6 @@ class Form extends Component {
                             label="Ingredients"
                             type="text"
                             id="ingredients"
-                            {...this.props}
                         />
                         <TextField
                             variant="outlined"
@@ -209,7 +199,6 @@ class Form extends Component {
                             label="Instructions"
                             type="text"
                             id="instructions"
-                            {...this.props}
                         />
                         <Button
                             variant="contained"
@@ -220,7 +209,6 @@ class Form extends Component {
                                 type="file"
                                 hidden
                                 id="photo"
-                                {...this.props}
                             />
                         </Button>
                         <Button

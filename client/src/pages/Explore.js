@@ -10,6 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from '../components/Header'
 import Navbar from '../components/Navbar';
 import BottomNavbar from '../components/Navbar';
+import Card2 from '../components/Card/index'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
