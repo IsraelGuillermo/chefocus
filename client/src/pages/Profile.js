@@ -11,7 +11,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import TopNavbar from '../components/TopNavbar';
-import BottomNavbar from '../components/BottomNavbar';
 import Avatar from '@material-ui/core/Avatar';
 import { useUserProvider } from '../Utils/AppContext';
 
@@ -125,7 +124,6 @@ function Profile() {
             ))}
           </Grid>
         </Container>
-        <BottomNavbar />
       </main>
     </>
   );

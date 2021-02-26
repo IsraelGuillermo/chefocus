@@ -1,5 +1,4 @@
 import React, { Component, useState } from "react";
-
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -74,7 +73,7 @@ function Form() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(recipeSubmit)
-            
+
         }).then(res => res.json())
             .then((data) => {
                 console.log(data)

@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import TopNavbar from '../components/TopNavbar';
-import BottomNavbar from '../components/BottomNavbar';
 import Card2 from '../components/Card/';
 import { useUserProvider } from '../Utils/AppContext';
 
@@ -99,7 +98,6 @@ function Explore() {
           </div>
         </div>
 
-        <BottomNavbar />
       </Container>
     </>
   );
