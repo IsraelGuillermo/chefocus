@@ -11,7 +11,9 @@ import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
 
 const useStyles = makeStyles({
     root: {
-        width: "auto",
+        width: "100%",
+        position: 'fixed',
+        bottom: 0,
     },
 });
 
