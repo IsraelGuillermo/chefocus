@@ -2,9 +2,10 @@ import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
+import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import PersonOutlineRoundedIcon from '@material-ui/icons/PersonOutlineRounded';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles({
@@ -29,9 +30,10 @@ function BottomNavbar() {
                 showLabels
                 className={classes.root}
             >
-                <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-                <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-                <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+                <BottomNavigationAction label="Explore" icon={<SearchRoundedIcon />} />
+                <BottomNavigationAction label="Favorites" icon={<FavoriteBorderRoundedIcon />} />
+                <BottomNavigationAction label="Submit" icon={<AddCircleOutlineRoundedIcon />} />
+                <BottomNavigationAction label="Profile" icon={<PersonOutlineRoundedIcon />} />
             </BottomNavigation>
         );
     } else {
