@@ -7,9 +7,8 @@ import Container from '@material-ui/core/Container';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Header from '../components/Header'
-import Navbar from '../components/Navbar';
-import BottomNavbar from '../components/Navbar/index';
+import TopNavbar from '../components/TopNavbar'
+import BottomNavbar from '../components/BottomNavbar';
 import Card2 from '../components/Card/'
 
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +65,7 @@ function Explore() {
 
     return (
         <Container component="main" maxWidth="m">
-            <Header></Header>
+            <TopNavbar />
             <CssBaseline />
             <div className={classes.paper}>
                 <div>
@@ -90,13 +89,13 @@ function Explore() {
                             </GridListTile>
                         ))}
                     </GridList>
-                    <Card2></Card2>
+                    <Card2 />
                 </div>
             </div>
 
-            
 
-            <BottomNavbar></BottomNavbar>
+
+            <BottomNavbar />
 
         </Container>
     );
