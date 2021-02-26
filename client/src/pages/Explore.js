@@ -65,7 +65,7 @@ function Explore() {
   console.log(userID);
   return (
     <>
-      <TopNavbar />
+
       <Container component="main" maxWidth="md">
         <CssBaseline />
 

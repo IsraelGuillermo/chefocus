@@ -4,6 +4,7 @@ import SignUp from './pages/Signup';
 import Explore from './pages/Explore';
 // import Favorites from './pages/Favorites';
 import Submission from './pages/Submission';
+import TopNavbar from './components/TopNavbar';
 import BottomNavbar from './components/BottomNavbar';
 import Profile from './pages/Profile';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
@@ -36,6 +37,8 @@ function App() {
               <SignUp />
             </Route>
             <>
+              <TopNavbar />
+
               <PrivateRoute exact path="/explore">
                 <Explore />
               </PrivateRoute>
