@@ -52,7 +52,7 @@ function SignUp() {
     email: '',
     password: '',
     username: '',
-    photo: 'rick123'
+    photo: 'rick1234'
   });
   const classes = useStyles();
 
