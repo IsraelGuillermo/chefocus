@@ -120,7 +120,7 @@ class Form extends Component {
             ingredients: "",
             instructions: ""
         }
-        
+
         fetch("http://localhost:3001/api/auth/recipes", {
             method: "POST",
             headers: {
@@ -140,7 +140,7 @@ class Form extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="md">
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Typography component="h1" variant="h5">
@@ -156,7 +156,7 @@ class Form extends Component {
                             label="Recipe Name"
                             name="recipeName"
                             autoFocus
-                            >
+                        >
                         </TextField>
                         <Grid container spacing={3}>
                             <Grid item xs={4}>
@@ -176,7 +176,7 @@ class Form extends Component {
                                     type="number"
                                     InputLabelProps={{
                                         shrink: true,
-                                    }}                               
+                                    }}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -186,7 +186,7 @@ class Form extends Component {
                                     type="number"
                                     InputLabelProps={{
                                         shrink: true,
-                                    }}                                  
+                                    }}
                                 />
                             </Grid>
                         </Grid>
@@ -198,7 +198,7 @@ class Form extends Component {
                             name="ingredients"
                             label="Ingredients"
                             type="text"
-                            id="ingredients"                       
+                            id="ingredients"
                         />
                         <TextField
                             variant="outlined"
@@ -208,7 +208,7 @@ class Form extends Component {
                             name="instructions"
                             label="Instructions"
                             type="text"
-                            id="instructions"                   
+                            id="instructions"
                         />
                         <Button
                             variant="contained"
@@ -218,7 +218,7 @@ class Form extends Component {
                         <input
                                 type="file"
                                 hidden
-                                id="photo"             
+                                id="photo"
                             />
                         </Button>
                         <Button
@@ -238,6 +238,7 @@ class Form extends Component {
                     </Button>
                     </form>
                 </div>
+
             </Container>
         );
     }

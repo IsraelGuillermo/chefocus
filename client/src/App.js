@@ -1,8 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Home from './pages/Home';
-import Explore from './pages/Explore';
 import SignUp from './pages/Signup';
+import Explore from './pages/Explore';
+// import Favorites from './pages/Favorites';
 import Submission from './pages/Submission';
+// import Profile from './pages/Profile';
+import BottomNavbar from './components/BottomNavbar';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import StoreUser from './Utils/AppContext';
 
@@ -21,29 +24,37 @@ function PrivateRoute({ children, ...rest }) {
 function App() {
 
   return (
-    <StoreUser>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/signup">
-            <SignUp />
-          </Route>
-          {/* {!isLoggedIn && (
-            <Route>
+    <div>
+      <StoreUser>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/">
               <Home />
             </Route>
-          )} */}
-          <PrivateRoute exact path="/explore">
-            <Explore />
-          </PrivateRoute>
-          <Route exact path="/submission">
-            <Submission />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </StoreUser>
+            <Route exact path="/signup">
+              <SignUp />
+            </Route>
+            <>
+              <PrivateRoute exact path="/explore">
+                <Explore />
+              </PrivateRoute>
+              {/* <PrivateRoute exact path="/favorites">
+            <Favorites />
+          </PrivateRoute> */}
+              <PrivateRoute exact path="/submission">
+                <Submission />
+              </PrivateRoute>
+              {/* <PrivateRoute exact path="/profile">
+            <Profile />
+          </PrivateRoute> */}
+              <BottomNavbar />
+            </>
+          </Switch>
+
+        </BrowserRouter>
+      </StoreUser>
+
+    </div>
   );
 }
 
