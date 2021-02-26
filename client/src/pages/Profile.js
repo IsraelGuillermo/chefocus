@@ -73,7 +73,6 @@ function Profile() {
       <CssBaseline />
 
       <main>
-        <TopNavbar />
 
         <div className={classes.heroContent}>
           <Container maxWidth="sm">

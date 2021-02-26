@@ -29,9 +29,10 @@ const useStyles = makeStyles({
 });
 
 const navLinks = [
-  { title: `home`, path: `/` },
-  { title: `Submission`, path: `/submission` },
-  { title: `explore`, path: `/explore` }
+  { title: `Explore`, path: `/explore` },
+  { title: `Favorites`, path: `/favorites` },
+  { title: `Submit`, path: `/submission` },
+  { title: `Profile`, path: `/profile` },
 ];
 
 const TopNavbar = () => {
