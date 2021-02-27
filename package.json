@@ -1,15 +1,15 @@
 {
   "name": "chefocus",
   "version": "1.0.0",
-  "description": "TBD",
-  "author": "TBD",
+  "description": "An app for culinary artists who want to share their creations",
+  "author": "Anthony Gamon, Israel Guillermo, Seth Glenn, Timothy Kemp",
   "license": "MIT",
   "main": "server/server.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TBD"
+    "url": "git+https://github.com/IsraelGuillermo/chefocus"
   },
-  "homepage": "TBD",
+  "homepage": "https://www.chefocus.com/",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node ./server/server.js",

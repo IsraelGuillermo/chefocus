@@ -1,7 +1,7 @@
 {
-  "name": "TBD",
+  "name": "CHEFocus",
   "version": "0.1.0",
-  "description": "TBD",
+  "description": "An app for culinary artists who want to share their creations",
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
