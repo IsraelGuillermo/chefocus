@@ -91,11 +91,6 @@ function Profile() {
     }
   };
 
-  const handleProfilePIcture = () => {
-    updateProfilePicture({ ...userID }).then((response) =>
-      console.log(response)
-    );
-  };
   console.log(userID);
   const handleUpload = () => {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
@@ -114,7 +109,9 @@ function Profile() {
             console.log(url);
             localStorage.setItem('photo', url);
             uploadedPhoto === true;
-            setUserID({ ...userID, photo: url });
+            const updatedUser = { ...userID, photo: url };
+            setUserID(updatedUser);
+            updateProfilePicture(updatedUser);
           });
       }
     );
@@ -127,7 +124,7 @@ function Profile() {
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            {!uploadedPhoto ? (
+            {uploadedPhoto ? (
               <>
                 <Avatar className={classes.large}>
                   <Button

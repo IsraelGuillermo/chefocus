@@ -4,8 +4,8 @@ const submit = (req, res) => {
   console.log(req.body);
   db.Recipe.create(req.body)
     .then((result) => {
-      const { recipe } = result;
-      res.json(recipe);
+      // const { recipe } = result;
+      res.json(result);
     })
     .catch((err) => {
       res.status(401).json(err);
