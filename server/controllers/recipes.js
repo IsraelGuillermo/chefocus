@@ -1,5 +1,4 @@
 const db = require('../models');
-const userName = require('../models/User')
 
 const submit = (req, res) => {
   console.log(req.body);
@@ -15,9 +14,9 @@ const submit = (req, res) => {
 
 const render = (req, res) => {
   console.log(req.body);
-  db.Recipe.findOne({
+  db.Recipe.findAll({
     where: {
-      // userName = username,
+      body: req.body
     }
   })
     .then((result) => {
