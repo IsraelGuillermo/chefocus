@@ -13,6 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { TextsmsTwoTone } from '@material-ui/icons';
 
 import { storage } from '../Firebase';
+import { submitrecipe } from '../Utils/API';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -60,7 +61,7 @@ function Form() {
     const uploadTask = storage.ref(`images/${foodPhoto}`).put(foodPhoto);
     uploadTask.on(
       'state_changed',
-      (snapshot) => { },
+      (snapshot) => {},
       (error) => {
         console.log(error);
       },
@@ -70,23 +71,10 @@ function Form() {
           .child(foodPhoto)
           .getDownloadURL()
           .then((url) => {
-            setRecipeSubmit({
-              ...recipeSubmit,
-              imageFood: url
-            });
-            console.log(url)
-            console.log(recipeSubmit)
-            fetch('/api/recipes', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(recipeSubmit)
-            })
-              .then((res) => res.json())
-              .catch((error) => {
-                console.error('Error:', error);
-              });
+            const updatedRecipe = { ...recipeSubmit, imageFood: url };
+            console.log(updatedRecipe);
+            setRecipeSubmit(updatedRecipe);
+            submitrecipe(updatedRecipe);
           });
       }
     );
@@ -98,7 +86,7 @@ function Form() {
       setFoodPhoto(e.target.files[0].name);
     }
   };
-  console.log(recipeSubmit);
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
