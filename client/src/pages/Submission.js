@@ -53,6 +53,34 @@ function Form() {
     firebaseImg = storageRef.child('images');
   }
 
+  // Firebase Code for submitting picture and food data
+  function handleUploadClick(e) {
+    // firebase code to POST/Upload pictures, then download to/from DB
+    e.preventDefault();
+    const uploadTask = storage.ref(`images/${foodPhoto}`).put(foodPhoto);
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => { },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref('images')
+          .child(foodPhoto)
+          .getDownloadURL()
+          .then((url) => {
+            setRecipeSubmit({
+              ...recipeSubmit,
+              imageFood: url
+            });
+            console.log(url)
+          });
+      }
+    );
+    handleChange();
+  }
+
   function handleChange() {
     fetch('/api/recipes', {
       method: 'POST',
@@ -70,32 +98,6 @@ function Form() {
       });
   }
 
-  // Firebase Code for submitting picture and food data
-  function handleUploadClick(e) {
-    // firebase code to POST/Upload pictures, then download to/from DB
-    e.preventDefault();
-    const uploadTask = storage.ref(`images/${foodPhoto}`).put(foodPhoto);
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {},
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref('images')
-          .child(foodPhoto)
-          .getDownloadURL()
-          .then((url) => {
-            setRecipeSubmit({
-              ...recipeSubmit,
-              imageFood: url
-            });
-          });
-      }
-    );
-    handleChange();
-  }
 
   const handleInputChange = (e) => {
     e.preventDefault();
@@ -117,7 +119,7 @@ function Form() {
             margin="normal"
             required
             fullWidth
-            id="recipeName"
+            id="name"
             label="Recipe Name"
             name="recipeName"
             autoFocus

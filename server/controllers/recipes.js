@@ -16,7 +16,7 @@ const render = (req, res) => {
   console.log(req.body);
   db.Recipe.findAll({
     where: {
-      body: req.body
+      body: req.body.body
     }
   })
     .then((result) => {
