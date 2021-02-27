@@ -78,7 +78,6 @@ function Profile() {
   const username = localStorage.getItem('username');
   const id = sessionStorage.getItem('userID');
   const photo = localStorage.getItem('photo');
-  const uploadedPhoto = false;
   const { userID, setUserID } = useUserProvider();
 
   useEffect(() => {
@@ -91,7 +90,6 @@ function Profile() {
     }
   };
 
-  console.log(userID);
   const handleUpload = () => {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
@@ -107,8 +105,8 @@ function Profile() {
           .getDownloadURL()
           .then((url) => {
             console.log(url);
+            localStorage.setItem('profilePhoto', true);
             localStorage.setItem('photo', url);
-            uploadedPhoto === true;
             const updatedUser = { ...userID, photo: url };
             setUserID(updatedUser);
             updateProfilePicture(updatedUser);
@@ -116,7 +114,7 @@ function Profile() {
       }
     );
   };
-
+  console.log(userID.photo);
   return (
     <>
       <CssBaseline />
@@ -124,7 +122,7 @@ function Profile() {
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            {uploadedPhoto ? (
+            {!photo ? (
               <>
                 <Avatar className={classes.large}>
                   <Button
