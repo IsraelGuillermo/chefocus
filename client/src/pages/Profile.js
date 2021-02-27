@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,11 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import TopNavbar from '../components/TopNavbar';
 import Avatar from '@material-ui/core/Avatar';
 import { useUserProvider } from '../Utils/AppContext';
-import firebase from 'firebase/app';
-import 'firebase/storage';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Box from '@material-ui/core/Box';
 import { storage } from '../Firebase';
@@ -81,7 +77,7 @@ function Profile() {
   const { userID, setUserID } = useUserProvider();
 
   useEffect(() => {
-    setUserID({ id: id, email: '', photo: '', username: username });
+    setUserID({ id: id, email: '', photo: photo, username: username });
   }, []);
 
   const handleChange = (e) => {
@@ -94,7 +90,7 @@ function Profile() {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
       'state_changed',
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
       },
@@ -104,17 +100,18 @@ function Profile() {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
-            console.log(url);
-            localStorage.setItem('profilePhoto', true);
             localStorage.setItem('photo', url);
             const updatedUser = { ...userID, photo: url };
             setUserID(updatedUser);
-            updateProfilePicture(updatedUser);
-          });
+            localStorage.setItem('profilePhoto', true);
+            updateProfilePicture(updatedUser).then(response => {
+              setUserID(userID);
+            })
+          })
       }
     );
   };
-  console.log(userID.photo);
+
   return (
     <>
       <CssBaseline />
@@ -122,7 +119,7 @@ function Profile() {
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            {!photo ? (
+            {photo === 'false' ? (
               <>
                 <Avatar className={classes.large}>
                   <Button
@@ -149,8 +146,8 @@ function Profile() {
                 </Button>
               </>
             ) : (
-              <Avatar alt="Remy Sharp" className={classes.large} src={photo} />
-            )}
+                <Avatar alt="Remy Sharp" className={classes.large} src={photo} />
+              )}
             <Typography
               component="h1"
               variant="h2"
