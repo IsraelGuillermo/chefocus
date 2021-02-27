@@ -73,6 +73,7 @@ function Home() {
         sessionStorage.setItem('userID', response.data.id);
         localStorage.setItem('username', response.data.username);
         localStorage.setItem('photo', response.data.photo);
+        localStorage.setItem('profilePhoto', false);
         history.push('/profile');
       })
       .catch((err) => {
