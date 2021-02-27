@@ -53,23 +53,6 @@ function Form() {
     firebaseImg = storageRef.child('images');
   }
 
-  function handleChange() {
-    fetch('/api/recipes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(recipeSubmit)
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }
-
   // Firebase Code for submitting picture and food data
   function handleUploadClick(e) {
     // firebase code to POST/Upload pictures, then download to/from DB
@@ -77,7 +60,7 @@ function Form() {
     const uploadTask = storage.ref(`images/${foodPhoto}`).put(foodPhoto);
     uploadTask.on(
       'state_changed',
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
       },
@@ -91,11 +74,22 @@ function Form() {
               ...recipeSubmit,
               imageFood: url
             });
-            
+            console.log(url)
+            console.log(recipeSubmit)
+            fetch('/api/recipes', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(recipeSubmit)
+            })
+              .then((res) => res.json())
+              .catch((error) => {
+                console.error('Error:', error);
+              });
           });
       }
     );
-    handleChange();
   }
 
   const handleInputChange = (e) => {
@@ -118,7 +112,7 @@ function Form() {
             margin="normal"
             required
             fullWidth
-            id="recipeName"
+            id="name"
             label="Recipe Name"
             name="recipeName"
             autoFocus

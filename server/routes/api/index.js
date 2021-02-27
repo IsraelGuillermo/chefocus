@@ -8,5 +8,6 @@ const isAuthenticated = require('../../config/middleware/isAuthenticated');
 router.use('/auth', authRoutes);
 router.use(isAuthenticated);
 router.use('/recipes', recipeRoutes);
+router.use('/getRecipes', recipeRoutes)
 router.use('/updateProfilePic', profilepicRoutes);
 module.exports = router;
