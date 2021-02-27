@@ -18,6 +18,7 @@ import 'firebase/storage';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Box from '@material-ui/core/Box';
 import { storage } from '../Firebase';
+import { updateProfilePicture } from '../Utils/API';
 
 function Copyright() {
   return (
@@ -71,18 +72,31 @@ const useStyles = makeStyles((theme) => ({
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function Profile() {
-  const [image, setImage] = useState();
+  const [image, setImage] = useState({});
   const classes = useStyles();
 
   const username = localStorage.getItem('username');
+  const id = sessionStorage.getItem('userID');
   const photo = localStorage.getItem('photo');
   const uploadedPhoto = false;
+  const { userID, setUserID } = useUserProvider();
+
+  useEffect(() => {
+    setUserID({ id: id, email: '', photo: '', username: username });
+  }, []);
+
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
   };
 
+  const handleProfilePIcture = () => {
+    updateProfilePicture({ ...userID }).then((response) =>
+      console.log(response)
+    );
+  };
+  console.log(userID);
   const handleUpload = () => {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
@@ -97,12 +111,14 @@ function Profile() {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
-            setImage(url);
+            console.log(url);
+            localStorage.setItem('photo', url);
+            uploadedPhoto === true;
+            setUserID({ ...userID, photo: url });
           });
       }
     );
   };
-  console.log(image);
 
   return (
     <>
