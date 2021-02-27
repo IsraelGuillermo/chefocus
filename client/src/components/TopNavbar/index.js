@@ -52,7 +52,7 @@ const TopNavbar = () => {
     return null;
   } else {
     return (
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
           <Container maxWidth="md" className={classes.navbarDisplayFlex}>
             <List
