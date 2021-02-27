@@ -19,38 +19,37 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 345
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%' // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+      duration: theme.transitions.duration.shortest
+    })
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: 'rotate(180deg)'
   },
   avatar: {
-    backgroundColor: red[500],
-  },
+    backgroundColor: red[500]
+  }
 }));
 
 function RecipeReviewCard() {
-
   const [recipeForm, setRecipeForm] = useState({
     // imageFood: firebaseImg,
-    recipeName: "",
+    recipeName: '',
     servings: 0,
     prepHours: 0,
     prepMinutes: 0,
-    ingredients: "",
-    instructions: ""
-  })
+    ingredients: '',
+    instructions: ''
+  });
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -60,22 +59,22 @@ function RecipeReviewCard() {
   };
 
   function getCardData() {
-    fetch("/api/recipes", {
-      method: "GET",
+    fetch('/api/recipes', {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
-      },
-    }).then(res => res.json())
-      .then((data) => {
-        console.log(data)
       }
-      ).catch((error) => {
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
         console.error('Error:', error);
       });
   }
 
   getCardData();
-
 
   return (
     <Card className={classes.root}>
@@ -85,7 +84,7 @@ function RecipeReviewCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title={recipeForm, recipeForm.recipeName}
+        title={(recipeForm, recipeForm.recipeName)}
         subheader="Date of Recipe"
       />
       <CardMedia
@@ -107,7 +106,7 @@ function RecipeReviewCard() {
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
+            [classes.expandOpen]: expanded
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -119,18 +118,10 @@ function RecipeReviewCard() {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Recipe: </Typography>
-          <Typography paragraph>
-            {/* First bit of instructions */}
-          </Typography>
-          <Typography paragraph>
-            {/* Recipe */}
-          </Typography>
-          <Typography paragraph>
-            {/* Instructions */}
-          </Typography>
-          <Typography>
-            {/* Last Instructions */}
-          </Typography>
+          <Typography paragraph>{/* First bit of instructions */}</Typography>
+          <Typography paragraph>{/* Recipe */}</Typography>
+          <Typography paragraph>{/* Instructions */}</Typography>
+          <Typography>{/* Last Instructions */}</Typography>
         </CardContent>
       </Collapse>
     </Card>
