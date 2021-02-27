@@ -17,7 +17,7 @@ const render = (req, res) => {
   console.log(req.body);
   db.Recipe.findOne({
     where: {
-      userName = username,
+      // userName = username,
     }
   })
     .then((result) => {

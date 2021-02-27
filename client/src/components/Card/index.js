@@ -76,7 +76,6 @@ function RecipeReviewCard() {
 
   getCardData();
 
-
   return (
     <Card className={classes.root}>
       <CardHeader
