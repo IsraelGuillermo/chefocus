@@ -90,7 +90,7 @@ function Profile() {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
       'state_changed',
-      (snapshot) => { },
+      (snapshot) => {},
       (error) => {
         console.log(error);
       },
@@ -104,10 +104,10 @@ function Profile() {
             const updatedUser = { ...userID, photo: url };
             setUserID(updatedUser);
             localStorage.setItem('profilePhoto', true);
-            updateProfilePicture(updatedUser).then(response => {
+            updateProfilePicture(updatedUser).then((response) => {
               setUserID(userID);
-            })
-          })
+            });
+          });
       }
     );
   };
@@ -146,8 +146,8 @@ function Profile() {
                 </Button>
               </>
             ) : (
-                <Avatar alt="Remy Sharp" className={classes.large} src={photo} />
-              )}
+              <Avatar alt="Remy Sharp" className={classes.large} src={photo} />
+            )}
             <Typography
               component="h1"
               variant="h2"
