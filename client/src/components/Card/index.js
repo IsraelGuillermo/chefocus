@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 function RecipeReviewCard() {
   const [recipeForm, setRecipeForm] = useState({
-    // imageFood: firebaseImg,
+    imageFood: '',
     recipeName: '',
     servings: 0,
     prepHours: 0,
@@ -50,6 +50,8 @@ function RecipeReviewCard() {
     ingredients: '',
     instructions: ''
   });
+
+  const [allResults, setAllResults] = useState([])
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -59,7 +61,7 @@ function RecipeReviewCard() {
   };
 
   function getCardData() {
-    fetch('/api/recipes', {
+    fetch('/api/getRecipes', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -67,7 +69,7 @@ function RecipeReviewCard() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setAllResults(data)
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -78,32 +80,28 @@ function RecipeReviewCard() {
 
   return (
     <Card className={classes.root}>
+      {allResults.map((recipe) => (
+       <>  
       <CardHeader
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title={(recipeForm, recipeForm.recipeName)}
+        title={(recipe.recipeName)}
         subheader="Date of Recipe"
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image={`${recipe.imageFood}`}
         title="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {/* Summary  */}
+          {recipe.imageFood}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -124,6 +122,8 @@ function RecipeReviewCard() {
           <Typography>{/* Last Instructions */}</Typography>
         </CardContent>
       </Collapse>
+      </>
+      ))}
     </Card>
   );
 }

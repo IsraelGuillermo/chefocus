@@ -75,29 +75,22 @@ function Form() {
               imageFood: url
             });
             console.log(url)
+            console.log(recipeSubmit)
+            fetch('/api/recipes', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(recipeSubmit)
+            })
+              .then((res) => res.json())
+              .catch((error) => {
+                console.error('Error:', error);
+              });
           });
       }
     );
-    handleChange();
   }
-
-  function handleChange() {
-    fetch('/api/recipes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(recipeSubmit)
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }
-
 
   const handleInputChange = (e) => {
     e.preventDefault();

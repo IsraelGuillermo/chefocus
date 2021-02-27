@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: true
       },
-      photo: {
+      imageFood: {
         type: DataTypes.STRING,
         allowNull: true,
         default: DataTypes.STRING
