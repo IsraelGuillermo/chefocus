@@ -34,7 +34,7 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
-    "firebase": "^8.2.7",
+    "firebase": "^8.2.9",
     "if-env": "^1.0.4",
     "material-design-icons": "^3.0.1",
     "material-ui": "^0.20.2"

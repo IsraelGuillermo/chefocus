@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       instructions: {
         type: DataTypes.STRING,
         allowNull: false
-      },
+      }
     },
     {
       underscored: true

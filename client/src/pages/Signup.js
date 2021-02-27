@@ -51,8 +51,7 @@ function SignUp() {
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     password: '',
-    username: '',
-    photo: 'rick1234'
+    username: ''
   });
   const classes = useStyles();
 

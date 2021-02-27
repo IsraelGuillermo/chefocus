@@ -32,7 +32,7 @@ const navLinks = [
   { title: `Explore`, path: `/explore` },
   { title: `Favorites`, path: `/favorites` },
   { title: `Submit`, path: `/submission` },
-  { title: `Profile`, path: `/profile` },
+  { title: `Profile`, path: `/profile` }
 ];
 
 const TopNavbar = () => {

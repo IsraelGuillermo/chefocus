@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,6 +13,12 @@ import Link from '@material-ui/core/Link';
 import TopNavbar from '../components/TopNavbar';
 import Avatar from '@material-ui/core/Avatar';
 import { useUserProvider } from '../Utils/AppContext';
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import Box from '@material-ui/core/Box';
+import { storage } from '../Firebase';
+import { updateProfilePicture } from '../Utils/API';
 
 function Copyright() {
   return (
@@ -57,26 +63,96 @@ const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(15),
     height: theme.spacing(15)
+  },
+  margin: {
+    margin: theme.spacing(1)
   }
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function Profile() {
+  const [image, setImage] = useState({});
   const classes = useStyles();
 
   const username = localStorage.getItem('username');
+  const id = sessionStorage.getItem('userID');
   const photo = localStorage.getItem('photo');
+  const uploadedPhoto = false;
+  const { userID, setUserID } = useUserProvider();
+
+  useEffect(() => {
+    setUserID({ id: id, email: '', photo: '', username: username });
+  }, []);
+
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  console.log(userID);
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref('profileImages')
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+            localStorage.setItem('photo', url);
+            uploadedPhoto === true;
+            const updatedUser = { ...userID, photo: url };
+            setUserID(updatedUser);
+            updateProfilePicture(updatedUser);
+          });
+      }
+    );
+  };
 
   return (
     <>
       <CssBaseline />
 
       <main>
-
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            <Avatar alt="Remy Sharp" className={classes.large} src={photo} />
+            {uploadedPhoto ? (
+              <>
+                <Avatar className={classes.large}>
+                  <Button
+                    variant="contained"
+                    component="label"
+                    className={classes.margin}
+                  >
+                    Photo
+                    <input
+                      type="file"
+                      id="photo"
+                      hidden
+                      onChange={handleChange}
+                    ></input>
+                  </Button>
+                </Avatar>
+                <Button
+                  variant="contained"
+                  component="label"
+                  className={classes.margin}
+                  onClick={handleUpload}
+                >
+                  Submit
+                </Button>
+              </>
+            ) : (
+              <Avatar alt="Remy Sharp" className={classes.large} src={photo} />
+            )}
             <Typography
               component="h1"
               variant="h2"
