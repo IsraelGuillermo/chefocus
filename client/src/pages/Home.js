@@ -44,7 +44,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center'
   },
   logo: {
-    marginBottom: theme.spacing(5)
+    marginBottom: theme.spacing(5),
+    padding: '1rem',
+    border: '5px',
+    borderStyle: 'solid',
+    borderRadius: 6,
+    borderColor: '#F15C22',
+    backgroundColor: '#fff',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
