@@ -88,6 +88,15 @@ function Explore() {
           </div>
 
           <div className={classes.root}>
+            {allResults?.map((recipe) => {
+              return (
+                <ReviewRecipeCard
+                  key={recipe.id}
+                  recipeName={recipe.recipeName}
+                  imageFood={recipe.imageFood}
+                />
+              );
+            })}
             <GridList cellHeight={180} className={classes.gridList}>
               {tileData.map((tile) => (
                 <GridListTile key={tile.img}>
@@ -107,15 +116,6 @@ function Explore() {
                 </GridListTile>
               ))}
             </GridList>
-            {allResults?.map((recipe) => {
-              return (
-                <ReviewRecipeCard
-                  key={recipe.id}
-                  recipeName={recipe.recipeName}
-                  imageFood={recipe.imageFood}
-                />
-              );
-            })}
           </div>
         </div>
       </Container>

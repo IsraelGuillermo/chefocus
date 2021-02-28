@@ -15,6 +15,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Box from '@material-ui/core/Box';
 import { storage } from '../Firebase';
 import { updateProfilePicture } from '../Utils/API';
+import { getRecipesByUser } from '../Utils/API';
 
 function Copyright() {
   return (
@@ -68,6 +69,8 @@ const useStyles = makeStyles((theme) => ({
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function Profile() {
+  const [recipesByUser, setRecipeByUser] = useState([]);
+
   const [image, setImage] = useState({});
   const classes = useStyles();
 
@@ -79,6 +82,19 @@ function Profile() {
   useEffect(() => {
     setUserID({ id: id, email: '', photo: photo, username: username });
   }, []);
+
+  useEffect(() => {
+    const UserId = userID.id;
+    console.log(userID.id);
+    getRecipesByUser(UserId)
+      .then(({ data }) => {
+        setRecipeByUser(data);
+        console.log(recipesByUser);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  });
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
