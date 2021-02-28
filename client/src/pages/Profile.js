@@ -180,37 +180,24 @@ function Profile() {
               color="textSecondary"
               paragraph
             >
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
+              Cook, Capture and Share your favorite recipes! Cook, Share and
+              Love!
             </Typography>
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {recipesByUser.map((recipe) => (
-              <Grid item key={recipe.id} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <ReviewRecipeCard
-                    key={recipe.id}
-                    className={classes.cardMedia}
-                    recipeName={recipe.recipeName}
-                    imageFood={recipe.imageFood}
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+          {recipesByUser?.map((recipe) => {
+            return (
+              <ReviewRecipeCard
+                key={recipe.id}
+                recipeName={recipe.recipeName}
+                imageFood={recipe.imageFood}
+                prepHrs={recipe.prepHours}
+                prepMins={recipe.prepMinutes}
+                servings={recipe.servings}
+              />
+            );
+          })}
         </Container>
       </main>
     </>

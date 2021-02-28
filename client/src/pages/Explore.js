@@ -94,28 +94,12 @@ function Explore() {
                   key={recipe.id}
                   recipeName={recipe.recipeName}
                   imageFood={recipe.imageFood}
+                  prepHrs={recipe.prepHours}
+                  prepMins={recipe.prepMinutes}
+                  servings={recipe.servings}
                 />
               );
             })}
-            <GridList cellHeight={180} className={classes.gridList}>
-              {tileData.map((tile) => (
-                <GridListTile key={tile.img}>
-                  <img src={tile.img} alt={tile.title} />
-                  <GridListTileBar
-                    title={tile.title}
-                    subtitle={<span>by: {tile.author}</span>}
-                    actionIcon={
-                      <IconButton
-                        aria-label={`info about ${tile.title}`}
-                        className={classes.icon}
-                      >
-                        <InfoIcon />
-                      </IconButton>
-                    }
-                  />
-                </GridListTile>
-              ))}
-            </GridList>
           </div>
         </div>
       </Container>
