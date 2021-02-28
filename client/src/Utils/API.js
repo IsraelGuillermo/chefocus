@@ -17,3 +17,6 @@ export function submitrecipe(recipe) {
 export function getRecipes(recipe) {
   return axios.get('/api/getRecipes');
 }
+export function getRecipesByUser(id) {
+  return axios.get('/api/getRecipesByUser/' + id);
+}
