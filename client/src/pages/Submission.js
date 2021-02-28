@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
+import styles from "./css/submissionStyle.css"
 
 import { TextsmsTwoTone } from '@material-ui/icons';
 
@@ -28,7 +29,10 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(2)
+  },
+  textField: {
+    
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
@@ -61,7 +65,7 @@ function Form() {
     const uploadTask = storage.ref(`images/${foodPhoto.name}`).put(foodPhoto);
     uploadTask.on(
       'state_changed',
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
       },
@@ -95,7 +99,7 @@ function Form() {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Submit A Recipe
+          Submit A Recipe 🥘
         </Typography>
         <form className={classes.form} noValidate autoComplete="off">
           <TextField
