@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import { login } from '../Utils/API';
 import { useUserProvider } from '../Utils/AppContext';
@@ -26,8 +26,19 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    height: '100vh',
+  },
+  image: {
+    backgroundImage: 'url(https://source.unsplash.com/featured/?kitchen,food)',
+    backgroundRepeat: 'no-repeat',
+    backgroundColor:
+      theme.palette.type === 'dark' ? theme.palette.grey[50] : theme.palette.grey[900],
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
   paper: {
-    marginTop: theme.spacing(5),
+    margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
@@ -78,73 +89,82 @@ function Home() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <div className={classes.paper}>
-        <Box className={classes.logo}>
-          <img
-            src="./icons/CHEFocusSmall.png"
-            alt="CHEFocus Logo"
-            width="500"
-          />
-        </Box>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={(event) => {
-              setLoginInfo({ ...loginInfo, email: event.target.value });
-            }}
-            value={loginInfo.email}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={(event) => {
-              setLoginInfo({ ...loginInfo, password: event.target.value });
-            }}
-            value={loginInfo.password}
-          />
-          <Button
-            type="button"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleClickEvent}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
+          <Box className={classes.logo}>
+            <img
+              src="./icons/CHEFocusSmall.png"
+              alt="CHEFocus Logo"
+              width="400"
+            />
+          </Box>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  onChange={(event) => {
+                    setLoginInfo({ ...loginInfo, email: event.target.value });
+                  }}
+                  value={loginInfo.email}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  onChange={(event) => {
+                    setLoginInfo({ ...loginInfo, password: event.target.value });
+                  }}
+                  value={loginInfo.password}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={handleClickEvent}
+            >
+              Sign In
+          </Button>
+            <Grid container>
+              <Grid item>
+                <Link href="/signup" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+            <Box mt={5}>
+              <Copyright />
+            </Box>
+          </form>
+        </div>
+      </Grid>
+    </Grid>
   );
 }
 
