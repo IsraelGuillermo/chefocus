@@ -58,7 +58,7 @@ function Form() {
   function handleUploadClick(e) {
     // firebase code to POST/Upload pictures, then download to/from DB
     e.preventDefault();
-    const uploadTask = storage.ref(`images/${foodPhoto}`).put(foodPhoto);
+    const uploadTask = storage.ref(`images/${foodPhoto.name}`).put(foodPhoto);
     uploadTask.on(
       'state_changed',
       (snapshot) => {},
@@ -68,10 +68,13 @@ function Form() {
       () => {
         storage
           .ref('images')
-          .child(foodPhoto)
+          .child(foodPhoto.name)
           .getDownloadURL()
           .then((url) => {
-            const updatedRecipe = { ...recipeSubmit, imageFood: url };
+            const updatedRecipe = {
+              ...recipeSubmit,
+              imageFood: url
+            };
             console.log(updatedRecipe);
             setRecipeSubmit(updatedRecipe);
             submitrecipe(updatedRecipe);
@@ -83,7 +86,7 @@ function Form() {
   const handleInputChange = (e) => {
     e.preventDefault();
     if (e.target.files[0]) {
-      setFoodPhoto(e.target.files[0].name);
+      setFoodPhoto(e.target.files[0]);
     }
   };
 

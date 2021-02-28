@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -16,6 +16,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+// import { getRecipes } from '../../Utils/API';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function RecipeReviewCard() {
+function RecipeReviewCard(props) {
   const [recipeForm, setRecipeForm] = useState({
     imageFood: '',
     recipeName: '',
@@ -51,7 +52,7 @@ function RecipeReviewCard() {
     instructions: ''
   });
 
-  const [allResults, setAllResults] = useState([])
+  // const [allResults, setAllResults] = useState([]);
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -60,71 +61,72 @@ function RecipeReviewCard() {
     setExpanded(!expanded);
   };
 
-  function getCardData() {
-    fetch('/api/getRecipes', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setAllResults(data)
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }
+  // useEffect(() => {
+  //   getRecipes()
+  //     .then(({ data }) => {
+  //       console.log(data);
+  //       setAllResults(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //     });
+  // }, []);
 
-  getCardData();
+  // getCardData();
 
   return (
-    <Card className={classes.root}>
-      {allResults.map((recipe) => (
-       <>  
-      <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={(recipe.recipeName)}
-        subheader="Date of Recipe"
-      />
-      <CardMedia
-        className={classes.media}
-        image={`${recipe.imageFood}`}
-        title="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {recipe.imageFood}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+    <>
+      {/* {allResults?.map((recipe) => { */}
+      {/* return ( */}
+      <Card className={classes.root}>
+        <CardHeader
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={props.recipeName}
+          subheader="Date of Recipe"
+        />
+        <CardMedia
+          className={classes.media}
+          style={{ height: 0, paddingTop: '56%' }}
+          title="Paella dish"
+          image={`${props.imageFood}`}
+        />
+        {/* <img src={recipe.imageFood} /> */}
         <CardContent>
-          <Typography paragraph>Recipe: </Typography>
-          <Typography paragraph>{/* First bit of instructions */}</Typography>
-          <Typography paragraph>{/* Recipe */}</Typography>
-          <Typography paragraph>{/* Instructions */}</Typography>
-          <Typography>{/* Last Instructions */}</Typography>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          ></Typography>
         </CardContent>
-      </Collapse>
-      </>
-      ))}
-    </Card>
+        <CardActions disableSpacing>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>Recipe: </Typography>
+            <Typography paragraph>{/* First bit of instructions */}</Typography>
+            <Typography paragraph>{/* Recipe */}</Typography>
+            <Typography paragraph>{/* Instructions */}</Typography>
+            <Typography>{/* Last Instructions */}</Typography>
+          </CardContent>
+        </Collapse>
+      </Card>
+      {/* );
+      })} */}
+    </>
   );
 }
 

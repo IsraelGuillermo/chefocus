@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Container,
@@ -10,8 +10,9 @@ import {
 } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import TopNavbar from '../components/TopNavbar';
-import Card2 from '../components/Card/';
+import ReviewRecipeCard from '../components/Card/';
 import { useUserProvider } from '../Utils/AppContext';
+import { getRecipes } from '../Utils/API';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -60,12 +61,24 @@ const tileData = [
 ];
 
 function Explore() {
+  const [allResults, setAllResults] = useState([]);
+
+  useEffect(() => {
+    getRecipes()
+      .then(({ data }) => {
+        console.log(data);
+        setAllResults(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
+
   const classes = useStyles();
   const { userID, setUserID } = useUserProvider();
   console.log(userID);
   return (
     <>
-
       <Container component="main" maxWidth="md">
         <CssBaseline />
 
@@ -94,10 +107,17 @@ function Explore() {
                 </GridListTile>
               ))}
             </GridList>
-            <Card2 />
+            {allResults?.map((recipe) => {
+              return (
+                <ReviewRecipeCard
+                  key={recipe.id}
+                  recipeName={recipe.recipeName}
+                  imageFood={recipe.imageFood}
+                />
+              );
+            })}
           </div>
         </div>
-
       </Container>
     </>
   );
