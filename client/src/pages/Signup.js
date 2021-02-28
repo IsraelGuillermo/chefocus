@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import Logo from '../components/Logo';
+import LandingImages from '../components/LandingImages';
 import { makeStyles } from '@material-ui/core/styles';
 import { signupUser } from '../Utils/API';
 
@@ -41,15 +43,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center'
   },
-  logo: {
-    marginBottom: theme.spacing(5),
-    padding: '1rem',
-    border: '5px',
-    borderStyle: 'solid',
-    borderRadius: 6,
-    borderColor: '#F15C22',
-    backgroundColor: '#fff',
-  },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1)
@@ -78,16 +71,10 @@ function SignUp() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <LandingImages />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Box className={classes.logo}>
-            <img
-              src="./icons/CHEFocusSmall.png"
-              alt="CHEFocus Logo"
-              width="400"
-            />
-          </Box>
+          <Logo />
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
