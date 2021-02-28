@@ -28,7 +28,10 @@ function App() {
 
   const [theme, setTheme] = useState({
     palette: {
-      type: 'dark'
+      type: 'dark',
+      primary: {
+        main: '#F15C22'
+      }
     },
   });
 
