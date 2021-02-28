@@ -9,6 +9,7 @@ import BottomNavbar from './components/BottomNavbar';
 import Profile from './pages/Profile';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { UserProvider } from './Utils/AppContext';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 function PrivateRoute({ children, ...rest }) {
   const userID = sessionStorage.getItem('userID');
@@ -24,41 +25,63 @@ function PrivateRoute({ children, ...rest }) {
 }
 
 function App() {
+
+  const [theme, setTheme] = useState({
+    palette: {
+      type: 'dark'
+    },
+  });
+
+  const toggleDarkTheme = () => {
+    let newPaletteType = theme.palette.type === 'light' ? 'dark' : 'light';
+    setTheme({
+      palette: {
+        type: newPaletteType
+      }
+    });
+  };
+
+  const muiTheme = createMuiTheme(theme);
+
   return (
-    <div>
-      <UserProvider>
-        <BrowserRouter>
+    <>
+      <MuiThemeProvider theme={muiTheme}>
 
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/signup">
-              <SignUp />
-            </Route>
-            <>
-              <TopNavbar />
+        <UserProvider>
+          <BrowserRouter>
 
-              <PrivateRoute exact path="/explore">
-                <Explore />
-              </PrivateRoute>
-              {/* <PrivateRoute exact path="/favorites">
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/signup">
+                <SignUp />
+              </Route>
+              <>
+                <TopNavbar />
+
+                <PrivateRoute exact path="/explore">
+                  <Explore />
+                </PrivateRoute>
+                {/* <PrivateRoute exact path="/favorites">
             <Favorites />
           </PrivateRoute> */}
-              <PrivateRoute exact path="/submission">
-                <Submission />
-              </PrivateRoute>
-              <PrivateRoute exact path="/profile">
-                <Profile />
-              </PrivateRoute>
+                <PrivateRoute exact path="/submission">
+                  <Submission />
+                </PrivateRoute>
+                <PrivateRoute exact path="/profile">
+                  <Profile />
+                </PrivateRoute>
 
-              <BottomNavbar />
-            </>
-          </Switch>
+                <BottomNavbar />
+              </>
+            </Switch>
 
-        </BrowserRouter>
-      </UserProvider>
-    </div>
+          </BrowserRouter>
+        </UserProvider>
+
+      </MuiThemeProvider>
+    </>
 
   );
 }

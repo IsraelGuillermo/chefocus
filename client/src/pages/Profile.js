@@ -16,6 +16,7 @@ import Box from '@material-ui/core/Box';
 import { storage } from '../Firebase';
 import { updateProfilePicture } from '../Utils/API';
 import { getRecipesByUser } from '../Utils/API';
+import ReviewRecipeCard from '../components/Card/';
 
 function Copyright() {
   return (
@@ -88,14 +89,14 @@ function Profile() {
     console.log(userID.id);
     getRecipesByUser(UserId)
       .then(({ data }) => {
+        console.log(data);
         setRecipeByUser(data);
-        console.log(recipesByUser);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
-  });
-
+  }, []);
+  console.log(recipesByUser);
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
@@ -188,13 +189,14 @@ function Profile() {
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {recipesByUser.map((recipe) => (
+              <Grid item key={recipe.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
-                  <CardMedia
+                  <ReviewRecipeCard
+                    key={recipe.id}
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
+                    recipeName={recipe.recipeName}
+                    imageFood={recipe.imageFood}
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
