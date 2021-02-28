@@ -11,6 +11,7 @@ import Logo from '../components/Logo';
 import LandingImages from '../components/LandingImages';
 import { makeStyles } from '@material-ui/core/styles';
 import { signupUser } from '../Utils/API';
+import { useHistory } from 'react-router';
 
 function Copyright() {
   return (
@@ -53,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SignUp() {
+
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     password: '',
@@ -66,6 +68,7 @@ function SignUp() {
     signupUser({ ...signUpInfo }).then((response) => {
       console.log(response);
     });
+
   }
 
   return (
