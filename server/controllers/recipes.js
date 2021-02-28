@@ -27,5 +27,21 @@ const render = (req, res) => {
     });
 };
 
+const findRecipeByUser = (req, res) => {
+  const userId = req.params.id;
+  db.Recipe.findAll({
+    where: {
+      userid: userId
+    }
+  })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.status(401).json(err);
+    });
+};
+
 exports.submit = submit;
 exports.render = render;
+exports.findRecipeByUser = findRecipeByUser;
