@@ -5,7 +5,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  Container
+  Container,
+  Box
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useHistory, NavLink } from 'react-router-dom';
@@ -15,16 +16,22 @@ const useStyles = makeStyles({
   navbarDisplayFlex: {
     display: `flex`,
     justifyContent: `space-between`,
-    top: '50px'
+    top: '50px',
   },
   navDisplayFlex: {
     display: `flex`,
-    justifyContent: `space-between`
+    justifyContent: `space-between`,
   },
   linkText: {
     textDecoration: `none`,
     textTransform: `uppercase`,
-    color: `white`
+    color: `white`,
+  },
+  image: {
+    padding: '1rem',
+    float: 'left',
+    minWidth: '10rem',
+    maxWidth: '20rem'
   }
 });
 
@@ -54,6 +61,13 @@ const TopNavbar = () => {
     return (
       <AppBar position="sticky">
         <Toolbar>
+          <Box className={classes.image}>
+            <img
+              src="./icons/CHEFocus_headerlogo.png"
+              alt="CHEFocus Logo"
+              width="100%"
+            />
+          </Box>
           <Container maxWidth="md" className={classes.navbarDisplayFlex}>
             <List
               component="nav"
@@ -68,7 +82,7 @@ const TopNavbar = () => {
                 </NavLink>
               ))}
               <ListItem button>
-                <ListItemText primary="LOGOUT" onClick={handleClickFunction} />
+                <ListItemText primary="LOGOUT" onClick={handleClickFunction} className={classes.linkText} />
               </ListItem>
             </List>
           </Container>
