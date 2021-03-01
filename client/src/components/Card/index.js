@@ -18,11 +18,15 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
     padding: '10% 0',
     marginLeft: '.75rem',
-    lineHeight: 1
+    lineHeight: 1,
+    fontWeight: 500
   },
   large: {
     width: theme.spacing(5),
-    height: theme.spacing(5)
+    height: theme.spacing(5),
+    borderColor: '#f4ac1b',
+    borderStyle: 'solid',
+    borderWidth: '2px'
   },
   avatar: {
     display: 'inline-flex',

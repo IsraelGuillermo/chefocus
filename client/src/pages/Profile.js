@@ -12,7 +12,6 @@ import Link from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
 import { useUserProvider } from '../Utils/AppContext';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import Box from '@material-ui/core/Box';
 import { storage } from '../Firebase';
 import { updateProfilePicture } from '../Utils/API';
 import { getRecipesByUser } from '../Utils/API';
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2)
   },
   heroContent: {
-    backgroundColor: '#a2d0c1',
+    backgroundColor: '#424242',
     padding: theme.spacing(8, 0, 6)
   },
   heroButtons: {
@@ -60,7 +59,9 @@ const useStyles = makeStyles((theme) => ({
 
   large: {
     width: theme.spacing(15),
-    height: theme.spacing(15)
+    height: theme.spacing(15),
+    borderColor: '#f4ac1b',
+    borderStyle: 'solid'
   },
   margin: {
     margin: theme.spacing(1)
@@ -135,53 +136,61 @@ function Profile() {
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            {photo === 'false' ? (
-              <>
-                <Avatar className={classes.large}>
-                  <Button
-                    variant="contained"
-                    component="label"
-                    className={classes.margin}
-                  >
-                    Photo
+            <Grid container direction='row' justify='center' alignItems='center'>
+              <Grid item sm>
+                {photo === 'false' ? (
+                  <>
+                    <Avatar className={classes.large}>
+                      <Button
+                        variant="contained"
+                        component="label"
+                        className={classes.margin}
+                      >
+                        Photo
                     <input
-                      type="file"
-                      id="photo"
-                      hidden
-                      onChange={handleChange}
-                    ></input>
-                  </Button>
-                </Avatar>
-                <Button
-                  variant="contained"
-                  component="label"
-                  className={classes.margin}
-                  onClick={handleUpload}
-                >
-                  Submit
+                          type="file"
+                          id="photo"
+                          hidden
+                          onChange={handleChange}
+                        ></input>
+                      </Button>
+                    </Avatar>
+                    <Button
+                      variant="contained"
+                      component="label"
+                      className={classes.margin}
+                      onClick={handleUpload}
+                    >
+                      Submit
                 </Button>
-              </>
-            ) : (
-                <Avatar alt={username} className={classes.large} src={photo} />
-              )}
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterBottom
-            >
-              Welcome {username}
+                  </>
+                ) : (
+                    <Avatar alt={username} className={classes.large} src={photo} />
+                  )}
+              </Grid>
+              <Grid item sm>
+                <Typography
+                  component="h1"
+                  variant="h2"
+                  align="center"
+                  color="textPrimary"
+                  gutterBottom
+                >
+                  Welcome {username}!
+                </Typography>
+              </Grid>
+              <Grid container direction='row'>
+                <Typography
+                  variant="h5"
+                  align="center"
+                  color="textSecondary"
+                  paragraph
+                >
+                  Cook, Capture and Share your favorite recipes! Cook, Share and
+                  Love!
             </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="textSecondary"
-              paragraph
-            >
-              Cook, Capture and Share your favorite recipes! Cook, Share and
-              Love!
-            </Typography>
+              </Grid>
+            </Grid>
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
