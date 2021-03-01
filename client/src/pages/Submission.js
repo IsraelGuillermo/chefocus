@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2)
   },
   textField: {
-    
+
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
@@ -103,6 +103,7 @@ function Form() {
         </Typography>
         <form className={classes.form} noValidate autoComplete="off">
           <TextField
+            multiline
             variant="outlined"
             margin="normal"
             required
@@ -173,6 +174,8 @@ function Form() {
             </Grid>
           </Grid>
           <TextField
+            autoCapitalize="words"
+            multiline
             variant="outlined"
             margin="normal"
             required
@@ -190,6 +193,7 @@ function Form() {
             value={recipeSubmit.ingredients}
           />
           <TextField
+            multiline
             variant="outlined"
             margin="normal"
             required
