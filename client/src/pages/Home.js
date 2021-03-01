@@ -13,6 +13,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { login } from '../Utils/API';
 import { useUserProvider } from '../Utils/AppContext';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 function Copyright() {
   return (
@@ -43,6 +46,17 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  modalPaper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
   }
 }));
 
@@ -58,11 +72,19 @@ function Home() {
     email: '',
     password: ''
   });
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   function handleClickEvent(e) {
     e.preventDefault();
     login({ ...loginInfo })
       .then((response) => {
+        console.log(response);
         setUserID({
           id: response.data.id,
           email: response.data.email,
@@ -75,7 +97,7 @@ function Home() {
         history.push('/profile');
       })
       .catch((err) => {
-        console.log(err);
+        handleOpen();
       });
   }
 
@@ -83,6 +105,28 @@ function Home() {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <LandingImages />
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.modalPaper}>
+            <h2 id="transition-modal-title">CHEFocus</h2>
+            <p id="transition-modal-description">
+              Incorrect password or email please try again or sign up!
+            </p>
+          </div>
+        </Fade>
+      </Modal>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Logo />
