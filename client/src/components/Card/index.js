@@ -11,7 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345
+    maxWidth: 275
   },
   username: {
     color: '#F15C22',
@@ -43,7 +43,7 @@ function RecipeReviewCard(props) {
           <CardMedia
             component="img"
             alt={props.recipeName}
-            height="200"
+            height="275"
             image={props.imageFood}
             title={props.recipeName}
           />
@@ -59,12 +59,8 @@ function RecipeReviewCard(props) {
             </div>
             <Typography variant="body2" color="textPrimary" component="p">
               This recipe can be prepared in {props.prepHrs} Hrs and{' '}
-<<<<<<< HEAD
-              {props.prepMins} Mins, and it provides {props.servings} servings!
-=======
               {props.prepMins} Mins and it provides enough servings for{' '}
               {props.servings}!
->>>>>>> develop
             </Typography>
           </CardContent>
         </CardActionArea>
