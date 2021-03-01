@@ -20,3 +20,6 @@ export function getRecipes(recipe) {
 export function getRecipesByUser(id) {
   return axios.get('/api/getRecipesByUser/' + id);
 }
+export function getIndividualRecipe(id) {
+  return axios.get('/api/getIndividualRecipe/' + id);
+}

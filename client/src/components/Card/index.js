@@ -59,13 +59,23 @@ function RecipeReviewCard(props) {
             </div>
             <Typography variant="body2" color="textPrimary" component="p">
               This recipe can be prepared in {props.prepHrs} Hrs and{' '}
+<<<<<<< HEAD
               {props.prepMins} Mins, and it provides {props.servings} servings!
+=======
+              {props.prepMins} Mins and it provides enough servings for{' '}
+              {props.servings}!
+>>>>>>> develop
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            Share
+          <Button
+            size="small"
+            color="primary"
+            onClick={props.onClick}
+            value={props.value}
+          >
+            Go to Recipe
           </Button>
           <Button size="small" color="primary">
             Learn More
