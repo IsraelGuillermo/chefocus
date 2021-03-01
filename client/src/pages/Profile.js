@@ -96,7 +96,7 @@ function Profile() {
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, []);
+  }, [userID]);
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -108,7 +108,7 @@ function Profile() {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
       'state_changed',
-      (snapshot) => { },
+      (snapshot) => {},
       (error) => {
         console.log(error);
       },
@@ -137,7 +137,12 @@ function Profile() {
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            <Grid container direction='row' justify='center' alignItems='center'>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
               <Grid item sm>
                 {photo === 'false' ? (
                   <>
@@ -148,7 +153,7 @@ function Profile() {
                         className={classes.margin}
                       >
                         Photo
-                    <input
+                        <input
                           type="file"
                           id="photo"
                           hidden
@@ -163,11 +168,15 @@ function Profile() {
                       onClick={handleUpload}
                     >
                       Submit
-                </Button>
+                    </Button>
                   </>
                 ) : (
-                    <Avatar alt={username} className={classes.large} src={photo} />
-                  )}
+                  <Avatar
+                    alt={username}
+                    className={classes.large}
+                    src={photo}
+                  />
+                )}
               </Grid>
               <Grid item sm>
                 <Typography
@@ -180,7 +189,7 @@ function Profile() {
                   Welcome {username}!
                 </Typography>
               </Grid>
-              <Grid container direction='row'>
+              <Grid container direction="row">
                 <Typography
                   variant="h5"
                   align="center"
@@ -189,7 +198,7 @@ function Profile() {
                 >
                   Cook, Capture and Share your favorite recipes! Cook, Share and
                   Love!
-            </Typography>
+                </Typography>
               </Grid>
             </Grid>
           </Container>
