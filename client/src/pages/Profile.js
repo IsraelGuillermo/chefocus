@@ -61,7 +61,8 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(15),
     height: theme.spacing(15),
     borderColor: '#f4ac1b',
-    borderStyle: 'solid'
+    borderStyle: 'solid',
+    marginBottom: '21px'
   },
   margin: {
     margin: theme.spacing(1)
