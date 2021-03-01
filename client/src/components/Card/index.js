@@ -7,15 +7,34 @@ import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345
+  },
+  username: {
+    color: '#F15C22',
+    display: 'inline-block',
+    padding: '10% 0',
+    marginLeft: '.75rem',
+    lineHeight: 1
+  },
+  large: {
+    width: theme.spacing(5),
+    height: theme.spacing(5)
+  },
+  avatar: {
+    display: 'inline-flex',
+    marginTop: '.5rem',
+    marginBottom: '.5rem'
   }
-});
+}));
 
 function RecipeReviewCard(props) {
   const classes = useStyles();
+  const username = sessionStorage.getItem('username');
+  const photo = sessionStorage.getItem('photo');
 
   return (
     <>
@@ -23,18 +42,24 @@ function RecipeReviewCard(props) {
         <CardActionArea>
           <CardMedia
             component="img"
-            alt="Contemplative Reptile"
-            height="140"
+            alt={props.recipeName}
+            height="200"
             image={props.imageFood}
-            title="Contemplative Reptile"
+            title={props.recipeName}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography variant="h5" display="block">
               {props.recipeName}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <div className={classes.avatar}>
+              <Avatar alt={username} className={classes.large} src={photo} />
+              <Typography gutterBottom variant="subtitle1">
+                <span className={classes.username}>{username}</span>
+              </Typography>
+            </div>
+            <Typography variant="body2" color="textPrimary" component="p">
               This recipe can be prepared in {props.prepHrs} Hrs and{' '}
-              {props.prepMins} Mins and it provides {props.servings}!
+              {props.prepMins} Mins, and it provides {props.servings} servings!
             </Typography>
           </CardContent>
         </CardActionArea>

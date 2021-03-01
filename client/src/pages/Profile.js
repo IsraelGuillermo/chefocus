@@ -107,7 +107,7 @@ function Profile() {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
       'state_changed',
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
       },
@@ -163,8 +163,8 @@ function Profile() {
                 </Button>
               </>
             ) : (
-              <Avatar alt="Remy Sharp" className={classes.large} src={photo} />
-            )}
+                <Avatar alt={username} className={classes.large} src={photo} />
+              )}
             <Typography
               component="h1"
               variant="h2"
