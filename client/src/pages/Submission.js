@@ -9,12 +9,13 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
-import styles from "./css/submissionStyle.css"
+import styles from './css/submissionStyle.css';
 
 import { TextsmsTwoTone } from '@material-ui/icons';
 
 import { storage } from '../Firebase';
 import { submitrecipe } from '../Utils/API';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -31,15 +32,13 @@ const useStyles = makeStyles((theme) => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(2)
   },
-  textField: {
-
-  },
   submit: {
     margin: theme.spacing(3, 0, 2)
   }
 }));
 
 function Form() {
+  let history = useHistory();
   const [foodPhoto, setFoodPhoto] = useState();
   const [recipeSubmit, setRecipeSubmit] = useState({
     imageFood: '',
@@ -65,7 +64,7 @@ function Form() {
     const uploadTask = storage.ref(`images/${foodPhoto.name}`).put(foodPhoto);
     uploadTask.on(
       'state_changed',
-      (snapshot) => { },
+      (snapshot) => {},
       (error) => {
         console.log(error);
       },
@@ -82,6 +81,9 @@ function Form() {
             console.log(updatedRecipe);
             setRecipeSubmit(updatedRecipe);
             submitrecipe(updatedRecipe);
+          })
+          .then(() => {
+            history.push('/explore');
           });
       }
     );
