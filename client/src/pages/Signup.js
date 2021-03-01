@@ -28,15 +28,17 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: '100vh'
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/featured/?kitchen,food)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'dark' ? theme.palette.grey[50] : theme.palette.grey[900],
+      theme.palette.type === 'dark'
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: 'center'
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -54,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SignUp() {
-
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     password: '',
@@ -65,10 +66,13 @@ function SignUp() {
 
   function handleClickEvent(e) {
     e.preventDefault();
-    signupUser({ ...signUpInfo }).then((response) => {
-      console.log(response);
-    });
-
+    signupUser({ ...signUpInfo })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -94,7 +98,10 @@ function SignUp() {
                   label="Username"
                   autoFocus
                   onChange={(event) =>
-                    setSignUpInfo({ ...signUpInfo, username: event.target.value })
+                    setSignUpInfo({
+                      ...signUpInfo,
+                      username: event.target.value
+                    })
                   }
                   value={signUpInfo.username}
                 />
@@ -125,7 +132,10 @@ function SignUp() {
                   id="password"
                   autoComplete="current-password"
                   onChange={(event) =>
-                    setSignUpInfo({ ...signUpInfo, password: event.target.value })
+                    setSignUpInfo({
+                      ...signUpInfo,
+                      password: event.target.value
+                    })
                   }
                   value={signUpInfo.password}
                 />
@@ -140,12 +150,12 @@ function SignUp() {
               onClick={handleClickEvent}
             >
               Sign Up
-          </Button>
+            </Button>
             <Grid container justify="flex-end">
               <Grid item>
                 <Link href="/" variant="body2">
                   Already have an account? Sign in
-              </Link>
+                </Link>
               </Grid>
             </Grid>
             <Box mt={5}>

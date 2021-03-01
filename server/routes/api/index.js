@@ -2,9 +2,11 @@ const router = require('express').Router();
 const authRoutes = require('./auth');
 const recipeRoutes = require('./recipes');
 const profilepicRoutes = require('./profilePic');
+const singupRoute = require('./signup');
 
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
 
+router.use('/signup', singupRoute);
 router.use('/auth', authRoutes);
 router.use(isAuthenticated);
 router.use('/recipes', recipeRoutes);
