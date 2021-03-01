@@ -29,7 +29,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: '100vh'
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -70,8 +70,8 @@ function Home() {
           username: response.data.username
         });
         sessionStorage.setItem('userID', response.data.id);
-        localStorage.setItem('username', response.data.username);
-        localStorage.setItem('photo', response.data.photo);
+        sessionStorage.setItem('username', response.data.username);
+        sessionStorage.setItem('photo', response.data.photo);
         history.push('/profile');
       })
       .catch((err) => {
@@ -120,7 +120,10 @@ function Home() {
                   id="password"
                   autoComplete="current-password"
                   onChange={(event) => {
-                    setLoginInfo({ ...loginInfo, password: event.target.value });
+                    setLoginInfo({
+                      ...loginInfo,
+                      password: event.target.value
+                    });
                   }}
                   value={loginInfo.password}
                 />
@@ -135,7 +138,7 @@ function Home() {
               onClick={handleClickEvent}
             >
               Sign In
-          </Button>
+            </Button>
             <Grid container>
               <Grid item>
                 <Link href="/signup" variant="body2">

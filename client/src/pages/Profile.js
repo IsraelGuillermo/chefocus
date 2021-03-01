@@ -75,9 +75,9 @@ function Profile() {
   const [image, setImage] = useState({});
   const classes = useStyles();
 
-  const username = localStorage.getItem('username');
+  const username = sessionStorage.getItem('username');
   const id = sessionStorage.getItem('userID');
-  const photo = localStorage.getItem('photo');
+  const photo = sessionStorage.getItem('photo');
   const { userID, setUserID } = useUserProvider();
 
   useEffect(() => {
@@ -117,10 +117,10 @@ function Profile() {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
-            localStorage.setItem('photo', url);
+            sessionStorage.setItem('photo', url);
             const updatedUser = { ...userID, photo: url };
             setUserID(updatedUser);
-            localStorage.setItem('profilePhoto', true);
+            sessionStorage.setItem('profilePhoto', true);
             updateProfilePicture(updatedUser).then((response) => {
               setUserID(userID);
             });
