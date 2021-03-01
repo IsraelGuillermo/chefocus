@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import Home from './pages/Home';
 import SignUp from './pages/Signup';
 import Explore from './pages/Explore';
+import Recipe from './pages/Recipe';
 // import Favorites from './pages/Favorites';
 import Submission from './pages/Submission';
 import TopNavbar from './components/TopNavbar';
@@ -25,14 +26,13 @@ function PrivateRoute({ children, ...rest }) {
 }
 
 function App() {
-
   const [theme, setTheme] = useState({
     palette: {
       type: 'dark',
       primary: {
         main: '#F15C22'
       }
-    },
+    }
   });
 
   const toggleDarkTheme = () => {
@@ -49,10 +49,8 @@ function App() {
   return (
     <>
       <MuiThemeProvider theme={muiTheme}>
-
         <UserProvider>
           <BrowserRouter>
-
             <Switch>
               <Route exact path="/">
                 <Home />
@@ -75,17 +73,17 @@ function App() {
                 <PrivateRoute exact path="/profile">
                   <Profile />
                 </PrivateRoute>
+                <PrivateRoute exact path="/individualrecipe">
+                  <Recipe />
+                </PrivateRoute>
 
                 <BottomNavbar />
               </>
             </Switch>
-
           </BrowserRouter>
         </UserProvider>
-
       </MuiThemeProvider>
     </>
-
   );
 }
 

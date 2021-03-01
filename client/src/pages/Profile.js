@@ -86,17 +86,16 @@ function Profile() {
 
   useEffect(() => {
     const UserId = userID.id;
-    console.log(userID.id);
+
     getRecipesByUser(UserId)
       .then(({ data }) => {
-        console.log(data);
         setRecipeByUser(data);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }, []);
-  console.log(recipesByUser);
+
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);

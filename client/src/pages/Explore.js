@@ -13,6 +13,7 @@ import TopNavbar from '../components/TopNavbar';
 import ReviewRecipeCard from '../components/Card/';
 import { useUserProvider } from '../Utils/AppContext';
 import { getRecipes } from '../Utils/API';
+import { getIndividualRecipe } from '../Utils/API';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -76,7 +77,13 @@ function Explore() {
 
   const classes = useStyles();
   const { userID, setUserID } = useUserProvider();
-  console.log(userID);
+
+  const [recipeID, serRecipeID] = useState();
+
+  const handleClick = (data) => {
+    console.log(data);
+  };
+
   return (
     <>
       <Container component="main" maxWidth="md">
@@ -92,11 +99,21 @@ function Explore() {
               return (
                 <ReviewRecipeCard
                   key={recipe.id}
+                  value={recipe.id}
                   recipeName={recipe.recipeName}
                   imageFood={recipe.imageFood}
                   prepHrs={recipe.prepHours}
                   prepMins={recipe.prepMinutes}
                   servings={recipe.servings}
+                  onClick={() => {
+                    getIndividualRecipe(recipe.id)
+                      .then(({ data }) => {
+                        console.log(data);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
                 />
               );
             })}
