@@ -64,7 +64,7 @@ function Form() {
     const uploadTask = storage.ref(`images/${foodPhoto.name}`).put(foodPhoto);
     uploadTask.on(
       'state_changed',
-      (snapshot) => { },
+      (snapshot) => {},
       (error) => {
         console.log(error);
       },
@@ -223,7 +223,7 @@ function Form() {
             color="primary"
             className={classes.submit}
             onClick={handleUploadClick}
-          // href={'/explore'}
+            // href={'/explore'}
           >
             Create Recipe
           </Button>
