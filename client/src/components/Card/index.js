@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,14 +70,17 @@ function RecipeReviewCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button
+          {/* <Button
             size="small"
             color="primary"
             onClick={props.onClick}
             value={props.value}
           >
             Go to Recipe
-          </Button>
+          </Button> */}
+          <Link to={'/recipes/' + props.link}>
+            <span>Click ME</span>
+          </Link>
           <Button size="small" color="primary">
             Learn More
           </Button>

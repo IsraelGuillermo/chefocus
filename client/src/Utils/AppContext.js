@@ -1,18 +1,29 @@
 import React, { useState, useContext } from 'react';
 
-// const initialState = {
-//   id: '',
-//   email: ''
+// const useRecipeModel = () => {
+//   const [individualRecipe, setIndividualRecipe] = useState({});
+//   return {
+//     individualRecipe,
+//     setIndividualRecipe
+//   };
 // };
 
-// export const AppContext = createContext();
-
-// const StoreUser = ({ children }) => {
-//   const [userID, setUserID] = useState(initialState);
+// const emptyContext = [null, () => {}];
+// const RecipeContext = React.createContext(emptyContext);
+// const RecipeContextProvider = RecipeContext.Provider;
+// export const useRecipeProvider = () => {
+//   const res = useContext(RecipeContext);
+//   return res ? res : emptyContext;
+// };
+// /**
+//  * Provider Component
+//  */
+// export const RecipeProvider = ({ children }) => {
+//   const RecipeModel = useRecipeModel();
 //   return (
-//     <AppContext.Provider value={[userID, setUserID]}>
+//     <RecipeContextProvider value={RecipeModel}>
 //       {children}
-//     </AppContext.Provider>
+//     </RecipeContextProvider>
 //   );
 // };
 
