@@ -1,19 +1,20 @@
 {
-  "name": "TBD",
+  "name": "chefocus",
   "version": "1.0.0",
-  "description": "TBD",
-  "author": "TBD",
+  "description": "An app for culinary artists who want to share their creations",
+  "author": "Anthony Gamon, Israel Guillermo, Seth Glenn, Timothy Kemp",
   "license": "MIT",
   "main": "server/server.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TBD"
+    "url": "git+https://github.com/IsraelGuillermo/chefocus"
   },
-  "homepage": "TBD",
+  "homepage": "https://www.chefocus.com/",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node ./server/server.js",
-    "start:dev": "npm run kill && concurrently \"nodemon ./server/server.js\" \"npm run client\"",
+    "start:dev": "concurrently \"nodemon ./server/server.js\" \"npm run client\"",
+    "client": "cd client && npm run start",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
     "install": "concurrently \"cd client && npm install\" \"cd server && npm install\""
@@ -30,6 +31,12 @@
     "nodemon": "^2.0.7"
   },
   "dependencies": {
-    "if-env": "^1.0.4"
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "axios": "^0.21.1",
+    "firebase": "^8.2.9",
+    "if-env": "^1.0.4",
+    "material-design-icons": "^3.0.1",
+    "material-ui": "^0.20.2"
   }
 }

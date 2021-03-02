@@ -1,25 +1,89 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useContext, useEffect } from 'react';
+import Home from './pages/Home';
+import SignUp from './pages/Signup';
+import Explore from './pages/Explore';
+import Recipe from './pages/Recipe';
+// import Favorites from './pages/Favorites';
+import Submission from './pages/Submission';
+import TopNavbar from './components/TopNavbar';
+import BottomNavbar from './components/BottomNavbar';
+import Profile from './pages/Profile';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { UserProvider } from './Utils/AppContext';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
+function PrivateRoute({ children, ...rest }) {
+  const userID = sessionStorage.getItem('userID');
+
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        return !!userID ? children : <Redirect to="/" />;
+      }}
+    />
+  );
+}
 
 function App() {
+  const [theme, setTheme] = useState({
+    palette: {
+      type: 'dark',
+      primary: {
+        main: '#F15C22'
+      }
+    }
+  });
+
+  const toggleDarkTheme = () => {
+    let newPaletteType = theme.palette.type === 'light' ? 'dark' : 'light';
+    setTheme({
+      palette: {
+        type: newPaletteType
+      }
+    });
+  };
+
+  const muiTheme = createMuiTheme(theme);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <MuiThemeProvider theme={muiTheme}>
+        <UserProvider>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/signup">
+                <SignUp />
+              </Route>
+              <>
+                <TopNavbar />
+
+                <PrivateRoute exact path="/explore">
+                  <Explore />
+                </PrivateRoute>
+                {/* <PrivateRoute exact path="/favorites">
+            <Favorites />
+          </PrivateRoute> */}
+                <PrivateRoute exact path="/submission">
+                  <Submission />
+                </PrivateRoute>
+                <PrivateRoute exact path="/profile">
+                  <Profile />
+                </PrivateRoute>
+                <PrivateRoute exact path="/individualrecipe">
+                  <Recipe />
+                </PrivateRoute>
+
+                <BottomNavbar />
+              </>
+            </Switch>
+          </BrowserRouter>
+        </UserProvider>
+      </MuiThemeProvider>
+    </>
   );
 }
 

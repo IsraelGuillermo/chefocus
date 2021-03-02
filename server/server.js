@@ -3,6 +3,8 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
+// const firebase = require("firebase")
+// require("firebase/storage")
 
 const db = require('./models');
 const routes = require('./routes');
@@ -12,7 +14,6 @@ const corsOptions = require('./config/cors.js');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
