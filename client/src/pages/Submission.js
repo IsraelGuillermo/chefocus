@@ -14,7 +14,7 @@ import styles from './css/submissionStyle.css';
 import { TextsmsTwoTone } from '@material-ui/icons';
 
 import { storage } from '../Firebase';
-import { submitrecipe } from '../Utils/API';
+import { submitRecipe } from '../Utils/API';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +64,7 @@ function Form() {
     const uploadTask = storage.ref(`images/${foodPhoto.name}`).put(foodPhoto);
     uploadTask.on(
       'state_changed',
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
       },
@@ -80,7 +80,7 @@ function Form() {
             };
             console.log(updatedRecipe);
             setRecipeSubmit(updatedRecipe);
-            submitrecipe(updatedRecipe);
+            submitRecipe(updatedRecipe);
           })
           .then(() => {
             history.push('/explore');

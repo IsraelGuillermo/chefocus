@@ -11,7 +11,7 @@ export function updateProfilePicture(user) {
   return axios.put('/api/updateProfilePic', user);
 }
 
-export function submitrecipe(recipe) {
+export function submitRecipe(recipe) {
   return axios.post('/api/recipes', recipe);
 }
 export function getRecipes(recipe) {
