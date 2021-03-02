@@ -29,9 +29,10 @@ const render = (req, res) => {
 
 const findRecipeByUser = (req, res) => {
   const userId = req.params.id;
+  console.log(userId);
   db.Recipe.findAll({
     where: {
-      userid: userId
+      user_id: userId
     }
   })
     .then((result) => {
