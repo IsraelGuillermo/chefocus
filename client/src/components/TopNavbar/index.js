@@ -51,8 +51,8 @@ const TopNavbar = () => {
   const handleClickFunction = () => {
     history.push('/');
     sessionStorage.removeItem('userID');
-    localStorage.removeItem('username');
-    localStorage.removeItem('photo');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('photo');
   };
 
   if (matches) {

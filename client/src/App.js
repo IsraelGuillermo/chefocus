@@ -35,15 +35,6 @@ function App() {
     }
   });
 
-  const toggleDarkTheme = () => {
-    let newPaletteType = theme.palette.type === 'light' ? 'dark' : 'light';
-    setTheme({
-      palette: {
-        type: newPaletteType
-      }
-    });
-  };
-
   const muiTheme = createMuiTheme(theme);
 
   return (
