@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import TopNavbar from '../components/TopNavbar';
-import ReviewRecipeCard from '../components/Card/';
+import RecipeReviewCard from '../components/Card/';
 import { useUserProvider } from '../Utils/AppContext';
 import { getRecipes } from '../Utils/API';
 
@@ -100,7 +100,7 @@ function Explore() {
           <div className={classes.root}>
             {allResults?.map((recipe) => {
               return (
-                <ReviewRecipeCard
+                <RecipeReviewCard
                   key={recipe.id}
                   value={recipe.id}
                   recipeName={recipe.recipeName}
@@ -108,10 +108,23 @@ function Explore() {
                   prepHrs={recipe.prepHours}
                   prepMins={recipe.prepMinutes}
                   servings={recipe.servings}
+<<<<<<< HEAD
                   // onClick={() => {
                   //
                   // }}
                   link={recipe.id}
+=======
+                  onClick={() => {
+                    getIndividualRecipe(recipe.id)
+                      .then(({ data }) => {
+                        console.log(data);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+
+                  }}
+>>>>>>> origin
                 />
               );
             })}
