@@ -1,4 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useMutationEffect
+} from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -82,21 +87,23 @@ function Profile() {
   const photo = sessionStorage.getItem('photo');
   const { userID, setUserID } = useUserProvider();
 
-  useEffect(() => {
-    setUserID({ id: id, email: '', photo: photo, username: username });
-  }, []);
+  // useMutationEffect(() => {
+  //   setUserID({ id: id, email: '', photo: photo, username: username });
+  // }, []);
 
   useEffect(() => {
     const UserId = userID.id;
-
+    console.log(UserId);
     getRecipesByUser(UserId)
       .then(({ data }) => {
-        setRecipeByUser(data);
+        if (data.id === id) {
+          setRecipeByUser(data);
+        }
       })
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, [userID]);
+  }, []);
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
