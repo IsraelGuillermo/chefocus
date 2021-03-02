@@ -1,8 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -85,12 +81,9 @@ function Profile() {
   const { userID, setUserID } = useUserProvider();
 
   useEffect(() => {
-    console.log(userID.id);
-    getRecipesByUser(userID.id)
+    getRecipesByUser(id)
       .then(({ data }) => {
-        if (data[0].UserId === parseInt(id)) {
-          setRecipeByUser(data);
-        }
+        setRecipeByUser(data);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -107,7 +100,7 @@ function Profile() {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
       'state_changed',
-      (snapshot) => { },
+      (snapshot) => {},
       (error) => {
         console.log(error);
       },
@@ -167,12 +160,12 @@ function Profile() {
                     </Button>
                   </>
                 ) : (
-                    <Avatar
-                      alt={username}
-                      className={classes.large}
-                      src={photo}
-                    />
-                  )}
+                  <Avatar
+                    alt={username}
+                    className={classes.large}
+                    src={photo}
+                  />
+                )}
               </Grid>
               <Grid item sm>
                 <Typography
