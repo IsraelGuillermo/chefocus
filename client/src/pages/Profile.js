@@ -15,7 +15,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { storage } from '../Firebase';
 import { updateProfilePicture } from '../Utils/API';
 import { getRecipesByUser } from '../Utils/API';
-import ReviewRecipeCard from '../components/Card/';
+import RecipeReviewCard from '../components/Card/';
 
 function Copyright() {
   return (
@@ -108,7 +108,7 @@ function Profile() {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
       'state_changed',
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
       },
@@ -171,12 +171,12 @@ function Profile() {
                     </Button>
                   </>
                 ) : (
-                  <Avatar
-                    alt={username}
-                    className={classes.large}
-                    src={photo}
-                  />
-                )}
+                    <Avatar
+                      alt={username}
+                      className={classes.large}
+                      src={photo}
+                    />
+                  )}
               </Grid>
               <Grid item sm>
                 <Typography
@@ -206,7 +206,7 @@ function Profile() {
         <Container className={classes.cardGrid} maxWidth="md">
           {recipesByUser?.map((recipe) => {
             return (
-              <ReviewRecipeCard
+              <RecipeReviewCard
                 key={recipe.id}
                 recipeName={recipe.recipeName}
                 imageFood={recipe.imageFood}
