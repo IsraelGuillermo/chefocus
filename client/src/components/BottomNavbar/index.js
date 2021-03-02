@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useHistory, NavLink } from 'react-router-dom';
 import { BottomNavigation } from '@material-ui/core/';
@@ -22,6 +22,29 @@ function BottomNavbar() {
     let history = useHistory();
     const classes = useStyles();
     const [value, setValue] = useState(0);
+
+    const [active, setActive] = useState({
+        activeButton: "Mui-selected active"
+    })
+
+    useEffect(() => {
+        function activeButton() {
+            if (window.location.pathname == "/profile") {
+                setActive({
+                    activeButton: "Mui-selected active"
+                });
+            }
+            else (window.location.pathname !== "/profile") {
+                setActive({
+                    activeButton: ""
+                });
+            }
+
+        }
+        activeButton()
+    }, [])
+
+
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -74,6 +97,8 @@ function BottomNavbar() {
                     exact to="/profile"
                     label="Profile"
                     value="profile"
+                    id="test"
+                    className={active.activeButton}
                     // activeStyle={{
                     //     color: '#3f51b5'
                     // }}
