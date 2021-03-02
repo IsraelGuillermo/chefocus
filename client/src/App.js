@@ -10,6 +10,7 @@ import BottomNavbar from './components/BottomNavbar';
 import Profile from './pages/Profile';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { UserProvider } from './Utils/AppContext';
+import { RecipeProvider } from './Utils/RecipeContext';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 function PrivateRoute({ children, ...rest }) {
@@ -35,52 +36,45 @@ function App() {
     }
   });
 
-  const toggleDarkTheme = () => {
-    let newPaletteType = theme.palette.type === 'light' ? 'dark' : 'light';
-    setTheme({
-      palette: {
-        type: newPaletteType
-      }
-    });
-  };
-
   const muiTheme = createMuiTheme(theme);
 
   return (
     <>
       <MuiThemeProvider theme={muiTheme}>
         <UserProvider>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/signup">
-                <SignUp />
-              </Route>
-              <>
-                <TopNavbar />
+          <RecipeProvider>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route exact path="/signup">
+                  <SignUp />
+                </Route>
+                <>
+                  <TopNavbar />
 
-                <PrivateRoute exact path="/explore">
-                  <Explore />
-                </PrivateRoute>
-                {/* <PrivateRoute exact path="/favorites">
+                  <PrivateRoute exact path="/explore">
+                    <Explore />
+                  </PrivateRoute>
+                  {/* <PrivateRoute exact path="/favorites">
             <Favorites />
           </PrivateRoute> */}
-                <PrivateRoute exact path="/submission">
-                  <Submission />
-                </PrivateRoute>
-                <PrivateRoute exact path="/profile">
-                  <Profile />
-                </PrivateRoute>
-                <PrivateRoute exact path="/individualrecipe">
-                  <Recipe />
-                </PrivateRoute>
+                  <PrivateRoute exact path="/submission">
+                    <Submission />
+                  </PrivateRoute>
+                  <PrivateRoute exact path="/profile">
+                    <Profile />
+                  </PrivateRoute>
+                  <PrivateRoute exact path="/recipes/:id">
+                    <Recipe />
+                  </PrivateRoute>
 
-                <BottomNavbar />
-              </>
-            </Switch>
-          </BrowserRouter>
+                  <BottomNavbar />
+                </>
+              </Switch>
+            </BrowserRouter>
+          </RecipeProvider>
         </UserProvider>
       </MuiThemeProvider>
     </>

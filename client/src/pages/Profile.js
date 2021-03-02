@@ -1,4 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -69,8 +73,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 function Profile() {
   const [recipesByUser, setRecipeByUser] = useState([]);
 
@@ -83,20 +85,17 @@ function Profile() {
   const { userID, setUserID } = useUserProvider();
 
   useEffect(() => {
-    setUserID({ id: id, email: '', photo: photo, username: username });
-  }, []);
-
-  useEffect(() => {
-    const UserId = userID.id;
-
-    getRecipesByUser(UserId)
+    console.log(userID.id);
+    getRecipesByUser(userID.id)
       .then(({ data }) => {
-        setRecipeByUser(data);
+        if (data[0].UserId === parseInt(id)) {
+          setRecipeByUser(data);
+        }
       })
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, [userID]);
+  }, []);
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -121,10 +120,7 @@ function Profile() {
             sessionStorage.setItem('photo', url);
             const updatedUser = { ...userID, photo: url };
             setUserID(updatedUser);
-            sessionStorage.setItem('profilePhoto', true);
-            updateProfilePicture(updatedUser).then((response) => {
-              setUserID(userID);
-            });
+            updateProfilePicture(updatedUser);
           });
       }
     );
@@ -204,7 +200,7 @@ function Profile() {
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
-          {recipesByUser?.map((recipe) => {
+          {recipesByUser.map((recipe) => {
             return (
               <RecipeReviewCard
                 key={recipe.id}
