@@ -29,16 +29,16 @@ function BottomNavbar() {
 
     useEffect(() => {
         function activeButton() {
-            if (window.location.pathname == "/profile") {
+            if (window.location.pathname === "/profile") {
                 setActive({
                     activeButton: "Mui-selected active"
                 });
-            }
-            else (window.location.pathname !== "/profile") {
+            } else {
                 setActive({
                     activeButton: ""
                 });
             }
+            
 
         }
         activeButton()
