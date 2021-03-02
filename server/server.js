@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const helmet = require('helmet');
@@ -17,7 +18,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
-app.use(session({ secret: 'TBD', resave: true, saveUninitialized: true }));
+app.use(session({ secret: process.env.SECRET, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors(corsOptions));
