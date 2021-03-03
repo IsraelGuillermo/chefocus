@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useHistory, NavLink } from 'react-router-dom';
 import { BottomNavigation } from '@material-ui/core/';
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 function BottomNavbar() {
     let history = useHistory();
     const classes = useStyles();
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState();
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -31,6 +31,25 @@ function BottomNavbar() {
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('photo');
     };
+
+    useEffect(() => {
+        switch (true) {
+            case window.location.pathname.includes('explore'):
+                setValue('explore')
+                break;
+            case window.location.pathname.includes('favorites'):
+                setValue('favorites')
+                break;
+            case window.location.pathname.includes('submission'):
+                setValue('submission')
+                break;
+            case window.location.pathname.includes('profile'):
+                setValue('profile')
+                break;
+            default:
+                break;
+        }
+    }, [])
 
     if (matches) {
         return (
