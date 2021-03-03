@@ -51,9 +51,7 @@ function App() {
                 <Route exact path="/signup">
                   <SignUp />
                 </Route>
-                <Route path="*">
-                  <Redirect to='/' />
-                </Route>
+
                 <>
                   <TopNavbar />
 
@@ -72,8 +70,10 @@ function App() {
                   <PrivateRoute exact path="/recipes/:id">
                     <Recipe />
                   </PrivateRoute>
+
                   <BottomNavbar />
                 </>
+
               </Switch>
             </BrowserRouter>
           </RecipeProvider>
