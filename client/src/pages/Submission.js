@@ -47,15 +47,12 @@ function Form() {
     prepHours: 0,
     prepMinutes: 0,
     ingredients: '',
-    instructions: ''
+    instructions: '',
+    formattedInstructions: '',
+    formattedIngredients: ''
   });
 
   const classes = useStyles();
-
-  function firebase() {
-    storageRef = firebaseApp.storage().ref();
-    firebaseImg = storageRef.child('images');
-  }
 
   // Firebase Code for submitting picture and food data
   function handleUploadClick(e) {
@@ -186,12 +183,12 @@ function Form() {
             label="Ingredients"
             type="text"
             id="ingredients"
-            onChange={(event) => {
+            onChange={(event) =>
               setRecipeSubmit({
                 ...recipeSubmit,
                 ingredients: event.target.value
-              });
-            }}
+              })
+            }
             value={recipeSubmit.ingredients}
           />
           <TextField

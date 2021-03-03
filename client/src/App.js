@@ -8,6 +8,7 @@ import Submission from './pages/Submission';
 import TopNavbar from './components/TopNavbar';
 import BottomNavbar from './components/BottomNavbar';
 import Profile from './pages/Profile';
+import HomeRouter from './pages/HomeRouter';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { UserProvider } from './Utils/AppContext';
 import { RecipeProvider } from './Utils/RecipeContext';
@@ -51,8 +52,10 @@ function App() {
                 <Route exact path="/signup">
                   <SignUp />
                 </Route>
-
-                <>
+                <PrivateRoute>
+                  <HomeRouter />
+                </PrivateRoute>
+                {/* <>
                   <TopNavbar />
 
                   <PrivateRoute exact path="/explore">
@@ -61,7 +64,7 @@ function App() {
                   {/* <PrivateRoute exact path="/favorites">
             <Favorites />
           </PrivateRoute> */}
-                  <PrivateRoute exact path="/submission">
+                {/* <PrivateRoute exact path="/submission">
                     <Submission />
                   </PrivateRoute>
                   <PrivateRoute exact path="/profile">
@@ -72,7 +75,7 @@ function App() {
                   </PrivateRoute>
 
                   <BottomNavbar />
-                </>
+                </> */}
 
               </Switch>
             </BrowserRouter>
