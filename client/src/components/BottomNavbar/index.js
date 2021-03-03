@@ -24,26 +24,17 @@ function BottomNavbar() {
     const [value, setValue] = useState(0);
 
     const [active, setActive] = useState({
-        activeButton: "Mui-selected active"
+        activeButton: " "
     })
 
+    // Mui-selected active
+
     useEffect(() => {
-        function activeButton() {
-            if (window.location.pathname === "/profile") {
-                setActive({
-                    activeButton: "Mui-selected active"
-                });
-            } else {
-                setActive({
-                    activeButton: ""
-                });
-            }
-            
-
-        }
-        activeButton()
+        if (window.location.pathname == "/profile")
+           setActive({
+               activeButton: "Mui-selected active"
+           })
     }, [])
-
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('xs'));
