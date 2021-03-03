@@ -6,8 +6,16 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { useParams } from 'react-router-dom';
 import { getIndividualRecipe } from '../Utils/API';
 import { useRecipeProvider } from '../Utils/RecipeContext';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    whiteSpace: 'pre-wrap'
+  }
+}));
 
 export default function FixedContainer() {
+  const classes = useStyles();
   const [recipe, setRecipe] = useState({});
   const { id } = useParams();
 
@@ -31,13 +39,13 @@ export default function FixedContainer() {
         <Typography variant="h4" gutterBottom>
           Ingredients
         </Typography>
-        <Typography variant="body1" gutterBottom>
+        <Typography variant="body1" gutterBottom className={classes.paper}>
           {recipe.ingredients}
         </Typography>
         <Typography variant="h4" gutterBottom>
           Instructions
         </Typography>
-        <Typography variant="body1" gutterBottom>
+        <Typography variant="body1" gutterBottom className={classes.paper}>
           {recipe.instructions}
         </Typography>
         <img src={recipe.imageFood} />
