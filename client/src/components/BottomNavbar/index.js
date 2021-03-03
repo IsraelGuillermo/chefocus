@@ -66,36 +66,24 @@ function BottomNavbar() {
                     exact to="/explore"
                     label="Explore"
                     value="explore"
-                    // activeStyle={{
-                    //     color: '#3f51b5'
-                    // }}
                     icon={<SearchRoundedIcon />} />
                 <BottomNavigationAction
                     component={NavLink}
                     exact to="/favorites"
                     label="Favorites"
                     value="favorites"
-                    // activeStyle={{
-                    //     color: '#3f51b5'
-                    // }}
                     icon={<FavoriteBorderRoundedIcon />} />
                 <BottomNavigationAction
                     component={NavLink}
                     exact to="/submission"
                     label="Submit"
                     value="submission"
-                    // activeStyle={{
-                    //     color: '#3f51b5',
-                    // }}
                     icon={<AddCircleOutlineRoundedIcon />} />
                 <BottomNavigationAction
                     component={NavLink}
                     exact to="/profile"
                     label="Profile"
                     value="profile"
-                    // activeStyle={{
-                    //     color: '#3f51b5'
-                    // }}
                     icon={<PersonOutlineRoundedIcon />} />
                 <BottomNavigationAction
                     component={NavLink}
@@ -103,9 +91,6 @@ function BottomNavbar() {
                     exact to="/"
                     label="Logout"
                     value="logout"
-                    // activeStyle={{
-                    //     color: '#3f51b5'
-                    // }}
                     icon={<LockOutlinedIcon />} />
             </BottomNavigation>
         );

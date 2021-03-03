@@ -55,28 +55,6 @@ function App() {
                 <PrivateRoute>
                   <HomeRouter />
                 </PrivateRoute>
-                {/* <>
-                  <TopNavbar />
-
-                  <PrivateRoute exact path="/explore">
-                    <Explore />
-                  </PrivateRoute>
-                  {/* <PrivateRoute exact path="/favorites">
-            <Favorites />
-          </PrivateRoute> */}
-                {/* <PrivateRoute exact path="/submission">
-                    <Submission />
-                  </PrivateRoute>
-                  <PrivateRoute exact path="/profile">
-                    <Profile />
-                  </PrivateRoute>
-                  <PrivateRoute exact path="/recipes/:id">
-                    <Recipe />
-                  </PrivateRoute>
-
-                  <BottomNavbar />
-                </> */}
-
               </Switch>
             </BrowserRouter>
           </RecipeProvider>

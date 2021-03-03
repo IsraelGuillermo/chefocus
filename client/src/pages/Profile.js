@@ -15,6 +15,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { storage } from '../Firebase';
 import { updateProfilePicture } from '../Utils/API';
 import { getRecipesByUser } from '../Utils/API';
+import { deleteRecipe } from '../Utils/API';
 import RecipeReviewCard from '../components/Card/';
 
 function Copyright() {
@@ -100,7 +101,7 @@ function Profile() {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
       'state_changed',
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
       },
@@ -118,6 +119,10 @@ function Profile() {
       }
     );
   };
+
+  // const deleteRecipe = (e) => {
+  //   deleteRecipe()
+  // };
 
   return (
     <>
@@ -160,12 +165,12 @@ function Profile() {
                     </Button>
                   </>
                 ) : (
-                  <Avatar
-                    alt={username}
-                    className={classes.large}
-                    src={photo}
-                  />
-                )}
+                    <Avatar
+                      alt={username}
+                      className={classes.large}
+                      src={photo}
+                    />
+                  )}
               </Grid>
               <Grid item sm>
                 <Typography
@@ -202,6 +207,8 @@ function Profile() {
                 prepHrs={recipe.prepHours}
                 prepMins={recipe.prepMinutes}
                 servings={recipe.servings}
+                link={recipe.id}
+                handleDeleteEvent={() => deleteRecipe(recipe.id)}
               />
             );
           })}
