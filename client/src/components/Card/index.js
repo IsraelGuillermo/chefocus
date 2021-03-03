@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function RecipeReviewCard(props) {
+  const [isProfile, setIsProfile] = useState(false);
+  const profilePage = window.location.pathname.includes('profile');
+
   const classes = useStyles();
   const username = sessionStorage.getItem('username');
   const photo = sessionStorage.getItem('photo');
@@ -81,9 +84,14 @@ function RecipeReviewCard(props) {
           <Link to={'/recipes/' + props.link}>
             <span>Click ME</span>
           </Link>
-          <Button size="small" color="primary">
-            Learn More
-          </Button>
+          <>
+            {profilePage ? (
+              <Button onClick={props.handleDeleteEvent} size="small" color="primary">
+                Delete
+              </Button>
+            ) : <Fragment></Fragment>}
+          </>
+
         </CardActions>
       </Card>
     </>
