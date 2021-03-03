@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SignUp() {
+  let history = useHistory();
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     password: '',
@@ -58,6 +59,7 @@ function SignUp() {
     e.preventDefault();
     signupUser({ ...signUpInfo })
       .then((response) => {
+        history.push('/');
         console.log(response);
       })
       .catch((err) => {
