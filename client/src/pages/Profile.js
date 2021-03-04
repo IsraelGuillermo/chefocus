@@ -17,7 +17,7 @@ import { updateProfilePicture } from '../Utils/API';
 import { getRecipesByUser } from '../Utils/API';
 import { deleteRecipe } from '../Utils/API';
 import RecipeReviewCard from '../components/Card/';
-
+import { useHistory } from 'react-router-dom';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Profile() {
+  let history = useHistory();
   const [recipesByUser, setRecipeByUser] = useState([]);
 
   const [image, setImage] = useState({});
@@ -101,7 +102,7 @@ function Profile() {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
       'state_changed',
-      (snapshot) => { },
+      (snapshot) => {},
       (error) => {
         console.log(error);
       },
@@ -120,10 +121,9 @@ function Profile() {
     );
   };
 
-  // const deleteRecipe = (e) => {
-  //   deleteRecipe()
-  // };
-
+  const refreshPage = () => {
+    window.location.reload();
+  };
   return (
     <>
       <CssBaseline />
@@ -165,12 +165,12 @@ function Profile() {
                     </Button>
                   </>
                 ) : (
-                    <Avatar
-                      alt={username}
-                      className={classes.large}
-                      src={photo}
-                    />
-                  )}
+                  <Avatar
+                    alt={username}
+                    className={classes.large}
+                    src={photo}
+                  />
+                )}
               </Grid>
               <Grid item sm>
                 <Typography
@@ -208,7 +208,11 @@ function Profile() {
                 prepMins={recipe.prepMinutes}
                 servings={recipe.servings}
                 link={recipe.id}
-                handleDeleteEvent={() => deleteRecipe(recipe.id)}
+                handleDeleteEvent={() =>
+                  deleteRecipe(recipe.id).then(() => {
+                    refreshPage();
+                  })
+                }
               />
             );
           })}
