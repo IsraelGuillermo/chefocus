@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import styles from "./css/submissionStyle.css"
 import { storage } from '../Firebase';
 import { submitRecipe } from '../Utils/API';
 import { useHistory } from 'react-router-dom';
