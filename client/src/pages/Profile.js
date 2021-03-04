@@ -120,6 +120,10 @@ function Profile() {
     );
   };
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   return (
     <>
       <CssBaseline />
@@ -204,7 +208,11 @@ function Profile() {
                 prepMins={recipe.prepMinutes}
                 servings={recipe.servings}
                 link={recipe.id}
-                handleDeleteEvent={() => deleteRecipe(recipe.id)}
+                handleDeleteEvent={() =>
+                  deleteRecipe(recipe.id).then(() => {
+                    refreshPage();
+                  })
+                }
               />
             );
           })}
