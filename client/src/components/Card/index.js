@@ -6,11 +6,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+import RestaurantMenuRoundedIcon from '@material-ui/icons/RestaurantMenuRounded';
 import ConfirmDelete from '../ConfirmDelete/';
 
 const useStyles = makeStyles((theme) => ({
@@ -44,8 +44,6 @@ function RecipeReviewCard(props) {
   const profilePage = window.location.pathname.includes('profile');
 
   const classes = useStyles();
-  const username = sessionStorage.getItem('username');
-  const photo = sessionStorage.getItem('photo');
 
   return (
     <>
@@ -63,9 +61,9 @@ function RecipeReviewCard(props) {
               {props.recipeName}
             </Typography>
             <div className={classes.avatar}>
-              <Avatar alt={username} className={classes.large} src={photo} />
+              <Avatar alt={props.username} className={classes.large} src={props.photo} />
               <Typography gutterBottom variant="subtitle1">
-                <span className={classes.username}>{username}</span>
+                <span className={classes.username}>{props.username}</span>
               </Typography>
             </div>
             <Typography variant="body2" color="textPrimary" component="p">
@@ -78,6 +76,7 @@ function RecipeReviewCard(props) {
         <CardActions>
 
           <Link to={'/recipes/' + props.link}>
+            <RestaurantMenuRoundedIcon />
             <span>View Recipe</span>
           </Link>
 

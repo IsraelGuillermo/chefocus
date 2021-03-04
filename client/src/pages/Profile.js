@@ -208,6 +208,8 @@ function Profile() {
                 prepMins={recipe.prepMinutes}
                 servings={recipe.servings}
                 link={recipe.id}
+                photo={recipe.User.photo}
+                username={recipe.User.username}
                 handleDeleteEvent={() =>
                   deleteRecipe(recipe.id).then(() => {
                     refreshPage();
