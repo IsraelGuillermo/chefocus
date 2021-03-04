@@ -12,11 +12,6 @@ import { updateProfilePicture } from '../Utils/API';
 import { getRecipesByUser } from '../Utils/API';
 import { deleteRecipe } from '../Utils/API';
 import RecipeReviewCard from '../components/Card/';
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Link from '@material-ui/core/Link';
-// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 // function Copyright() {
 //   return (
@@ -45,9 +40,10 @@ const useStyles = makeStyles((theme) => ({
   cardGrid: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     overflow: 'hidden',
-    backgroundColor: '#303030'
+    backgroundColor: '#303030',
+    marginBottom: theme.spacing(10),
   },
   card: {
     height: '100%',

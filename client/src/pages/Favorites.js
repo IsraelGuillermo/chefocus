@@ -14,7 +14,7 @@ import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(7),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
@@ -40,9 +40,9 @@ function Favorites() {
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
-                    Coming Soon!
-                </Typography>
+                <div>
+                    <h1>Coming Soon!</h1>
+                </div>
             </div>
         </Container>
     );

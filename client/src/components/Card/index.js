@@ -15,7 +15,8 @@ import ConfirmDelete from '../ConfirmDelete/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 275,
+    maxWidth: 250,
+    minWidth: 250,
     margin: "1rem",
     borderStyle: "solid",
     borderWidth: '2px',
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     borderWidth: '2px'
   },
   avatar: {
-    display: 'inline-flex',
+    display: 'flex',
     marginTop: '.5rem',
     marginBottom: '.5rem'
   }
@@ -61,7 +62,8 @@ function RecipeReviewCard(props) {
           <CardMedia
             component="img"
             alt={props.recipeName}
-            height="275"
+            height="250"
+            width='250'
             image={props.imageFood}
             title={props.recipeName}
           />
@@ -70,7 +72,7 @@ function RecipeReviewCard(props) {
               {props.recipeName}
             </Typography>
             <div className={classes.avatar}>
-              <Avatar alt={props.username} className={classes.large} src={props.photo} />
+              <Avatar alt={props.username} className={classes.large} src={props.photo} height='40px' width='40px' />
               <Typography variant="subtitle1">
                 <span className={classes.username}>{props.username}</span>
               </Typography>
@@ -97,12 +99,12 @@ function RecipeReviewCard(props) {
                   <DeleteForeverOutlinedIcon />
                 </IconButton>
                 <ConfirmDelete
-                  title="Delete Post?"
+                  title="Delete Recipe?"
                   open={confirmOpen}
                   setOpen={setConfirmOpen}
                   onConfirm={props.handleDeleteEvent}
                 >
-                  Are you sure you want to delete this post?
+                  <strong>Are you sure you want to delete this recipe?</strong>
                 </ConfirmDelete>
               </div>
 

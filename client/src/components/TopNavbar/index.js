@@ -30,8 +30,21 @@ const useStyles = makeStyles({
   image: {
     padding: '1rem',
     float: 'left',
-    minWidth: '10rem',
+    minWidth: '15rem',
     maxWidth: '20rem'
+  },
+  logo: {
+    padding: '1rem',
+    margin: 'auto',
+    textAlign: 'center',
+    minWidth: '15rem',
+    maxWidth: '15rem',
+  },
+  logoHorizontallyCenter: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)'
   }
 });
 
@@ -56,7 +69,20 @@ const TopNavbar = () => {
   };
 
   if (matches) {
-    return null;
+    return (
+      <AppBar position="sticky">
+        <Toolbar style={{ minHeight: '75px' }}>
+          <Box className={classes.logoHorizontallyCenter}>
+            <img
+              src="./icons/CHEFocus_headerlogo.png"
+              alt="CHEFocus Logo"
+              width="100%"
+              className={classes.logo}
+            />
+          </Box>
+        </Toolbar>
+      </AppBar>
+    );
   } else {
     return (
       <AppBar position="sticky">
