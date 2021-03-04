@@ -11,6 +11,7 @@ import {
 import InfoIcon from '@material-ui/icons/Info';
 import RecipeReviewCard from '../components/Card/';
 import { getRecipes } from '../Utils/API';
+import { Input } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,20 +37,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Explore() {
-  const [allResults, setAllResults] = useState([]);
+  const [data, setData] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [result, setResult] = useState([]);
 
   useEffect(() => {
-    getRecipes()
-      .then(({ data }) => {
-        console.log(data);
-        setAllResults(data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    const getRecipesInitially = async () => {
+      try {
+        await getRecipes().then(({ data }) => {
+          setData(data);
+          setFiltered(data);
+        });
+      } catch (err) {
+        throw new Error(err);
+      }
+    };
+    getRecipesInitially();
   }, []);
 
+  useEffect(() => {
+    const results = filtered.filter((res) =>
+      res.recipeName.toLowerCase().includes(result.toLowerCase())
+    );
+    setData(results);
+  }, [result]);
+
+  const handleOnChange = (e) => {
+    setResult(e.target.value);
+  };
   const classes = useStyles();
+  console.log(result);
+  console.log(data);
+  console.log(filtered);
 
   return (
     <>
@@ -60,9 +79,14 @@ function Explore() {
           <div>
             <h1>Explore Recipes</h1>
           </div>
+          <Input
+            fullWidth={true}
+            onChange={handleOnChange}
+            placeholder="Search for an recipe"
+          ></Input>
 
           <div className={classes.root}>
-            {allResults?.map((recipe) => {
+            {data?.map((recipe) => {
               return (
                 <RecipeReviewCard
                   key={recipe.id}
