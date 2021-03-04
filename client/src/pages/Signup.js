@@ -8,6 +8,9 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Logo from '../components/Logo';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 import LandingImages from '../components/LandingImages';
 import { makeStyles } from '@material-ui/core/styles';
 import { signupUser } from '../Utils/API';
@@ -40,12 +43,24 @@ const useStyles = makeStyles((theme) => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1)
   },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  modalPaper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
+  },
   submit: {
     margin: theme.spacing(3, 0, 2)
   }
 }));
 
 function SignUp() {
+  let history = useHistory();
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     password: '',
@@ -54,13 +69,23 @@ function SignUp() {
   });
   const classes = useStyles();
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   function handleClickEvent(e) {
     e.preventDefault();
     signupUser({ ...signUpInfo })
       .then((response) => {
+        history.push('/');
         console.log(response);
       })
       .catch((err) => {
+        handleOpen();
         console.log(err);
       });
   }
@@ -69,6 +94,29 @@ function SignUp() {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <LandingImages />
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.modalPaper}>
+            <h2 id="transition-modal-title">CHEFocus</h2>
+            <p id="transition-modal-description">
+              Username or Email Address already in use. Please try again!
+            </p>
+          </div>
+        </Fade>
+      </Modal>
+
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Logo />

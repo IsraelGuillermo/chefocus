@@ -1,34 +1,35 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
 import { useUserProvider } from '../Utils/AppContext';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { storage } from '../Firebase';
 import { updateProfilePicture } from '../Utils/API';
 import { getRecipesByUser } from '../Utils/API';
+import { deleteRecipe } from '../Utils/API';
 import RecipeReviewCard from '../components/Card/';
+// import Card from '@material-ui/core/Card';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardMedia from '@material-ui/core/CardMedia';
+// import Link from '@material-ui/core/Link';
+// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Your Website
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -42,8 +43,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4)
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8)
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: '#303030'
   },
   card: {
     height: '100%',
@@ -100,7 +104,7 @@ function Profile() {
     const uploadTask = storage.ref(`profileImages/${image.name}`).put(image);
     uploadTask.on(
       'state_changed',
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
       },
@@ -117,6 +121,10 @@ function Profile() {
           });
       }
     );
+  };
+
+  const refreshPage = () => {
+    window.location.reload();
   };
 
   return (
@@ -160,12 +168,12 @@ function Profile() {
                     </Button>
                   </>
                 ) : (
-                  <Avatar
-                    alt={username}
-                    className={classes.large}
-                    src={photo}
-                  />
-                )}
+                    <Avatar
+                      alt={username}
+                      className={classes.large}
+                      src={photo}
+                    />
+                  )}
               </Grid>
               <Grid item sm>
                 <Typography
@@ -202,6 +210,14 @@ function Profile() {
                 prepHrs={recipe.prepHours}
                 prepMins={recipe.prepMinutes}
                 servings={recipe.servings}
+                link={recipe.id}
+                photo={recipe.User.photo}
+                username={recipe.User.username}
+                handleDeleteEvent={() =>
+                  deleteRecipe(recipe.id).then(() => {
+                    refreshPage();
+                  })
+                }
               />
             );
           })}

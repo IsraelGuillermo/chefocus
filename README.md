@@ -8,7 +8,7 @@
 * [Deployed Website](#deployed-website)
 * [Repository](#repository)
 * [Clone Repository](#clone-repository)
-* [Future Development](#future-development)
+* [Future Enhancements](#future-enhancements)
 * [Technology Used](#technology-used)
 * [Screenshots](#technology-used)
 * [Questions](#questions)
@@ -17,9 +17,9 @@
 ```
 AS A food lover
 
-I WANT to be able to view other recipes or have a place to store my recipes. 
+I WANT to be able to view other recipes or have a place to store my own. 
 
-SO THAT I can continue to create new dishes or be able to make some of my favorites.  
+SO THAT I can continue to create new recipes for other to see and view my own. 
 ```
 
 ## Description
@@ -35,7 +35,7 @@ npm i
 Visit the website (linked below) sign up or log in, and view or post some of your favorite recipes. 
 
 ## Deployed Website
-[CHEFoucs](https://fierce-mountain-61777.herokuapp.com/)
+[CHEFoucs](https://chefocus.herokuapp.com/)
 
 ## Repository
 [Github Repo](https://github.com/IsraelGuillermo/chefocus)
@@ -46,19 +46,28 @@ Alternatively, you can clone the project and run the following command :
 npm run start
 ````
 
-## Future Development
-* Be able to share recipes from the application to other social media platforms. 
-* 
-* 
-* 
-* 
+## Future Enhancements
+* Being able to add a like feature.
+* Have the ability to share recipes to other social media platforms.
+* Be able to categorize the recipes into different categories. 
+* Have the ability to search a recipe by an ingredient you have. 
+* Having limited access to the website if not logged in. 
+* Have the ability to print a recipe.
+* Drop zone for drag an image to be uploaded. 
+* Compress and crop photo size upon upload.
+
 
 ## Technology Used
-* MaterialUI
+* Axios
 * Firebase
-* MySQL
 * React
-* 
+* MySQL
+* Heroku
+* Material ui
+* Passport
+* Sequelize
+* NPM modules
+
 
 ## Screenshots
 
