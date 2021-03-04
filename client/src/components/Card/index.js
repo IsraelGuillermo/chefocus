@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import RestaurantMenuRoundedIcon from '@material-ui/icons/RestaurantMenuRounded';
 import ConfirmDelete from '../ConfirmDelete/';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,11 +21,11 @@ const useStyles = makeStyles((theme) => ({
     margin: "1rem",
     borderStyle: "solid",
     borderWidth: '2px',
-    borderColor: "#F15C22",
+    borderColor: '#F15C22',
     boxShadow: [
-      "0px 2px 4px 0px rgb(0 0 0 /20%)",
-      "0px 4px 5px 0px rgb(0 0 0 /14%)",
-      "0px 1px 10px 0px rgb(0 0 0 /12%)"
+      '0px 2px 4px 0px rgb(0 0 0 /20%)',
+      '0px 4px 5px 0px rgb(0 0 0 /14%)',
+      '0px 1px 10px 0px rgb(0 0 0 /12%)'
     ]
   },
   username: {
@@ -46,6 +47,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     marginTop: '.5rem',
     marginBottom: '.5rem'
+  },
+  img: {
+    objectFit: 'cover',
+    width: '100%',
+    height: '250px'
   }
 }));
 
@@ -59,20 +65,24 @@ function RecipeReviewCard(props) {
     <>
       <Card className={classes.root}>
         <CardActionArea>
-          <CardMedia
-            component="img"
+          <LazyLoadImage
             alt={props.recipeName}
-            height="250"
-            width='250'
-            image={props.imageFood}
-            title={props.recipeName}
+            src={props.imageFood}
+            effect="blur"
+            className={classes.img}
           />
           <CardContent>
             <Typography variant="h5" display="block">
               {props.recipeName}
             </Typography>
             <div className={classes.avatar}>
-              <Avatar alt={props.username} className={classes.large} src={props.photo} height='40px' width='40px' />
+              <Avatar
+                alt={props.username}
+                className={classes.large}
+                src={props.photo}
+                height='40px'
+                width='40px'
+              />
               <Typography variant="subtitle1">
                 <span className={classes.username}>{props.username}</span>
               </Typography>
@@ -85,7 +95,6 @@ function RecipeReviewCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-
           <Link to={'/recipes/' + props.link}>
             <RestaurantMenuRoundedIcon />
             <span>View Recipe</span>
@@ -93,9 +102,11 @@ function RecipeReviewCard(props) {
 
           <>
             {profilePage ? (
-
               <div>
-                <IconButton aria-label="delete" onClick={() => setConfirmOpen(true)}>
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => setConfirmOpen(true)}
+                >
                   <DeleteForeverOutlinedIcon />
                 </IconButton>
                 <ConfirmDelete
@@ -107,10 +118,10 @@ function RecipeReviewCard(props) {
                   <strong>Are you sure you want to delete this recipe?</strong>
                 </ConfirmDelete>
               </div>
-
-            ) : <Fragment></Fragment>}
+            ) : (
+                <Fragment></Fragment>
+              )}
           </>
-
         </CardActions>
       </Card>
     </>

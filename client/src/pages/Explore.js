@@ -7,7 +7,7 @@ import { Input } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(7),
+    marginTop: theme.spacing(6),
     marginBottom: theme.spacing(10),
     alignItems: 'center',
     display: 'flex',
