@@ -15,14 +15,23 @@ import ConfirmDelete from '../ConfirmDelete/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 275
+    maxWidth: 275,
+    margin: "1rem",
+    borderStyle: "solid",
+    borderWidth: '2px',
+    borderColor: "#F15C22",
+    boxShadow: [
+      "0px 2px 4px 0px rgb(0 0 0 /20%)",
+      "0px 4px 5px 0px rgb(0 0 0 /14%)",
+      "0px 1px 10px 0px rgb(0 0 0 /12%)"
+    ]
   },
   username: {
     color: '#F15C22',
-    display: 'inline-block',
-    padding: '10% 0',
+    display: 'flex',
+    marginTop: '6px',
+    marginBottom: '.5rem',
     marginLeft: '.75rem',
-    lineHeight: 1,
     fontWeight: 500
   },
   large: {
@@ -62,7 +71,7 @@ function RecipeReviewCard(props) {
             </Typography>
             <div className={classes.avatar}>
               <Avatar alt={props.username} className={classes.large} src={props.photo} />
-              <Typography gutterBottom variant="subtitle1">
+              <Typography variant="subtitle1">
                 <span className={classes.username}>{props.username}</span>
               </Typography>
             </div>
