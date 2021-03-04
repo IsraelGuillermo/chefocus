@@ -1,17 +1,12 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 // import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './css/submissionStyle.css';
-
-import { TextsmsTwoTone } from '@material-ui/icons';
 
 import { storage } from '../Firebase';
 import { submitRecipe } from '../Utils/API';
@@ -61,7 +56,7 @@ function Form() {
     const uploadTask = storage.ref(`images/${foodPhoto.name}`).put(foodPhoto);
     uploadTask.on(
       'state_changed',
-      (snapshot) => {},
+      (snapshot) => { },
       (error) => {
         console.log(error);
       },
@@ -98,7 +93,7 @@ function Form() {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Submit A Recipe 🥘
+          Submit A Recipe
         </Typography>
         <form className={classes.form} noValidate autoComplete="off">
           <TextField
@@ -220,7 +215,7 @@ function Form() {
             color="primary"
             className={classes.submit}
             onClick={handleUploadClick}
-            // href={'/explore'}
+          // href={'/explore'}
           >
             Create Recipe
           </Button>
