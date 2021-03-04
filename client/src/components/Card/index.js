@@ -76,19 +76,14 @@ function RecipeReviewCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {/* <Button
-            size="small"
-            color="primary"
-            onClick={props.onClick}
-            value={props.value}
-          >
-            Go to Recipe
-          </Button> */}
+
           <Link to={'/recipes/' + props.link}>
-            <span>Click ME</span>
+            <span>View Recipe</span>
           </Link>
+
           <>
             {profilePage ? (
+
               <div>
                 <IconButton aria-label="delete" onClick={() => setConfirmOpen(true)}>
                   <DeleteForeverOutlinedIcon />
@@ -103,9 +98,6 @@ function RecipeReviewCard(props) {
                 </ConfirmDelete>
               </div>
 
-              /* <Button onClick={props.handleDeleteEvent} size="small" color="primary">
-                Delete
-              </Button> */
             ) : <Fragment></Fragment>}
           </>
 
