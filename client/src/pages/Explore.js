@@ -34,17 +34,14 @@ function Explore() {
   const [result, setResult] = useState([]);
 
   useEffect(() => {
-    const getRecipesInitially = async () => {
-      try {
-        await getRecipes().then(({ data }) => {
-          setData(data);
-          setFiltered(data);
-        });
-      } catch (err) {
-        throw new Error(err);
-      }
-    };
-    getRecipesInitially();
+    getRecipes()
+      .then(({ data }) => {
+        setData(data);
+        setFiltered(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   useEffect(() => {
@@ -58,9 +55,6 @@ function Explore() {
     setResult(e.target.value);
   };
   const classes = useStyles();
-  console.log(result);
-  console.log(data);
-  console.log(filtered);
 
   return (
     <>
