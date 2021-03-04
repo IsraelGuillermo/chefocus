@@ -7,17 +7,18 @@ import { Input } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(10),
+    alignItems: 'center',
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+    flexDirection: 'column'
   },
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: '#303030'
+    backgroundColor: '#303030',
+    justifyContent: 'center'
   },
   gridList: {
     width: 500,
@@ -68,7 +69,7 @@ function Explore() {
           <Input
             fullWidth={true}
             onChange={handleOnChange}
-            placeholder="Search for an recipe"
+            placeholder="Search for a recipe"
           ></Input>
 
           <div className={classes.root}>

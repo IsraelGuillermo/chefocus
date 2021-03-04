@@ -14,7 +14,8 @@ import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(10),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
@@ -92,9 +93,9 @@ function Form() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Submit A Recipe
-        </Typography>
+        <div>
+          <h1>Submit A Recipe</h1>
+        </div>
         <form className={classes.form} noValidate autoComplete="off">
           <TextField
             multiline
