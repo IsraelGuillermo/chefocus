@@ -38,6 +38,7 @@
     "firebase": "^8.2.9",
     "if-env": "^1.0.4",
     "material-design-icons": "^3.0.1",
-    "material-ui": "^0.20.2"
+    "material-ui": "^0.20.2",
+    "react-lazy-load-image-component": "^1.5.1"
   }
 }
