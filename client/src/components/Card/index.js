@@ -9,6 +9,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+import ConfirmDelete from '../ConfirmDelete/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function RecipeReviewCard(props) {
-  const [isProfile, setIsProfile] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const profilePage = window.location.pathname.includes('profile');
 
   const classes = useStyles();
@@ -86,9 +89,23 @@ function RecipeReviewCard(props) {
           </Link>
           <>
             {profilePage ? (
-              <Button onClick={props.handleDeleteEvent} size="small" color="primary">
+              <div>
+                <IconButton aria-label="delete" onClick={() => setConfirmOpen(true)}>
+                  <DeleteForeverOutlinedIcon />
+                </IconButton>
+                <ConfirmDelete
+                  title="Delete Post?"
+                  open={confirmOpen}
+                  setOpen={setConfirmOpen}
+                  onConfirm={props.handleDeleteEvent}
+                >
+                  Are you sure you want to delete this post?
+                </ConfirmDelete>
+              </div>
+
+              /* <Button onClick={props.handleDeleteEvent} size="small" color="primary">
                 Delete
-              </Button>
+              </Button> */
             ) : <Fragment></Fragment>}
           </>
 
