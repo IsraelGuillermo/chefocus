@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Container,
-  CssBaseline,
-  GridList,
-  GridListTile,
-  GridListTileBar,
-  IconButton
-} from '@material-ui/core';
-import InfoIcon from '@material-ui/icons/Info';
+import { Container, CssBaseline } from '@material-ui/core';
 import RecipeReviewCard from '../components/Card/';
 import { getRecipes } from '../Utils/API';
 
@@ -24,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: '#303030'
   },
   gridList: {
     width: 500,
@@ -73,6 +65,8 @@ function Explore() {
                   prepMins={recipe.prepMinutes}
                   servings={recipe.servings}
                   link={recipe.id}
+                  photo={recipe.User.photo}
+                  username={recipe.User.username}
                 />
               );
             })}

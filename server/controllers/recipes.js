@@ -18,9 +18,16 @@ const submit = (req, res) => {
 
 const render = (req, res) => {
   console.log(req.body);
-  db.Recipe.findAll({})
+  db.Recipe.findAll({
+    include: [
+      {
+        model: db.User
+      }
+    ]
+  })
     .then((result) => {
       res.json(result);
+      console.log(result);
     })
     .catch((err) => {
       res.status(401).json(err);
@@ -31,9 +38,14 @@ const findRecipeByUser = (req, res) => {
   const userId = req.params.id;
   console.log(userId);
   db.Recipe.findAll({
-    where: {
-      user_id: userId
-    }
+    include: [
+      {
+        model: db.User,
+        where: {
+          id: userId
+        }
+      },
+    ]
   })
     .then((result) => {
       res.json(result);
@@ -42,21 +54,6 @@ const findRecipeByUser = (req, res) => {
       res.status(401).json(err);
     });
 };
-// const findOne = (req, res) => {
-//   console.log(req.params.id);
-//   // const recipeId = req.params.id;
-//   // db.Recipe.findOne({
-//   //   where: {
-//   //     id: recipeId
-//   //   }
-//   // })
-//   //   .then((result) => {
-//   //     res.json(result);
-//   //   })
-//   //   .catch((err) => {
-//   //     res.status().json(err);
-//   //   });
-// };
 
 exports.submit = submit;
 exports.render = render;
