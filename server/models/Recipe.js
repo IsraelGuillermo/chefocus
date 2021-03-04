@@ -28,11 +28,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       ingredients: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(10000),
         allowNull: false
       },
       instructions: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(10000),
         allowNull: false
       }
     },

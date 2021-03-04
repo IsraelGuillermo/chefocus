@@ -6,23 +6,32 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+import RestaurantMenuRoundedIcon from '@material-ui/icons/RestaurantMenuRounded';
 import ConfirmDelete from '../ConfirmDelete/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 275
+    maxWidth: 275,
+    margin: "1rem",
+    borderStyle: "solid",
+    borderWidth: '2px',
+    borderColor: "#F15C22",
+    boxShadow: [
+      "0px 2px 4px 0px rgb(0 0 0 /20%)",
+      "0px 4px 5px 0px rgb(0 0 0 /14%)",
+      "0px 1px 10px 0px rgb(0 0 0 /12%)"
+    ]
   },
   username: {
     color: '#F15C22',
-    display: 'inline-block',
-    padding: '10% 0',
+    display: 'flex',
+    marginTop: '6px',
+    marginBottom: '.5rem',
     marginLeft: '.75rem',
-    lineHeight: 1,
     fontWeight: 500
   },
   large: {
@@ -44,8 +53,6 @@ function RecipeReviewCard(props) {
   const profilePage = window.location.pathname.includes('profile');
 
   const classes = useStyles();
-  const username = sessionStorage.getItem('username');
-  const photo = sessionStorage.getItem('photo');
 
   return (
     <>
@@ -63,9 +70,9 @@ function RecipeReviewCard(props) {
               {props.recipeName}
             </Typography>
             <div className={classes.avatar}>
-              <Avatar alt={username} className={classes.large} src={photo} />
-              <Typography gutterBottom variant="subtitle1">
-                <span className={classes.username}>{username}</span>
+              <Avatar alt={props.username} className={classes.large} src={props.photo} />
+              <Typography variant="subtitle1">
+                <span className={classes.username}>{props.username}</span>
               </Typography>
             </div>
             <Typography variant="body2" color="textPrimary" component="p">
@@ -76,19 +83,15 @@ function RecipeReviewCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {/* <Button
-            size="small"
-            color="primary"
-            onClick={props.onClick}
-            value={props.value}
-          >
-            Go to Recipe
-          </Button> */}
+
           <Link to={'/recipes/' + props.link}>
-            <span>Click ME</span>
+            <RestaurantMenuRoundedIcon />
+            <span>View Recipe</span>
           </Link>
+
           <>
             {profilePage ? (
+
               <div>
                 <IconButton aria-label="delete" onClick={() => setConfirmOpen(true)}>
                   <DeleteForeverOutlinedIcon />
@@ -103,9 +106,6 @@ function RecipeReviewCard(props) {
                 </ConfirmDelete>
               </div>
 
-              /* <Button onClick={props.handleDeleteEvent} size="small" color="primary">
-                Delete
-              </Button> */
             ) : <Fragment></Fragment>}
           </>
 
