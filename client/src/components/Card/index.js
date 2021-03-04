@@ -16,9 +16,10 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 275,
-    margin: '1rem',
-    borderStyle: 'solid',
+    maxWidth: 250,
+    minWidth: 250,
+    margin: "1rem",
+    borderStyle: "solid",
     borderWidth: '2px',
     borderColor: '#F15C22',
     boxShadow: [
@@ -43,9 +44,14 @@ const useStyles = makeStyles((theme) => ({
     borderWidth: '2px'
   },
   avatar: {
-    display: 'inline-flex',
+    display: 'flex',
     marginTop: '.5rem',
     marginBottom: '.5rem'
+  },
+  img: {
+    objectFit: 'cover',
+    width: '100%',
+    height: '250px'
   }
 }));
 
@@ -60,12 +66,10 @@ function RecipeReviewCard(props) {
       <Card className={classes.root}>
         <CardActionArea>
           <LazyLoadImage
-            // component="img"
             alt={props.recipeName}
-            height="275"
             src={props.imageFood}
             effect="blur"
-            // title={props.recipeName}
+            className={classes.img}
           />
           <CardContent>
             <Typography variant="h5" display="block">
@@ -76,6 +80,8 @@ function RecipeReviewCard(props) {
                 alt={props.username}
                 className={classes.large}
                 src={props.photo}
+                height='40px'
+                width='40px'
               />
               <Typography variant="subtitle1">
                 <span className={classes.username}>{props.username}</span>
@@ -104,17 +110,17 @@ function RecipeReviewCard(props) {
                   <DeleteForeverOutlinedIcon />
                 </IconButton>
                 <ConfirmDelete
-                  title="Delete Post?"
+                  title="Delete Recipe?"
                   open={confirmOpen}
                   setOpen={setConfirmOpen}
                   onConfirm={props.handleDeleteEvent}
                 >
-                  Are you sure you want to delete this post?
+                  <strong>Are you sure you want to delete this recipe?</strong>
                 </ConfirmDelete>
               </div>
             ) : (
-              <Fragment></Fragment>
-            )}
+                <Fragment></Fragment>
+              )}
           </>
         </CardActions>
       </Card>
