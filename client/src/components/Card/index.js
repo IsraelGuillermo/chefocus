@@ -55,16 +55,29 @@ function RecipeReviewCard(props) {
 
   const classes = useStyles();
 
+  const placeholder = () => {
+    return (
+      <>
+        <h1>Loading</h1>
+      </>
+    );
+  };
+
   return (
     <>
       <Card className={classes.root}>
         <CardActionArea>
           <LazyLoadImage
-            // component="img"
+            component="img"
             alt={props.recipeName}
             height="275"
+            width="275"
             src={props.imageFood}
             effect="blur"
+            delayTime={1000}
+            beforeLoad={placeholder}
+            // visibleByDefault={image.src == {props.imageFood}}
+
             // title={props.recipeName}
           />
           <CardContent>
