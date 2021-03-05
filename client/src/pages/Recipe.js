@@ -42,7 +42,6 @@ export default function FixedContainer() {
         console.log(err);
       });
   }, []);
-  console.log(recipe);
   return (
     <>
       <CssBaseline />

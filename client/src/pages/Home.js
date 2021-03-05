@@ -72,7 +72,6 @@ function Home() {
     e.preventDefault();
     login({ ...loginInfo })
       .then((response) => {
-        console.log(response);
         setUserID({
           id: response.data.id,
           email: response.data.email,
