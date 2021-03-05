@@ -94,7 +94,7 @@ const TopNavbar = () => {
               width="100%"
             />
           </Box>
-          <Container maxWidth="md" className={classes.navbarDisplayFlex}>
+          <Container maxWidth="sm" className={classes.navbarDisplayFlex}>
             <List
               component="nav"
               aria-labelledby="main navigation"

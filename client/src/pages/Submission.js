@@ -205,7 +205,7 @@ function Form() {
             }}
             value={recipeSubmit.instructions}
           />
-          <Button variant="contained" component="label">
+          <Button variant="contained" component="label" color="primary">
             Upload Photo
             <input type="file" hidden id="photo" onChange={handleInputChange} />
           </Button>
