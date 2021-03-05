@@ -5,7 +5,6 @@ const login = (req, res) => {
 };
 
 const signup = (req, res) => {
-  console.log(req.body);
   db.User.create(req.body)
     .then((result) => {
       const { password, ...user } = result;

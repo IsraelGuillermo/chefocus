@@ -1,7 +1,6 @@
 const db = require('../models');
 
 const findOne = (req, res) => {
-  console.log(req.params.id);
   const recipeId = req.params.id;
   db.Recipe.findOne({
     where: {

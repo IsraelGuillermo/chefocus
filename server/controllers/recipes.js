@@ -1,7 +1,6 @@
 const db = require('../models');
 
 const submit = (req, res) => {
-  console.log(req.body);
   const newRecipe = {
     ...req.body,
     UserId: req.user.id
@@ -17,7 +16,6 @@ const submit = (req, res) => {
 };
 
 const render = (req, res) => {
-  console.log(req.body);
   db.Recipe.findAll({
     include: [
       {
@@ -27,7 +25,6 @@ const render = (req, res) => {
   })
     .then((result) => {
       res.json(result);
-      console.log(result);
     })
     .catch((err) => {
       res.status(401).json(err);
@@ -36,7 +33,6 @@ const render = (req, res) => {
 
 const findRecipeByUser = (req, res) => {
   const userId = req.params.id;
-  console.log(userId);
   db.Recipe.findAll({
     include: [
       {
