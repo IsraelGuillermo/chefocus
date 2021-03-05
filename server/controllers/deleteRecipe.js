@@ -1,7 +1,6 @@
 const db = require('../models');
 
 const deleteRecipe = (req, res) => {
-  console.log(req.params.id);
   const recipeId = req.params.id;
   db.Recipe.destroy({
     where: {

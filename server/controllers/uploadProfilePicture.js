@@ -1,7 +1,6 @@
 const db = require('../models');
 
 const uploadProfilePic = (req, res) => {
-  console.log(req.body);
 
   db.User.update(
     { photo: req.body.photo },

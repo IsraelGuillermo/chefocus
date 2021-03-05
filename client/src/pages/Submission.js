@@ -71,7 +71,6 @@ function Form() {
               ...recipeSubmit,
               imageFood: url
             };
-            console.log(updatedRecipe);
             setRecipeSubmit(updatedRecipe);
             submitRecipe(updatedRecipe);
           })

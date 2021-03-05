@@ -70,7 +70,6 @@ function SignUp() {
     signupUser({ ...signUpInfo })
       .then((response) => {
         history.push('/');
-        console.log(response);
       })
       .catch((err) => {
         handleOpen();
