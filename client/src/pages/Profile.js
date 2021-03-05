@@ -12,24 +12,6 @@ import { updateProfilePicture } from '../Utils/API';
 import { getRecipesByUser } from '../Utils/API';
 import { deleteRecipe } from '../Utils/API';
 import RecipeReviewCard from '../components/Card/';
-// import Card from '@material-ui/core/Card';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Link from '@material-ui/core/Link';
-// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -37,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heroContent: {
     backgroundColor: '#424242',
-    padding: theme.spacing(8, 0, 6)
+    padding: theme.spacing(6, 0, 4)
   },
   heroButtons: {
     marginTop: theme.spacing(4)
@@ -45,28 +27,25 @@ const useStyles = makeStyles((theme) => ({
   cardGrid: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     overflow: 'hidden',
-    backgroundColor: '#303030'
+    backgroundColor: '#303030',
+    marginBottom: theme.spacing(10),
   },
   card: {
     height: '100%',
     display: 'flex',
     flexDirection: 'column'
   },
-  cardMedia: {
-    paddingTop: '56.25%' // 16:9
+  welcome: {
+    margin: '1.5rem'
   },
-  cardContent: {
-    flexGrow: 1
-  },
-
   large: {
     width: theme.spacing(15),
     height: theme.spacing(15),
     borderColor: '#f4ac1b',
     borderStyle: 'solid',
-    marginBottom: '21px'
+    flexGrow: 0
   },
   margin: {
     margin: theme.spacing(1)
@@ -147,6 +126,7 @@ function Profile() {
                       <Button
                         variant="contained"
                         component="label"
+                        color="primary"
                         className={classes.margin}
                       >
                         Photo
@@ -161,6 +141,7 @@ function Profile() {
                     <Button
                       variant="contained"
                       component="label"
+                      color="primary"
                       className={classes.margin}
                       onClick={handleUpload}
                     >
@@ -178,12 +159,12 @@ function Profile() {
               <Grid item sm>
                 <Typography
                   component="h1"
-                  variant="h2"
+                  variant="h3"
                   align="center"
                   color="textPrimary"
-                  gutterBottom
+                  className={classes.welcome}
                 >
-                  Welcome {username}!
+                  Welcome <br /> {username}!
                 </Typography>
               </Grid>
               <Grid container direction="row">
@@ -192,6 +173,7 @@ function Profile() {
                   align="center"
                   color="textSecondary"
                   paragraph
+                  className={classes.welcome}
                 >
                   Cook, Capture and Share your favorite recipes! Cook, Share and
                   Love!

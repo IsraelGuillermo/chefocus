@@ -12,22 +12,10 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import LandingImages from '../components/LandingImages';
+import Copyright from '../components/Copyright';
 import { makeStyles } from '@material-ui/core/styles';
 import { signupUser } from '../Utils/API';
 import { useHistory } from 'react-router';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        CHEFocus
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
